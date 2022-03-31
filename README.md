@@ -18,3 +18,7 @@ At the end of your project, you can see how well your original estimates compare
 | Writing  | Write introduction | 5            | 7          |
 |          | Write conclusion   | 4            | 2          |
 | Editing  | Edit introduction  | 2            | 3          |
+
+## Documentation
+
+- [Hours spent on project](https://github.com/hajame/rakkeri/blob/main/docs/working_hours.md)
