@@ -1,0 +1,26 @@
+version: "3.8"
+services:
+  db:
+    image: postgres:14.2-alpine3.15
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=test
+    ports:
+      - 5432:5432
+    volumes:
+      - ~/psql/rakkeri/data:/var/lib/postgresql/data
+  
+  server:
+    build: ./server
+    environment:
+      - spring_profiles_active=develop
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+  
+  client:
+    build: 
+      context: ./client
+    ports:
+      - 3000:3000
