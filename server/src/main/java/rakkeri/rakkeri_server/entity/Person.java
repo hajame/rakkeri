@@ -2,6 +2,8 @@ package rakkeri.rakkeri_server.entity;
 
 import javax.persistence.*;
 
+import static javax.persistence.GenerationType.SEQUENCE;
+
 
 @Entity(name = "Person")
 @Table(
@@ -12,7 +14,9 @@ import javax.persistence.*;
 )
 public class Person {
 
-    @Id @GeneratedValue(strategy=GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = SEQUENCE, generator = "person_sequence")
+    @SequenceGenerator(name = "person_sequence", sequenceName = "person_sequence", allocationSize = 1)
     @Column(name = "id", updatable = false)
     private Long id;
     @Column(name = "username", nullable = false, columnDefinition = "VARCHAR(255)")
