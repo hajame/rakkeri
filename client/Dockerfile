@@ -1,7 +1,8 @@
 FROM node:16.14.2-alpine3.14 as stage
 WORKDIR /usr/src/app
 COPY . .
-ENV REACT_APP_BACKEND_URL=http://localhost:8080
+ARG backendurl
+ENV REACT_APP_BACKEND_URL=${backendurl}
 RUN npm ci && npm run build
 
 FROM node:16.14.2-alpine3.14

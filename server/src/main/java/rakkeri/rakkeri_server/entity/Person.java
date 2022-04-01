@@ -12,7 +12,7 @@ import javax.persistence.*;
 )
 public class Person {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name = "id", updatable = false)
     private Long id;
     @Column(name = "username", nullable = false, columnDefinition = "VARCHAR(255)")
