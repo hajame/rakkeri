@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import rakkeri.rakkeri_server.entity.Person;
-import rakkeri.rakkeri_server.repository.PersonRepository;
+import rakkeri.rakkeri_server.service.PersonService;
 
 @SpringBootApplication
 public class RakkeriServerApplication {
@@ -31,9 +31,9 @@ public class RakkeriServerApplication {
     }
 
     @Bean
-    CommandLineRunner commandLineRunner(PersonRepository personRepository) {
+    CommandLineRunner commandLineRunner(PersonService personService) {
         return args -> {
-            personRepository.save(new Person("test", "test@example.com", "testhash0123456789"));
+            personService.save(new Person("test", "test@example.com", "testpass"));
             System.out.println("____ Database is: ____ " + dbUrl);
         };
     }
