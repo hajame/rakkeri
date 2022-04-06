@@ -20,6 +20,6 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .httpBasic();
 
-        http.csrf().disable();
+        http.csrf().ignoringAntMatchers("/test", "/hello", "/api/users");
     }
 }
