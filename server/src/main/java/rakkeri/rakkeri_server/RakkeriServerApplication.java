@@ -13,29 +13,29 @@ import rakkeri.rakkeri_server.repository.PersonRepository;
 @SpringBootApplication
 public class RakkeriServerApplication {
 
-	@Value("${spring.datasource.url}")
-	private String dbUrl;
+    @Value("${spring.datasource.url}")
+    private String dbUrl;
 
-	public static void main(String[] args) {
-		SpringApplication.run(RakkeriServerApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(RakkeriServerApplication.class, args);
+    }
 
-	@Bean
-	public WebMvcConfigurer corsConfigurer() {
-		return new WebMvcConfigurer() {
-			@Override
-			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/**").allowedOrigins("*").allowedHeaders("*");
-			}
-		};
-	}
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**").allowedOrigins("*").allowedHeaders("*");
+            }
+        };
+    }
 
-	@Bean
-	CommandLineRunner commandLineRunner(PersonRepository personRepository) {
-		return args -> {
-			personRepository.save(new Person("test", "test@example.com", "testhash0123456789"));
-			System.out.println("____ Database is: ____ " + dbUrl);
-		};
-	}
+    @Bean
+    CommandLineRunner commandLineRunner(PersonRepository personRepository) {
+        return args -> {
+            personRepository.save(new Person("test", "test@example.com", "testhash0123456789"));
+            System.out.println("____ Database is: ____ " + dbUrl);
+        };
+    }
 
 }
