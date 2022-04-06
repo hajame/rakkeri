@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Release API
-        uses: akhileshns/heroku-deploy@v3.04
+        uses: akhileshns/heroku-deploy@v3.0.4
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: rakkeri-api
