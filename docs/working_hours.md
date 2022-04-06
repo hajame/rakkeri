@@ -20,6 +20,13 @@
 |       | 3:43  | making client and server configurable, solving problems                    |
 |       | 2:13  | Successful deployment of backend as a regular Heroku app, not in Container |
 |       | 0:15  | Documentation                                                              |
+| 6.4.  | 0:13  | Building a walking skeleton                                                |
+|       | 0:23  | Deploy frontend                                                            |
+|       | 0:16  | GitHub Action for Continuous Deployment to Heroku                          |
+|       | 1:34  | Planning requirements                                                      |
+|       | 0:47  | Learning Spring Security                                                   |
+|       | 2:49  | Story: Create new user. Serverside done, start working on client side.     |
+|       | 0:07  | Documentation                                                              |
 |       |       |                                                                            |
 |       |       |                                                                            |
 |       |       |                                                                            |
@@ -28,4 +35,18 @@
 |       |       |                                                                            |
 |       |       |                                                                            |
 |       |       |                                                                            |
-| total | 24:43 |                                                                            |
+|       |       |                                                                            |
+|       |       |                                                                            |
+|       |       |                                                                            |
+|       |       |                                                                            |
+|       |       |                                                                            |
+|       |       |                                                                            |
+|       |       |                                                                            |
+|       |       |                                                                            |
+|       |       |                                                                            |
+|       |       |                                                                            |
+|       |       |                                                                            |
+|       |       |                                                                            |
+|       |       |                                                                            |
+|       |       |                                                                            |
+| total | 30:52 |                                                                            |
