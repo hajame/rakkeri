@@ -14,7 +14,7 @@ const App = () => {
     console.log(process.env, "This is the process env");
     console.log(BACKEND_URL, "This is the backend URL");
     axios.get(`${BACKEND_URL}/hello`).then((response) => {
-      setGreeting(response.data.content);
+      setGreeting(response.data.content + "!");
       console.log(response.data);
     });
     axios.get(`${BACKEND_URL}/test`).then((response) => {
