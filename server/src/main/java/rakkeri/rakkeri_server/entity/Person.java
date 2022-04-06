@@ -23,13 +23,13 @@ public class Person {
     private String username;
     @Column(name = "email", nullable = false, columnDefinition = "VARCHAR(255)")
     private String email;
-    @Column(name = "password_hash", nullable = false, columnDefinition = "VARCHAR(511)")
-    private String passwordHash;
+    @Column(name = "password", nullable = false, columnDefinition = "VARCHAR(511)")
+    private String password;
 
-    public Person(String username, String email, String passwordHash) {
+    public Person(String username, String email, String password) {
         this.username = username;
         this.email = email;
-        this.passwordHash = passwordHash;
+        this.password = password;
     }
 
     public Person() {}
@@ -58,12 +58,12 @@ public class Person {
         this.email = email;
     }
 
-    public String getPasswordHash() {
-        return passwordHash;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
@@ -72,7 +72,7 @@ public class Person {
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
-                ", passwordHash='" + passwordHash + '\'' +
+                ", password='" + password + '\'' +
                 '}';
     }
 }
