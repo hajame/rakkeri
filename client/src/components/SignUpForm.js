@@ -11,18 +11,16 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 export const SignUpForm = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = async (event) => {
+  const handleSignUp = async (event) => {
     event.preventDefault();
     try {
       const response = await userService.create({ username, email, password });
-      console.log(response);
       setUsername("");
       setEmail("");
       setPassword("");
@@ -43,9 +41,10 @@ export const SignUpForm = () => {
           alignItems: "center",
         }}
       >
-        <Box component="form" onSubmit={handleLogin} noValidate sx={{ mt: 1 }}>
-          <div>Create a new account</div>
-          <p></p>
+        <Box component="form" onSubmit={handleSignUp} noValidate sx={{ mt: 1 }}>
+          <Typography component="h1" variant="h5">
+            Create a new account
+          </Typography>
 
           <TextField
             margin="normal"
@@ -87,6 +86,13 @@ export const SignUpForm = () => {
           >
             Sign Up
           </Button>
+          <Grid container>
+            <Grid item>
+              <Link href="/" variant="body2">
+                {"Already have an account? Sign In"}
+              </Link>
+            </Grid>
+          </Grid>
         </Box>
       </Box>
     </Container>

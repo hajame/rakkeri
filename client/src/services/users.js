@@ -1,9 +1,15 @@
 import axios from "axios";
-const baseUrl = `${process.env.REACT_APP_BACKEND_URL}/api/users`;
+const usersUrl = `${process.env.REACT_APP_BACKEND_URL}/api/users`;
+const loginUrl = `${process.env.REACT_APP_BACKEND_URL}/api/login`;
 
 const create = async (credentials) => {
-  const response = await axios.post(baseUrl, credentials);
+  const response = await axios.post(usersUrl, credentials);
   return response;
 };
 
-export default { create };
+const login = async (credentials) => {
+  const response = await axios.post(loginUrl, credentials);
+  return response;
+};
+
+export default { create, login };
