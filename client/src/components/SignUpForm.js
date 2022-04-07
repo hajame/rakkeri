@@ -20,13 +20,13 @@ export const SignUpForm = () => {
   const handleSignUp = async (event) => {
     event.preventDefault();
     try {
-      const response = await userService.create({ username, email, password });
-      setUsername("");
-      setEmail("");
-      setPassword("");
+      await userService.create({ username, email, password });
     } catch (e) {
       console.error("Error in creating new user", e);
     }
+    setUsername("");
+    setEmail("");
+    setPassword("");
   };
 
   return (

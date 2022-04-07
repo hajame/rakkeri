@@ -1,12 +1,12 @@
 package rakkeri.rakkeri_server.endpoint;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import rakkeri.rakkeri_server.entity.Person;
+import rakkeri.rakkeri_server.service.JwtService;
 import rakkeri.rakkeri_server.service.PersonService;
 
 import java.util.List;
@@ -14,8 +14,13 @@ import java.util.List;
 @RestController
 public class Users {
 
-    @Autowired
-    private PersonService personService;
+    private final PersonService personService;
+    private final JwtService jwtService;
+
+    public Users(PersonService personService, JwtService jwtService) {
+        this.personService = personService;
+        this.jwtService = jwtService;
+    }
 
     @PostMapping("/api/users")
     public void create(@RequestBody Person person) {
@@ -30,7 +35,7 @@ public class Users {
         List<Person> people = personService.findByUsername(person);
         Person foundPerson = getUnique(people);
         if (personService.isValidPassword(person, foundPerson)) {
-            return "this is a token placeholder";
+            return jwtService.createToken(foundPerson);
         }
         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User not found");
     }

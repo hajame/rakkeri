@@ -21,11 +21,11 @@ export const Home = () => {
     event.preventDefault();
     try {
       const response = await userService.login({ username, password });
-      setUsername("");
-      setPassword("");
     } catch (e) {
       console.error("Error when logging in", e);
     }
+    setUsername("");
+    setPassword("");
   };
 
   return (
