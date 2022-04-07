@@ -31,7 +31,7 @@ public class Users {
     @PostMapping("/api/login")
     public String login(@RequestBody Person person) {
         System.out.println(person);
-
+        
         List<Person> people = personService.findByUsername(person);
         Person foundPerson = getUnique(people);
         if (personService.isValidPassword(person, foundPerson)) {
