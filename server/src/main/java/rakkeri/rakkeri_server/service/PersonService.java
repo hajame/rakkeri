@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import rakkeri.rakkeri_server.entity.Person;
 import rakkeri.rakkeri_server.repository.PersonRepository;
 
+import java.util.List;
+
 
 @Service
 public class PersonService {
@@ -18,5 +20,13 @@ public class PersonService {
     public void save(Person person) {
         person.setPassword(new BCryptPasswordEncoder().encode(person.getPassword()));
         personRepository.save(person);
+    }
+
+    public List<Person> findByUsername(Person person) {
+        return personRepository.findByUsername(person.getUsername());
+    }
+
+    public boolean isValidPassword(Person person, Person foundPerson) {
+        return new BCryptPasswordEncoder().matches(person.getPassword(), foundPerson.getPassword());
     }
 }
