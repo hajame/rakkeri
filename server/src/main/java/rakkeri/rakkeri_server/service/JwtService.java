@@ -17,8 +17,6 @@ public class JwtService {
     private String secret;
 
     public String createToken(Person person) {
-        String key = "this_is_just_a_test_this_is_just_a_test_this_is_just_a_test";
-
         Date issuedDate = new Date();
 
         String token = Jwts.builder()
