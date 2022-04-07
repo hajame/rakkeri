@@ -1,5 +1,17 @@
 import { useState } from "react";
 import userService from "../services/users";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import Link from "@mui/material/Link";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 export const SignUpForm = () => {
   const [username, setUsername] = useState("");
@@ -20,39 +32,64 @@ export const SignUpForm = () => {
   };
 
   return (
-    <div className="App">
-      <form onSubmit={handleLogin} className="App-header">
-        <div>Create a new account</div>
-        <p></p>
-        <div>
-          username{" "}
-          <input
-            type="text"
-            value={username}
+    // <ThemeProvider theme={theme}>
+    <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <Box
+        sx={{
+          marginTop: 8,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <Box component="form" onSubmit={handleLogin} noValidate sx={{ mt: 1 }}>
+          <div>Create a new account</div>
+          <p></p>
+
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="username"
+            label="Username"
             name="username"
+            autoComplete="username"
+            autoFocus
             onChange={({ target }) => setUsername(target.value)}
           />
-        </div>
-        <div>
-          email{" "}
-          <input
-            type="text"
-            value={email}
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="email"
+            label="Email Address"
             name="email"
+            autoComplete="email"
             onChange={({ target }) => setEmail(target.value)}
           />
-        </div>
-        <div>
-          password{" "}
-          <input
-            type="password"
-            value={password}
+          <TextField
+            margin="normal"
+            required
+            fullWidth
             name="password"
+            label="Password"
+            type="password"
+            id="password"
+            autoComplete="current-password"
             onChange={({ target }) => setPassword(target.value)}
           />
-        </div>
-        <button type="submit">Sign Up</button>
-      </form>
-    </div>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+          >
+            Sign Up
+          </Button>
+        </Box>
+      </Box>
+    </Container>
+    // </ThemeProvider>
   );
 };
