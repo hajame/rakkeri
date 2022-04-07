@@ -2,8 +2,8 @@ import React, { useState } from "react";
 
 export const SignUpForm = () => {
   return (
-    <div>
-      <form>
+    <div className="App">
+      <form className="App-header">
         <input type="text"></input>
         <input type="password"></input>
         <button>Sign Up</button>
