@@ -50,6 +50,7 @@ export const Home = () => {
             required
             fullWidth
             id="username"
+            value={username}
             label="Username"
             name="username"
             autoComplete="username"
@@ -61,6 +62,7 @@ export const Home = () => {
             required
             fullWidth
             name="password"
+            value={password}
             label="Password"
             type="password"
             id="password"

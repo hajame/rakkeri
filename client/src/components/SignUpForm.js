@@ -51,6 +51,7 @@ export const SignUpForm = () => {
             required
             fullWidth
             id="username"
+            value={username}
             label="Username"
             name="username"
             autoComplete="username"
@@ -62,6 +63,7 @@ export const SignUpForm = () => {
             required
             fullWidth
             id="email"
+            value={email}
             label="Email Address"
             name="email"
             autoComplete="email"
@@ -71,10 +73,11 @@ export const SignUpForm = () => {
             margin="normal"
             required
             fullWidth
-            name="password"
-            label="Password"
-            type="password"
             id="password"
+            value={password}
+            label="Password"
+            name="password"
+            type="password"
             autoComplete="current-password"
             onChange={({ target }) => setPassword(target.value)}
           />
