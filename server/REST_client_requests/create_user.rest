@@ -9,6 +9,17 @@ Content-Type: application/json
 
 ###
 
+
+post http://localhost:8080/api/login
+Content-Type: application/json
+
+{
+    "username": "test_user3",
+    "password": "password1"
+}
+
+###
+
 get http://localhost:8080/test
 
 

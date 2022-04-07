@@ -19,4 +19,10 @@ public class Users {
         personService.save(person);
     }
 
+    @PostMapping("/api/login")
+    public String login(@RequestBody Person person) {
+        System.out.println(person);
+        return "this is a token placeholder";
+    }
+
 }
