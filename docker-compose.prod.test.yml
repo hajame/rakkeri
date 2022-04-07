@@ -14,9 +14,10 @@ services:
     build: ./server
     environment:
       - spring_profiles_active=production
-      - DATABASE_URL=postgresql://db:5432/postgres
-      - DATABASE_USER=postgres
-      - DATABASE_PASSWORD=test
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/postgres
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=test
+      - JWT_SECRET=really_long_secret_for_the_encryption_algorithm_so_it_accepts_it
     ports:
       - 8080:8080
     depends_on:
