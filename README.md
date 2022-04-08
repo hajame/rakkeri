@@ -6,8 +6,8 @@ Räkkeri is a time tracking web application. It let's you estimate and track the
 
 Räkkeri let's you perform the following workflow:
 
-1. Define your project tasks (Write introduction)
-2. Sort your project tasks into categories (Writing)
+1. Define your project tasks (e.g. "Write introduction")
+2. Sort your project tasks into categories (e.g. "Writing")
 3. Define initial time estimates for each task
 4. Start time tracking for a task
 

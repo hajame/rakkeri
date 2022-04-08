@@ -27,6 +27,17 @@
 |       | 0:47  | Learning Spring Security                                                   |
 |       | 2:49  | Story: Create new user. Serverside done, start working on client side.     |
 |       | 0:07  | Documentation                                                              |
+| 7.4.  | 1:40  | Story: Create new user                                                     |
+|       | 0:35  | Import material UI                                                         |
+|       | 2:15  | Story: User can log in                                                     |
+|       | 2:06  | Story: User receives JWT after logging in                                  |
+|       | 0:32  | Fixing Spring Configuration on for Docker-compose build                    |
+|       | 0:08  | Documentation                                                              |
+| 8.4.  | 0:28  | Planning requirements                                                      |
+|       | 1:42  | Story: User sees main app view after login                                 |
+|       | 0:27  | Story: User is saved to local storage (JWT)                                |
+|       | 4:32  | Story: User can view their projects                                        |
+|       | 11:00 | Documentation                                                              |
 |       |       |                                                                            |
 |       |       |                                                                            |
 |       |       |                                                                            |
@@ -38,15 +49,4 @@
 |       |       |                                                                            |
 |       |       |                                                                            |
 |       |       |                                                                            |
-|       |       |                                                                            |
-|       |       |                                                                            |
-|       |       |                                                                            |
-|       |       |                                                                            |
-|       |       |                                                                            |
-|       |       |                                                                            |
-|       |       |                                                                            |
-|       |       |                                                                            |
-|       |       |                                                                            |
-|       |       |                                                                            |
-|       |       |                                                                            |
-| total | 30:52 |                                                                            |
+| total | 45:28 |                                                                            |
