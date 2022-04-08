@@ -11,6 +11,7 @@ Content-Type: application/json
 
 get http://localhost:8080/api/users/1/projects
 Content-Type: application/json
+Authorization: bearer "token"
 
 ###
 
@@ -19,13 +20,11 @@ post http://localhost:8080/api/login
 Content-Type: application/json
 
 {
-    "username": "test_user3",
-    "password": "password1"
+    "username": "test",
+    "password": "testpass"
 }
 
 ###
 
 get http://localhost:8080/test
 
-
-##Authorization: Basic user:32b543c7-9848-42e9-844f-f583df2dbe32

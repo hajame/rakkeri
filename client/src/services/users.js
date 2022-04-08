@@ -18,4 +18,4 @@ const setToken = (newToken) => {
   token = `bearer ${newToken}`;
 };
 
-export default { create, login, setToken };
+export default { create, login, setToken, token };

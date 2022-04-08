@@ -1,5 +1,10 @@
 import { useState, useEffect } from "react";
 import userService from "../services/users";
+import projectService from "../services/projects";
+
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -17,14 +22,24 @@ export const Home = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState(null);
+  const [projects, setProjects] = useState([]);
 
-  useEffect(() => {
+  const updateState = async () => {
     const userJSON = window.localStorage.getItem("rakkeriAppUser");
     if (userJSON) {
       const user = JSON.parse(userJSON);
       setUser(user);
       userService.setToken(user.token);
+      projectService.setToken(user.token);
+      try {
+        let projects = await projectService.getProjects(user);
+        setProjects(projects);
+      } catch {}
     }
+  };
+
+  useEffect(() => {
+    updateState();
   }, []);
 
   const loginForm = () => (
@@ -81,7 +96,13 @@ export const Home = () => {
       <Typography component="h1" variant="h5">
         Welcome {user.username}
       </Typography>
-
+      <List>
+        {projects.map((p) => (
+          <ListItem disablePadding key={p.id}>
+            <ListItemButton href={"projects/" + p.id}>{p.name}</ListItemButton>
+          </ListItem>
+        ))}
+      </List>
       <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
         New project
       </Button>
@@ -97,6 +118,7 @@ export const Home = () => {
       window.localStorage.setItem("rakkeriAppUser", JSON.stringify(user));
       setUsername("");
       setPassword("");
+      updateState();
     } catch (e) {
       console.error("Error when logging in", e);
     }
