@@ -1,6 +1,8 @@
 package rakkeri.rakkeri_server.entity;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
@@ -25,6 +27,13 @@ public class Person {
     private String email;
     @Column(name = "password", nullable = false, columnDefinition = "VARCHAR(511)")
     private String password;
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "person_projects",
+            joinColumns = {@JoinColumn(name = "person_id")},
+            inverseJoinColumns = {@JoinColumn(name = "project_id")}
+    )
+    private Set<Project> projects = new HashSet<>();
 
     public Person(String username, String email, String password) {
         this.username = username;
@@ -32,7 +41,8 @@ public class Person {
         this.password = password;
     }
 
-    public Person() {}
+    public Person() {
+    }
 
     public Long getId() {
         return id;
@@ -66,13 +76,12 @@ public class Person {
         this.password = password;
     }
 
-    @Override
-    public String toString() {
-        return "Person{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                '}';
+    public Set<Project> getProjects() {
+        return projects;
     }
+
+    public void setProjects(Set<Project> projects) {
+        this.projects = projects;
+    }
+    
 }
