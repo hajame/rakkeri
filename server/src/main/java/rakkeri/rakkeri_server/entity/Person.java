@@ -83,5 +83,5 @@ public class Person {
     public void setProjects(Set<Project> projects) {
         this.projects = projects;
     }
-    
+
 }

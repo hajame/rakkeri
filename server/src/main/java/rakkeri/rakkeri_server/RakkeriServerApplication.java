@@ -10,7 +10,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import rakkeri.rakkeri_server.entity.Person;
 import rakkeri.rakkeri_server.entity.Project;
 import rakkeri.rakkeri_server.service.PersonService;
-import rakkeri.rakkeri_server.service.ProjectService;
 
 @SpringBootApplication
 public class RakkeriServerApplication {
@@ -33,7 +32,7 @@ public class RakkeriServerApplication {
     }
 
     @Bean
-    CommandLineRunner commandLineRunner(PersonService personService, ProjectService projectService) {
+    CommandLineRunner commandLineRunner(PersonService personService) {
         return args -> {
             Person newPerson = new Person("test", "test@example.com", "testpass");
             Project project = new Project("Best Test Project");
@@ -43,7 +42,7 @@ public class RakkeriServerApplication {
             newPerson.getProjects().add(secondProject);
             project.getPersons().add(newPerson);
             secondProject.getPersons().add(newPerson);
-            
+
             personService.save(newPerson);
             System.out.println("____ Database is: ____ " + dbUrl);
         };

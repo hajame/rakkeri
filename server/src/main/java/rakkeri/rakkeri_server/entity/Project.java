@@ -1,5 +1,7 @@
 package rakkeri.rakkeri_server.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -16,6 +18,7 @@ public class Project {
     private Long id;
     @Column(name = "name", nullable = false, columnDefinition = "VARCHAR(255)")
     private String name;
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "projects")
     Set<Person> persons = new HashSet<>();
 
@@ -49,5 +52,5 @@ public class Project {
     public void setPersons(Set<Person> persons) {
         this.persons = persons;
     }
-    
+
 }

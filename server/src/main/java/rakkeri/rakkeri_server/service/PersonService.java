@@ -29,4 +29,8 @@ public class PersonService {
     public boolean isValidPassword(Person person, Person foundPerson) {
         return new BCryptPasswordEncoder().matches(person.getPassword(), foundPerson.getPassword());
     }
+
+    public Person findOne(Long personId) {
+        return personRepository.findById(personId).get();
+    }
 }
