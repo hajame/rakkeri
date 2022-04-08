@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
+import rakkeri.rakkeri_server.DTO.UserDTO;
 import rakkeri.rakkeri_server.entity.Person;
 import rakkeri.rakkeri_server.service.JwtService;
 import rakkeri.rakkeri_server.service.PersonService;
@@ -28,11 +29,12 @@ public class Users {
     }
 
     @PostMapping("/api/login")
-    public String login(@RequestBody Person person) {
+    public UserDTO login(@RequestBody Person person) {
         List<Person> people = personService.findByUsername(person);
         Person foundPerson = getUnique(people);
         if (personService.isValidPassword(person, foundPerson)) {
-            return jwtService.createToken(foundPerson);
+            String token = jwtService.createToken(foundPerson);
+            return new UserDTO(foundPerson.getId(), foundPerson.getUsername(), token);
         }
         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User not found");
     }
