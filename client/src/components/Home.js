@@ -95,7 +95,7 @@ export const Home = () => {
   const projectView = () => (
     <Box sx={{ mt: 1 }}>
       <Typography component="h1" variant="h5">
-        Welcome {user.username}
+        Select a project
       </Typography>
       <List>
         {projects.map((p) => (
@@ -130,8 +130,9 @@ export const Home = () => {
     }
   };
 
-  const createProject = async (event) => {
-    const response = await projectService.create("test", user);
+  const createProject = async () => {
+    const name = prompt("Please name your project", "name");
+    const response = await projectService.create(name, user);
     const newProjects = response.projects.sort((a, b) =>
       a.name.localeCompare(b.name)
     );
