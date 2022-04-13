@@ -37,19 +37,32 @@ export const Home = () => {
 
   return (
     // <ThemeProvider theme={theme}>
-    <Container component="main" maxWidth="xs">
+    <Box
+      sx={
+        user === null
+          ? {
+              marginTop: 4,
+              marginLeft: 1,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }
+          : { display: "flex" }
+      }
+    >
       <CssBaseline />
+      {user === null && (
+        <LoginForm setUser={setUser} updateState={updateState} />
+      )}
       <Box
         sx={{
-          marginTop: 8,
+          marginTop: 4,
+          marginLeft: 1,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
         }}
       >
-        {user === null && (
-          <LoginForm setUser={setUser} updateState={updateState} />
-        )}
         {user !== null && (
           <Projects
             user={user}
@@ -58,10 +71,20 @@ export const Home = () => {
             setProject={setProject}
           />
         )}
+      </Box>
+      <Box
+        sx={{
+          marginTop: 4,
+          marginLeft: 8,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
         {project !== null && <Project project={project} />}
         {console.log(project)}
       </Box>
-    </Container>
+    </Box>
     // </ThemeProvider>
   );
 };

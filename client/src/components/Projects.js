@@ -26,7 +26,7 @@ const Projects = ({ user, projects, setProjects, setProject }) => {
 
   return (
     <Box sx={{ mt: 1 }}>
-      <Typography component="h1" variant="h5">
+      <Typography component="h" variant="h6">
         Select a project
       </Typography>
       <List>
