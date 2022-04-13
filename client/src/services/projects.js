@@ -11,8 +11,21 @@ const getProjects = async (user) => {
   return response.data;
 };
 
+const create = async (name, user) => {
+  const config = {
+    headers: { Authorization: token },
+  };
+  const data = { name: name };
+  const response = await axios.post(
+    `${usersUrl}/${user.id}/projects`,
+    data,
+    config
+  );
+  return response.data;
+};
+
 const setToken = (newToken) => {
   token = `bearer ${newToken}`;
 };
 
-export default { getProjects, setToken };
+export default { getProjects, setToken, create };

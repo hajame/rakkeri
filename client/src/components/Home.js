@@ -33,6 +33,7 @@ export const Home = () => {
       projectService.setToken(user.token);
       try {
         let projects = await projectService.getProjects(user);
+        projects.sort((a, b) => a.name.localeCompare(b.name));
         setProjects(projects);
       } catch {}
     }
@@ -92,7 +93,7 @@ export const Home = () => {
   );
 
   const projectView = () => (
-    <Box component="form" noValidate sx={{ mt: 1 }}>
+    <Box sx={{ mt: 1 }}>
       <Typography component="h1" variant="h5">
         Welcome {user.username}
       </Typography>
@@ -103,7 +104,12 @@ export const Home = () => {
           </ListItem>
         ))}
       </List>
-      <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+      <Button
+        onClick={createProject}
+        fullWidth
+        variant="contained"
+        sx={{ mt: 3, mb: 2 }}
+      >
         New project
       </Button>
     </Box>
@@ -122,6 +128,14 @@ export const Home = () => {
     } catch (e) {
       console.error("Error when logging in", e);
     }
+  };
+
+  const createProject = async (event) => {
+    const response = await projectService.create("test", user);
+    const newProjects = response.projects.sort((a, b) =>
+      a.name.localeCompare(b.name)
+    );
+    setProjects(newProjects);
   };
 
   return (
