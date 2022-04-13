@@ -17,9 +17,13 @@ public class PersonService {
         this.personRepository = personRepository;
     }
 
-    public void save(Person person) {
+    public void saveNew(Person person) {
         person.setPassword(new BCryptPasswordEncoder().encode(person.getPassword()));
         personRepository.save(person);
+    }
+
+    public Person update(Person person) {
+        return personRepository.save(person);
     }
 
     public List<Person> findByUsername(Person person) {

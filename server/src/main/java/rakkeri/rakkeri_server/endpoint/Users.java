@@ -25,7 +25,7 @@ public class Users {
 
     @PostMapping("/api/users")
     public void create(@RequestBody Person person) {
-        personService.save(person);
+        personService.saveNew(person);
     }
 
     @PostMapping("/api/login")

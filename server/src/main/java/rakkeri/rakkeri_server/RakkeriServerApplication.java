@@ -43,7 +43,7 @@ public class RakkeriServerApplication {
             project.getPersons().add(newPerson);
             secondProject.getPersons().add(newPerson);
 
-            personService.save(newPerson);
+            personService.saveNew(newPerson);
             System.out.println("____ Database is: ____ " + dbUrl);
         };
     }

@@ -1,10 +1,7 @@
 package rakkeri.rakkeri_server.endpoint;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import rakkeri.rakkeri_server.entity.Person;
 import rakkeri.rakkeri_server.entity.Project;
@@ -27,14 +24,24 @@ public class Projects {
 
     @GetMapping("/api/users/{userId}/projects")
     public List<Project> getProjects(@RequestHeader("Authorization") String authorizationToken, @PathVariable("userId") Long userId) {
-        Person personFromToken;
-        try {
-            personFromToken = jwtService.parseToken(authorizationToken, userId);
-        } catch (Exception exception) {
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid token", exception);
-        }
-        Person person = personService.findOne(personFromToken.getId());
+        Person person = getPerson(authorizationToken, userId);
         return new ArrayList<>(person.getProjects());
     }
 
+    @PostMapping("/api/users/{userId}/projects")
+    public Person createProjects(@RequestHeader("Authorization") String authorizationToken, @PathVariable("userId") Long userId, @RequestBody Project project) {
+        Person person = getPerson(authorizationToken, userId);
+        person.getProjects().add(project);
+        return personService.update(person);
+    }
+
+    private Person getPerson(String authorizationToken, Long userId) {
+        Person person;
+        try {
+            person = jwtService.parseToken(authorizationToken, userId);
+        } catch (Exception exception) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid token", exception);
+        }
+        return personService.findOne(person.getId());
+    }
 }
