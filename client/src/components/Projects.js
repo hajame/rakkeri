@@ -10,7 +10,7 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
-const Projects = ({ user, projects, setProjects }) => {
+const Projects = ({ user, projects, setProjects, setProject }) => {
   const createProject = async () => {
     const name = prompt("Please name your project", "name");
     const response = await projectService.create(name, user);
@@ -18,6 +18,10 @@ const Projects = ({ user, projects, setProjects }) => {
       a.name.localeCompare(b.name)
     );
     setProjects(newProjects);
+  };
+
+  const setFocused = (project) => {
+    setProject(project);
   };
 
   return (
@@ -28,7 +32,7 @@ const Projects = ({ user, projects, setProjects }) => {
       <List>
         {projects.map((p) => (
           <ListItem disablePadding key={p.id}>
-            <ListItemButton component="a" href={"projects/" + p.id}>
+            <ListItemButton onClick={() => setFocused(p)}>
               {p.name}
             </ListItemButton>
           </ListItem>

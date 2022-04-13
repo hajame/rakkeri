@@ -4,6 +4,7 @@ import projectService from "../services/projects";
 
 import LoginForm from "./LoginForm";
 import Projects from "./Projects";
+import Project from "./Project";
 
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
@@ -13,6 +14,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 export const Home = () => {
   const [user, setUser] = useState(null);
   const [projects, setProjects] = useState([]);
+  const [project, setProject] = useState(null);
 
   const updateState = async () => {
     const userJSON = window.localStorage.getItem("rakkeriAppUser");
@@ -49,8 +51,15 @@ export const Home = () => {
           <LoginForm setUser={setUser} updateState={updateState} />
         )}
         {user !== null && (
-          <Projects user={user} projects={projects} setProjects={setProjects} />
+          <Projects
+            user={user}
+            projects={projects}
+            setProjects={setProjects}
+            setProject={setProject}
+          />
         )}
+        {project !== null && <Project project={project} />}
+        {console.log(project)}
       </Box>
     </Container>
     // </ThemeProvider>
