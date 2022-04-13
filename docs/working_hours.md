@@ -37,7 +37,7 @@
 |       | 1:42  | Story: User sees main app view after login                                 |
 |       | 0:27  | Story: User is saved to local storage (JWT)                                |
 |       | 4:32  | Story: User can view their projects                                        |
-|       | 11:00 | Documentation                                                              |
+|       | 0:11  | Documentation                                                              |
 |       |       |                                                                            |
 |       |       |                                                                            |
 |       |       |                                                                            |
