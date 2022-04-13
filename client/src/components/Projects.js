@@ -28,7 +28,9 @@ const Projects = ({ user, projects, setProjects }) => {
       <List>
         {projects.map((p) => (
           <ListItem disablePadding key={p.id}>
-            <ListItemButton href={"projects/" + p.id}>{p.name}</ListItemButton>
+            <ListItemButton component="a" href={"projects/" + p.id}>
+              {p.name}
+            </ListItemButton>
           </ListItem>
         ))}
       </List>
