@@ -23,9 +23,25 @@ const Task = ({ task, project, setProject }) => {
       }
       disablePadding
     >
-      <ListItemText primary={task.name} />
+      <ListItemText
+        primary={task.name + ` [ ${totalMinutesTracked()} min ]`}
+        sx={{ mr: 5 }}
+      />
     </ListItem>
   );
+
+  function totalMinutesTracked() {
+    let minutes = 0;
+    for (const i in task.trackings) {
+      minutes =
+        minutes +
+        (new Date(task.trackings[i].endTime) -
+          new Date(task.trackings[i].startTime)) /
+          1000 /
+          60;
+    }
+    return minutes;
+  }
 };
 
 export default Task;
