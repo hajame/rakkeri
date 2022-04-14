@@ -13,7 +13,7 @@ import Typography from "@mui/material/Typography";
 const Project = ({ project }) => {
   return (
     <Box sx={{ mt: 1 }}>
-      <Typography component="h1" variant="h5">
+      <Typography component="h" variant="h5">
         Project: {project.name}
       </Typography>
     </Box>

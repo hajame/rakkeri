@@ -82,7 +82,6 @@ export const Home = () => {
         }}
       >
         {project !== null && <Project project={project} />}
-        {console.log(project)}
       </Box>
     </Box>
     // </ThemeProvider>

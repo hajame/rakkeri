@@ -13,6 +13,9 @@ import Typography from "@mui/material/Typography";
 const Projects = ({ user, projects, setProjects, setProject }) => {
   const createProject = async () => {
     const name = prompt("Please name your project", "name");
+    if (!name) {
+      return;
+    }
     const response = await projectService.create(name, user);
     const newProjects = response.projects.sort((a, b) =>
       a.name.localeCompare(b.name)
