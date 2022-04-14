@@ -25,22 +25,22 @@ Authorization: bearer token
 
 ###
 
-post http://localhost:8080/api/users/1/projects/1/tasks
-Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJ0ZXN0IiwiaWF0IjoxNjQ5OTIyODQ4LCJleHAiOjE2NTExMzI0NDh9.pRCvs7l3Vyk-ZkVQm2JyVk3mLKM__vLSqlFFfAtt-_NhFxzJI1LLeLAd_pLhRWav
-
-{
-    "name": "New task"
-}
-
-###
-
 post http://localhost:8080/api/users/1/projects
 Content-Type: application/json
 Authorization: bearer token
 
 {
     "name": "New project"
+}
+
+###
+
+post http://localhost:8080/api/projects/1/tasks
+Content-Type: application/json
+Authorization: bearer token
+
+{
+    "name": "New task"
 }
 
 ###
