@@ -9,6 +9,7 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import rakkeri.rakkeri_server.entity.Person;
 import rakkeri.rakkeri_server.entity.Project;
+import rakkeri.rakkeri_server.entity.Task;
 import rakkeri.rakkeri_server.service.PersonService;
 
 @SpringBootApplication
@@ -37,7 +38,11 @@ public class RakkeriServerApplication {
             Person newPerson = new Person("test", "test@example.com", "testpass");
             Project project = new Project("Best Test Project");
             Project secondProject = new Project("Second Project");
-
+            Task cooking = new Task("cooking");
+            Task coding = new Task("coding");
+            project.getTasks().add(cooking);
+            secondProject.getTasks().add(coding);
+            secondProject.getTasks().add(cooking);
             newPerson.getProjects().add(project);
             newPerson.getProjects().add(secondProject);
             project.getPersons().add(newPerson);

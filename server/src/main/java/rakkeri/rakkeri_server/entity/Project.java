@@ -21,6 +21,13 @@ public class Project {
     @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "projects")
     Set<Person> persons = new HashSet<>();
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "project_tasks",
+            joinColumns = {@JoinColumn(name = "project_id")},
+            inverseJoinColumns = {@JoinColumn(name = "task_id")}
+    )
+    private Set<Task> tasks = new HashSet<>();
 
     public Project(String name) {
         this.name = name;
@@ -53,4 +60,11 @@ public class Project {
         this.persons = persons;
     }
 
+    public Set<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(Set<Task> tasks) {
+        this.tasks = tasks;
+    }
 }
