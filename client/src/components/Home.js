@@ -10,6 +10,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { grey } from "@mui/material/colors";
 
 export const Home = () => {
   const [user, setUser] = useState(null);
@@ -53,7 +54,7 @@ export const Home = () => {
                 flexDirection: "column",
                 alignItems: "center",
               }
-            : { display: "flex" }
+            : { display: "flex", flexDirection: "row", height: "100%" }
         }
       >
         <CssBaseline />
@@ -67,6 +68,11 @@ export const Home = () => {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
+            height: "100vh",
+            maxWidth: "15em",
+          }}
+          style={{
+            backgroundColor: "#212121",
           }}
         >
           {user !== null && (

@@ -21,7 +21,7 @@ const Projects = ({ user, project, projects, setProjects, setProject }) => {
       a.name.localeCompare(b.name)
     );
     setProjects(newProjects);
-    setProject(newProjects.find((p) => p.name == name));
+    setProject(newProjects.find((p) => p.name === name));
   };
 
   const setFocused = (project) => {
@@ -30,7 +30,7 @@ const Projects = ({ user, project, projects, setProjects, setProject }) => {
 
   return (
     <Box sx={{ mt: 1 }}>
-      <Typography component="div" variant="h7">
+      <Typography component="div" variant="h6">
         Projects
       </Typography>
       <Button
@@ -43,8 +43,9 @@ const Projects = ({ user, project, projects, setProjects, setProject }) => {
       </Button>
       <List>
         {projects.map((p) => (
-          <ListItem alignItems="left" disablePadding key={p.id}>
+          <ListItem alignItems="center" disablePadding key={p.id}>
             <ListItemButton
+              dense={true}
               selected={project && project.id === p.id}
               onClick={() => setFocused(p)}
             >

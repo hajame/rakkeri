@@ -29,17 +29,12 @@ const Project = ({ project, setProject }) => {
       <Typography component="div" variant="h6">
         Tasks
       </Typography>
-      <Button
-        onClick={createTask}
-        fullWidth
-        variant="contained"
-        sx={{ mt: 1, mb: 1 }}
-      >
+      <Button onClick={createTask} variant="contained" sx={{ mt: 1, mb: 1 }}>
         New task
       </Button>
       <List>
         {project.tasks.map((task) => (
-          <ListItem disablePadding key={task.id}>
+          <ListItem alignItems="center" disablePadding key={task.id}>
             <ListItemButton>{task.name}</ListItemButton>
           </ListItem>
         ))}
