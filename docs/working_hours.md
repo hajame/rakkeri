@@ -38,15 +38,20 @@
 |       | 0:27  | Story: User is saved to local storage (JWT)                                |
 |       | 4:32  | Story: User can view their projects                                        |
 |       | 0:11  | Documentation                                                              |
+| 14.4. | 1:18  | Planning requirements                                                      |
+|       | 2:47  | Story: User can create a new project                                       |
+|       | 1:47  | Story: User can view project details                                       |
+|       | 0:21  | Story: User can view project tasks                                         |
+| 15.4. | 1:16  | Story: User can view project tasks                                         |
+|       | 1:11  | Story: User can create project tasks                                       |
+|       | 1:06  | Styling                                                                    |
+|       | 1:13  | Planning requirements                                                      |
+|       | 2:32  | Story: User can read task tracking status                                  |
+|       | 0:11  | Documentation                                                              |
 |       |       |                                                                            |
 |       |       |                                                                            |
 |       |       |                                                                            |
 |       |       |                                                                            |
 |       |       |                                                                            |
 |       |       |                                                                            |
-|       |       |                                                                            |
-|       |       |                                                                            |
-|       |       |                                                                            |
-|       |       |                                                                            |
-|       |       |                                                                            |
-| total | 45:28 |                                                                            |
+| total | 59:12 |                                                                            |
