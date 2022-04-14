@@ -21,6 +21,8 @@ public class Task {
     @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "tasks")
     Set<Project> projects = new HashSet<>();
+    @OneToMany(mappedBy = "task", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Tracking> trackings = new HashSet<>();
 
     public Task(String name) {
         this.name = name;
@@ -53,4 +55,11 @@ public class Task {
         this.projects = projects;
     }
 
+    public Set<Tracking> getTrackings() {
+        return trackings;
+    }
+
+    public void setTrackings(Set<Tracking> trackings) {
+        this.trackings = trackings;
+    }
 }

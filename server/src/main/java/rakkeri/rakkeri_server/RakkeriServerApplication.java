@@ -10,7 +10,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import rakkeri.rakkeri_server.entity.Person;
 import rakkeri.rakkeri_server.entity.Project;
 import rakkeri.rakkeri_server.entity.Task;
+import rakkeri.rakkeri_server.entity.Tracking;
 import rakkeri.rakkeri_server.service.PersonService;
+
+import java.sql.Timestamp;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
 
 @SpringBootApplication
 public class RakkeriServerApplication {
@@ -40,6 +46,24 @@ public class RakkeriServerApplication {
             Project secondProject = new Project("Second Project");
             Task cooking = new Task("cooking");
             Task coding = new Task("coding");
+
+
+            Tracking first = new Tracking(
+                    cooking,
+                    new Timestamp(ZonedDateTime.now().withZoneSameInstant(ZoneId.of("UTC")).toInstant().toEpochMilli()),
+                    new Timestamp(ZonedDateTime.now().withZoneSameInstant(ZoneId.of("UTC"))
+                            .plus(1, ChronoUnit.HOURS).toInstant().toEpochMilli())
+            );
+            Tracking second = new Tracking(
+                    cooking,
+                    new Timestamp(ZonedDateTime.now().withZoneSameInstant(ZoneId.of("UTC"))
+                            .plus(2, ChronoUnit.HOURS).toInstant().toEpochMilli()),
+                    new Timestamp(ZonedDateTime.now().withZoneSameInstant(ZoneId.of("UTC"))
+                            .plus(3, ChronoUnit.HOURS).toInstant().toEpochMilli())
+            );
+            cooking.getTrackings().add(first);
+            cooking.getTrackings().add(second);
+
             project.getTasks().add(cooking);
             secondProject.getTasks().add(coding);
             secondProject.getTasks().add(cooking);

@@ -35,6 +35,12 @@ Authorization: bearer token
 
 ###
 
+get http://localhost:8080/api/projects/1/tasks/1
+Content-Type: application/json
+Authorization: bearer token
+
+###
+
 post http://localhost:8080/api/projects/1/tasks
 Content-Type: application/json
 Authorization: bearer token
