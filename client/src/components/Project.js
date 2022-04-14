@@ -33,7 +33,12 @@ const Project = ({ project, setProject }) => {
       </Button>
       <List>
         {project.tasks.map((task) => (
-          <Task task={task} project={project} setProject={setProject} />
+          <Task
+            key={task.id}
+            task={task}
+            project={project}
+            setProject={setProject}
+          />
         ))}
       </List>
     </Box>
