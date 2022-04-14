@@ -2,11 +2,10 @@ import { useState, useEffect } from "react";
 import userService from "../services/users";
 import projectService from "../services/projects";
 
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import Button from "@mui/material/Button";
+import Task from "./Task";
 
+import List from "@mui/material/List";
+import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
@@ -34,9 +33,7 @@ const Project = ({ project, setProject }) => {
       </Button>
       <List>
         {project.tasks.map((task) => (
-          <ListItem alignItems="center" disablePadding key={task.id}>
-            <ListItemButton>{task.name}</ListItemButton>
-          </ListItem>
+          <Task task={task} project={project} setProject={setProject} />
         ))}
       </List>
     </Box>
