@@ -88,7 +88,9 @@ export const Home = () => {
             alignItems: "center",
           }}
         >
-          {project !== null && <Project project={project} />}
+          {project !== null && (
+            <Project project={project} setProject={setProject} />
+          )}
         </Box>
       </Box>
     </ThemeProvider>

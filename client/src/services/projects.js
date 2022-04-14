@@ -1,5 +1,6 @@
 import axios from "axios";
 const usersUrl = `${process.env.REACT_APP_BACKEND_URL}/api/users`;
+const projectsUrl = `${process.env.REACT_APP_BACKEND_URL}/api/projects`;
 
 let token = null;
 
@@ -24,8 +25,21 @@ const create = async (name, user) => {
   return response.data;
 };
 
+const addTask = async (name, project) => {
+  const config = {
+    headers: { Authorization: token },
+  };
+  const data = { name: name };
+  const response = await axios.post(
+    `${projectsUrl}/${project.id}/tasks`,
+    data,
+    config
+  );
+  return response.data;
+};
+
 const setToken = (newToken) => {
   token = `bearer ${newToken}`;
 };
 
-export default { getProjects, setToken, create };
+export default { getProjects, setToken, create, addTask };
