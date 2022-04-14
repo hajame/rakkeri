@@ -10,7 +10,7 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
-const Projects = ({ user, projects, setProjects, setProject }) => {
+const Projects = ({ user, project, projects, setProjects, setProject }) => {
   const createProject = async () => {
     const name = prompt("Please name your project", "name");
     if (!name) {
@@ -29,13 +29,16 @@ const Projects = ({ user, projects, setProjects, setProject }) => {
 
   return (
     <Box sx={{ mt: 1 }}>
-      <Typography component="h" variant="h6">
-        Select a project
+      <Typography component="div" variant="h7">
+        Projects
       </Typography>
       <List>
         {projects.map((p) => (
-          <ListItem disablePadding key={p.id}>
-            <ListItemButton onClick={() => setFocused(p)}>
+          <ListItem alignItems="left" disablePadding key={p.id}>
+            <ListItemButton
+              selected={project && project.id === p.id}
+              onClick={() => setFocused(p)}
+            >
               {p.name}
             </ListItemButton>
           </ListItem>

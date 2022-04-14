@@ -13,9 +13,19 @@ import Typography from "@mui/material/Typography";
 const Project = ({ project }) => {
   return (
     <Box sx={{ mt: 1 }}>
-      <Typography component="h" variant="h5">
-        Project: {project.name}
+      <Typography component="div" variant="h6" mb={3}>
+        {project.name}
       </Typography>
+      <Typography component="div" variant="h6">
+        Tasks
+      </Typography>
+      <List>
+        {project.tasks.map((task) => (
+          <ListItem disablePadding key={task.id}>
+            <ListItemButton>{task.name}</ListItemButton>
+          </ListItem>
+        ))}
+      </List>
     </Box>
   );
 };

@@ -16,6 +16,12 @@ export const Home = () => {
   const [projects, setProjects] = useState([]);
   const [project, setProject] = useState(null);
 
+  const theme = createTheme({
+    palette: {
+      mode: "dark",
+    },
+  });
+
   const updateState = async () => {
     const userJSON = window.localStorage.getItem("rakkeriAppUser");
     if (userJSON) {
@@ -36,54 +42,55 @@ export const Home = () => {
   }, []);
 
   return (
-    // <ThemeProvider theme={theme}>
-    <Box
-      sx={
-        user === null
-          ? {
-              marginTop: 4,
-              marginLeft: 1,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }
-          : { display: "flex" }
-      }
-    >
-      <CssBaseline />
-      {user === null && (
-        <LoginForm setUser={setUser} updateState={updateState} />
-      )}
+    <ThemeProvider theme={theme}>
       <Box
-        sx={{
-          marginTop: 4,
-          marginLeft: 1,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
+        sx={
+          user === null
+            ? {
+                marginTop: 4,
+                marginLeft: 1,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }
+            : { display: "flex" }
+        }
       >
-        {user !== null && (
-          <Projects
-            user={user}
-            projects={projects}
-            setProjects={setProjects}
-            setProject={setProject}
-          />
+        <CssBaseline />
+        {user === null && (
+          <LoginForm setUser={setUser} updateState={updateState} />
         )}
+        <Box
+          sx={{
+            marginTop: 4,
+            marginLeft: 1,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          {user !== null && (
+            <Projects
+              user={user}
+              project={project}
+              projects={projects}
+              setProjects={setProjects}
+              setProject={setProject}
+            />
+          )}
+        </Box>
+        <Box
+          sx={{
+            marginTop: 4,
+            marginLeft: 8,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          {project !== null && <Project project={project} />}
+        </Box>
       </Box>
-      <Box
-        sx={{
-          marginTop: 4,
-          marginLeft: 8,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        {project !== null && <Project project={project} />}
-      </Box>
-    </Box>
-    // </ThemeProvider>
+    </ThemeProvider>
   );
 };
