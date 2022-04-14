@@ -14,7 +14,7 @@ import java.util.List;
 public class PersonService {
 
     private final PersonRepository personRepository;
-    private JwtService jwtService;
+    private final JwtService jwtService;
 
     public PersonService(PersonRepository personRepository, JwtService jwtService) {
         this.personRepository = personRepository;
@@ -46,6 +46,16 @@ public class PersonService {
         Person person;
         try {
             person = jwtService.parseToken(authorizationToken, userId);
+        } catch (Exception exception) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid token", exception);
+        }
+        return findOne(person.getId());
+    }
+
+    public Person getPerson(String authorizationToken) {
+        Person person;
+        try {
+            person = jwtService.parseToken(authorizationToken);
         } catch (Exception exception) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid token", exception);
         }
