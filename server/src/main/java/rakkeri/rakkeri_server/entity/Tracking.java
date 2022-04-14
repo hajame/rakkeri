@@ -1,5 +1,7 @@
 package rakkeri.rakkeri_server.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 
@@ -13,6 +15,7 @@ public class Tracking {
     @SequenceGenerator(name = "tracking_sequence", sequenceName = "tracking_sequence", allocationSize = 1)
     @Column(name = "id", updatable = false)
     private Long id;
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "task_id", nullable = false)
     private Task task;

@@ -16,10 +16,8 @@ const Projects = ({ user, project, projects, setProjects, setProject }) => {
     if (!name) {
       return;
     }
-    const response = await projectService.create(name, user);
-    const newProjects = response.projects.sort((a, b) =>
-      a.name.localeCompare(b.name)
-    );
+    const newProjects = await projectService.create(name, user);
+    newProjects.sort((a, b) => a.name.localeCompare(b.name));
     setProjects(newProjects);
     setProject(newProjects.find((p) => p.name === name));
   };
