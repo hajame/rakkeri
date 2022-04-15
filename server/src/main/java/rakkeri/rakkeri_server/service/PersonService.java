@@ -5,9 +5,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import rakkeri.rakkeri_server.entity.Person;
+import rakkeri.rakkeri_server.entity.Project;
 import rakkeri.rakkeri_server.repository.PersonRepository;
 
 import java.util.List;
+import java.util.Objects;
 
 
 @Service
@@ -61,4 +63,13 @@ public class PersonService {
         }
         return findOne(person.getId());
     }
+
+    public Project getProject(String authorizationToken, Long projectId) {
+        Person person = getPerson(authorizationToken);
+        return person.getProjects().stream()
+                .filter(proj -> Objects.equals(proj.getId(), projectId))
+                .findFirst()
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED));
+    }
+
 }

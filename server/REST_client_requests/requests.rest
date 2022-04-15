@@ -35,18 +35,45 @@ Authorization: bearer token
 
 ###
 
-get http://localhost:8080/api/projects/1/tasks/1
-Content-Type: application/json
-Authorization: bearer token
-
-###
-
 post http://localhost:8080/api/projects/1/tasks
 Content-Type: application/json
 Authorization: bearer token
 
 {
     "name": "New task"
+}
+
+###
+
+put http://localhost:8080/api/projects/1/tasks/1
+Content-Type: application/json
+Authorization: bearer token
+
+{
+    "id": 1,
+    "name": "cooking modified"
+}
+
+###
+
+post http://localhost:8080/api/projects/1/tasks/1/trackings
+Content-Type: application/json
+Authorization: bearer token
+
+{
+    "startTime": "2022-04-15T09:39:15.183"
+}
+
+###
+
+
+put http://localhost:8080/api/projects/1/tasks/1/trackings/3
+Content-Type: application/json
+Authorization: bearer token
+
+{
+    "startTime": "2022-04-15T09:39:15.183",
+    "endTime": "2022-04-16T09:39:15.183"
 }
 
 ###

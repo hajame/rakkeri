@@ -68,4 +68,14 @@ public class Tracking {
     public void setEndTime(Timestamp endTime) {
         this.endTime = endTime;
     }
+
+    @Override
+    public String toString() {
+        return "Tracking{" +
+                "id=" + id +
+                ", task=" + task +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                '}';
+    }
 }

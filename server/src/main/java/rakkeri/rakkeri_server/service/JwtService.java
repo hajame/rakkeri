@@ -45,7 +45,7 @@ public class JwtService {
 
         return toPerson(claims);
     }
-    
+
     public Person parseToken(String authenticationToken) {
         if (!authenticationToken.startsWith("bearer")) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid token");
