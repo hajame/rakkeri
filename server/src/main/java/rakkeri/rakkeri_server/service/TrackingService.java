@@ -19,6 +19,10 @@ public class TrackingService {
         this.taskService = taskService;
     }
 
+    public Tracking save(Tracking tracking) {
+        return trackingRepository.save(tracking);
+    }
+
     public Tracking update(Tracking tracking) {
         return trackingRepository.save(tracking);
     }
