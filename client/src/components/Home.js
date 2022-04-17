@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import userService from "../services/users";
 import projectService from "../services/projects";
+import taskService from "../services/tasks";
 
 import LoginForm from "./LoginForm";
 import Projects from "./Projects";
@@ -30,6 +31,7 @@ export const Home = () => {
       setUser(user);
       userService.setToken(user.token);
       projectService.setToken(user.token);
+      taskService.setToken(user.token);
       try {
         let projects = await projectService.getProjects(user);
         projects.sort((a, b) => a.name.localeCompare(b.name));

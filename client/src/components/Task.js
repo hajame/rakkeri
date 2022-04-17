@@ -4,9 +4,14 @@ import ListItemText from "@mui/material/ListItemText";
 import IconButton from "@mui/material/IconButton";
 import Icon from "@mui/material/Icon";
 
+import taskService from "../services/tasks";
+
 const Task = ({ task, project, setProject }) => {
-  const handleTracking = async (task) => {
-    alert(task.name);
+  const startTracking = async (task) => {
+    const tracking = {
+      startTime: new Date().toUTCString(),
+    };
+    await taskService.startTracking(project, task, tracking);
   };
 
   return (
@@ -16,7 +21,7 @@ const Task = ({ task, project, setProject }) => {
         <IconButton
           edge="end"
           aria-label="comments"
-          onClick={() => handleTracking(task)}
+          onClick={() => startTracking(task)}
         >
           <Icon color="primary">play_arrow</Icon>
         </IconButton>
@@ -33,14 +38,13 @@ const Task = ({ task, project, setProject }) => {
   function totalMinutesTracked() {
     let minutes = 0;
     for (const i in task.trackings) {
+      const endDate = task.trackings[i].endTime
+        ? new Date(task.trackings[i].endTime)
+        : new Date();
       minutes =
-        minutes +
-        (new Date(task.trackings[i].endTime) -
-          new Date(task.trackings[i].startTime)) /
-          1000 /
-          60;
+        minutes + (endDate - new Date(task.trackings[i].startTime)) / 1000 / 60;
     }
-    return minutes;
+    return parseInt(minutes);
   }
 };
 
