@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 export const Test = () => {
-  const [greeting, setGreeting] = useState("not connected to backend");
+  const [greeting, setGreeting] = useState('not connected to backend');
   const [testUser, setTestUser] = useState({
-    username: "no username",
-    email: "no email",
+    username: 'no username',
+    email: 'no email',
   });
 
   useEffect(() => {
@@ -18,8 +18,8 @@ export const Test = () => {
   }, []);
 
   return (
-    <div className="App">
-      <div className="App-header">
+    <div className='App'>
+      <div className='App-header'>
         <p>{greeting}</p>
         <p>
           Test user from postgres: <br></br>

@@ -1,4 +1,5 @@
-import axios from "axios";
+import axios from 'axios';
+
 const usersUrl = `${process.env.REACT_APP_BACKEND_URL}/api/users`;
 const projectsUrl = `${process.env.REACT_APP_BACKEND_URL}/api/projects`;
 
@@ -12,7 +13,7 @@ const addTask = async (name, project) => {
   const response = await axios.post(
     `${projectsUrl}/${project.id}/tasks`,
     data,
-    config
+    config,
   );
   return response.data;
 };
@@ -24,7 +25,7 @@ const startTracking = async (project, task, tracking) => {
   const response = await axios.post(
     `${projectsUrl}/${project.id}/tasks/${task.id}/trackings`,
     tracking,
-    config
+    config,
   );
   return response.data;
 };

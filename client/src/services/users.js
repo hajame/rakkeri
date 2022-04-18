@@ -1,4 +1,5 @@
-import axios from "axios";
+import axios from 'axios';
+
 const usersUrl = `${process.env.REACT_APP_BACKEND_URL}/api/users`;
 const loginUrl = `${process.env.REACT_APP_BACKEND_URL}/api/login`;
 

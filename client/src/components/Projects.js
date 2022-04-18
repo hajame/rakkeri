@@ -1,18 +1,18 @@
-import { useState, useEffect } from "react";
-import userService from "../services/users";
-import projectService from "../services/projects";
+import { useState, useEffect } from 'react';
+import userService from '../services/users';
+import projectService from '../services/projects';
 
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import Button from "@mui/material/Button";
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import Button from '@mui/material/Button';
 
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 
 const Projects = ({ user, project, projects, setProjects, setProject }) => {
   const createProject = async () => {
-    const name = prompt("Please name your project", "name");
+    const name = prompt('Please name your project', 'name');
     if (!name) {
       return;
     }
@@ -28,20 +28,20 @@ const Projects = ({ user, project, projects, setProjects, setProject }) => {
 
   return (
     <Box sx={{ mt: 1 }}>
-      <Typography component="div" variant="h6">
+      <Typography component='div' variant='h6'>
         Projects
       </Typography>
       <Button
         onClick={createProject}
         fullWidth
-        variant="contained"
+        variant='contained'
         sx={{ mt: 1, mb: 1 }}
       >
         Create new
       </Button>
       <List>
         {projects.map((p) => (
-          <ListItem alignItems="center" disablePadding key={p.id}>
+          <ListItem alignItems='center' disablePadding key={p.id}>
             <ListItemButton
               dense={true}
               selected={project && project.id === p.id}
