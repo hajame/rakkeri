@@ -5,13 +5,16 @@ import Icon from '@mui/material/Icon';
 
 import taskService from '../services/tasks';
 
-const Task = ({ task, project, setProject }) => {
+const Task = ({ task, project, setProject, activeTask, setActiveTask }) => {
+
+
   const startTracking = async (task) => {
     const tracking = {
       startTime: new Date().toUTCString(),
     };
     const savedTracking = await taskService.startTracking(project, task, tracking);
     task.trackings = { ...task.trackings, savedTracking };
+    setActiveTask(task);
   };
 
   return (

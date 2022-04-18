@@ -9,7 +9,7 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
-const Project = ({ project, setProject }) => {
+const Project = ({ project, setProject, activeTask, setActiveTask }) => {
   const createTask = async () => {
     const name = prompt('Task name', '');
     if (!name) {
@@ -38,6 +38,8 @@ const Project = ({ project, setProject }) => {
             task={task}
             project={project}
             setProject={setProject}
+            activeTask={activeTask}
+            setActiveTask={setActiveTask}
           />
         ))}
       </List>

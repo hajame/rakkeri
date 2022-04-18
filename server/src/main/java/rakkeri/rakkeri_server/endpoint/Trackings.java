@@ -26,7 +26,6 @@ public class Trackings {
         tracking.setTask(task);
         task.getTrackings().add(tracking);
         Tracking savedTracking = trackingService.save(tracking);
-        //taskService.update(task);
         return savedTracking;
     }
 

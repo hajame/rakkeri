@@ -17,6 +17,7 @@ export const Home = () => {
   const [user, setUser] = useState(null);
   const [projects, setProjects] = useState([]);
   const [project, setProject] = useState(null);
+  const [activeTask, setActiveTask] = useState(null);
 
   const theme = createTheme({
     palette: {
@@ -57,49 +58,70 @@ export const Home = () => {
               flexDirection: 'column',
               alignItems: 'center',
             }
-            : { display: 'flex', flexDirection: 'row', height: '100%' }
+            : { display: 'flex', flexDirection: 'column', height: '100%' }
         }
       >
-        <CssBaseline />
-        {user === null && (
-          <LoginForm setUser={setUser} updateState={updateState} />
-        )}
+
         <Box
-          sx={{
-            marginTop: 4,
-            marginLeft: 1,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            height: '100vh',
-            maxWidth: '15em',
-          }}
-          style={{
-            backgroundColor: '#212121',
-          }}
+          sx={
+            { display: 'flex', flexDirection: 'row', height: '100%' }
+          }
         >
-          {user !== null && (
-            <Projects
-              user={user}
-              project={project}
-              projects={projects}
-              setProjects={setProjects}
-              setProject={setProject}
-            />
+          <CssBaseline />
+          {user === null && (
+            <LoginForm setUser={setUser} updateState={updateState} />
           )}
-        </Box>
-        <Box
-          sx={{
-            marginTop: 4,
-            marginLeft: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          {project !== null && (
-            <Project project={project} setProject={setProject} />
-          )}
+          <Box
+            sx={{
+              marginTop: 4,
+              marginLeft: 1,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              height: '100vh',
+              maxWidth: '15em',
+            }}
+            style={{
+              backgroundColor: '#212121',
+            }}
+          >
+            {user !== null && (
+              <Projects
+                user={user}
+                project={project}
+                projects={projects}
+                setProjects={setProjects}
+                setProject={setProject}
+              />
+            )}
+          </Box>
+          <Box
+            sx={{
+              marginTop: 1,
+              marginLeft: 4,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'left',
+            }}
+          >
+            {user !== null && activeTask !== null && (
+              <Box
+                sx={{
+                  marginTop: 1,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'left',
+                }}
+              >
+                <p>active task __ <b>{activeTask.name}</b> __ start
+                  time: {new Date(activeTask.trackings[0].startTime).toTimeString()}</p>
+              </Box>
+            )}
+            {project !== null && (
+              <Project project={project} setProject={setProject} activeTask={activeTask}
+                       setActiveTask={setActiveTask} />
+            )}
+          </Box>
         </Box>
       </Box>
     </ThemeProvider>
