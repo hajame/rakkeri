@@ -20,6 +20,8 @@ import java.sql.Timestamp;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.HashSet;
+import java.util.Set;
 
 @SpringBootApplication
 public class RakkeriServerApplication {
@@ -57,6 +59,13 @@ public class RakkeriServerApplication {
             coding = taskService.save(coding);
             project = projectService.save(project);
             secondProject = projectService.save(secondProject);
+
+            Set<Project> projectSet = new HashSet<>();
+            projectSet.add(project);
+            projectSet.add(secondProject);
+
+            newPerson.setProjects(projectSet);
+            personService.update(newPerson);
 
             Tracking first = new Tracking(
                     newPerson,

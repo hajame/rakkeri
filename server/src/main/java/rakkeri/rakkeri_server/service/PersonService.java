@@ -44,7 +44,7 @@ public class PersonService {
         return personRepository.findById(personId).get();
     }
 
-    public Person getPerson(String authorizationToken, Long userId) {
+    public Person authenticatePerson(String authorizationToken, Long userId) {
         Person person;
         try {
             person = jwtService.parseToken(authorizationToken, userId);
@@ -54,7 +54,7 @@ public class PersonService {
         return findOne(person.getId());
     }
 
-    public Person getPerson(String authorizationToken) {
+    public Person authenticatePerson(String authorizationToken) {
         Person person;
         try {
             person = jwtService.parseToken(authorizationToken);
@@ -65,7 +65,7 @@ public class PersonService {
     }
 
     public Project getProject(String authorizationToken, Long projectId) {
-        Person person = getPerson(authorizationToken);
+        Person person = authenticatePerson(authorizationToken);
         return person.getProjects().stream()
                 .filter(proj -> Objects.equals(proj.getId(), projectId))
                 .findFirst()

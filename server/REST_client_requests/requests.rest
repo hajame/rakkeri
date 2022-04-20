@@ -35,7 +35,7 @@ Authorization: bearer token
 
 ###
 
-post http://localhost:8080/api/projects/1/tasks
+post http://localhost:8080/api/tasks
 Content-Type: application/json
 Authorization: bearer token
 
@@ -45,7 +45,7 @@ Authorization: bearer token
 
 ###
 
-put http://localhost:8080/api/projects/1/tasks/1
+put http://localhost:8080/api/tasks/1
 Content-Type: application/json
 Authorization: bearer token
 
@@ -67,13 +67,13 @@ Authorization: bearer token
 ###
 
 
-put http://localhost:8080/api/projects/1/tasks/1/trackings/3
+put http://localhost:8080/api/projects/1/tasks/2/trackings/9
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJ0ZXN0IiwiaWF0IjoxNjUwNDU0NTM1LCJleHAiOjE2NTE2NjQxMzV9.qkjVwJ1V33VsRO8YmmmqztovSC-0siGEXpzwPYP4cSxnfJSF44S0iFt7ibmfjqEq
+Authorization: bearer token
 
 {
-    "startTime": "2022-04-20T11:52:02.337",
-    "endTime": "2022-04-20T11:52:02.337"
+    "startTime": "2022-04-20T11:52:00.720Z",
+    "endTime": "2022-04-20T11:52:00.720Z"
 }
 
 ###

@@ -20,14 +20,14 @@ public class Projects {
     @GetMapping("/api/users/{userId}/projects")
     public List<Project> getProjects(@RequestHeader("Authorization") String authorizationToken,
                                      @PathVariable("userId") Long userId) {
-        Person person = personService.getPerson(authorizationToken, userId);
+        Person person = personService.authenticatePerson(authorizationToken, userId);
         return new ArrayList<>(person.getProjects());
     }
 
     @PostMapping("/api/users/{userId}/projects")
     public List<Project> createProject(@RequestHeader("Authorization") String authorizationToken,
                                        @PathVariable("userId") Long userId, @RequestBody Project project) {
-        Person person = personService.getPerson(authorizationToken, userId);
+        Person person = personService.authenticatePerson(authorizationToken, userId);
         person.getProjects().add(project);
         Person updatedPerson = personService.update(person);
         return new ArrayList<>(updatedPerson.getProjects());
