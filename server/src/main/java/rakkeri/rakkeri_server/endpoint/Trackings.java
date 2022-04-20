@@ -1,7 +1,6 @@
 package rakkeri.rakkeri_server.endpoint;
 
 import org.springframework.web.bind.annotation.*;
-import rakkeri.rakkeri_server.entity.Task;
 import rakkeri.rakkeri_server.entity.Tracking;
 import rakkeri.rakkeri_server.service.TaskService;
 import rakkeri.rakkeri_server.service.TrackingService;
@@ -22,11 +21,12 @@ public class Trackings {
                                    @PathVariable("projectId") Long projectId,
                                    @PathVariable("taskId") Long taskId,
                                    @RequestBody Tracking tracking) {
-        Task task = taskService.getTask(authorizationToken, projectId, taskId);
-        tracking.setTask(task);
-        task.getTrackings().add(tracking);
-        Tracking savedTracking = trackingService.save(tracking);
-        return savedTracking;
+        // Task task = taskService.getTask(authorizationToken, projectId, taskId);
+        // tracking.setTask(task);
+        // task.getTrackings().add(tracking);
+        ///Tracking savedTracking = trackingService.save(tracking);
+        // return savedTracking;
+        return null;
     }
 
     @PutMapping("/api/projects/{projectId}/tasks/{taskId}/trackings/{trackingId}")

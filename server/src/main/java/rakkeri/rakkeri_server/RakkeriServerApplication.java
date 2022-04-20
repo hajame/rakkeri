@@ -12,6 +12,9 @@ import rakkeri.rakkeri_server.entity.Project;
 import rakkeri.rakkeri_server.entity.Task;
 import rakkeri.rakkeri_server.entity.Tracking;
 import rakkeri.rakkeri_server.service.PersonService;
+import rakkeri.rakkeri_server.service.ProjectService;
+import rakkeri.rakkeri_server.service.TaskService;
+import rakkeri.rakkeri_server.service.TrackingService;
 
 import java.sql.Timestamp;
 import java.time.ZoneId;
@@ -20,6 +23,7 @@ import java.time.temporal.ChronoUnit;
 
 @SpringBootApplication
 public class RakkeriServerApplication {
+
 
     @Value("${spring.datasource.url}")
     private String dbUrl;
@@ -39,7 +43,8 @@ public class RakkeriServerApplication {
     }
 
     @Bean
-    CommandLineRunner commandLineRunner(PersonService personService) {
+    CommandLineRunner commandLineRunner(PersonService personService, TaskService taskService,
+                                        ProjectService projectService, TrackingService trackingService) {
         return args -> {
             Person newPerson = new Person("test", "test@example.com", "testpass");
             Project project = new Project("Best Test Project");
@@ -47,32 +52,31 @@ public class RakkeriServerApplication {
             Task cooking = new Task("cooking");
             Task coding = new Task("coding");
 
+            newPerson = personService.saveNew(newPerson);
+            cooking = taskService.save(cooking);
+            coding = taskService.save(coding);
+            project = projectService.save(project);
+            secondProject = projectService.save(secondProject);
 
             Tracking first = new Tracking(
+                    newPerson,
+                    project,
                     cooking,
                     new Timestamp(ZonedDateTime.now().withZoneSameInstant(ZoneId.of("UTC")).toInstant().toEpochMilli()),
                     new Timestamp(ZonedDateTime.now().withZoneSameInstant(ZoneId.of("UTC"))
                             .plus(1, ChronoUnit.HOURS).toInstant().toEpochMilli())
             );
             Tracking second = new Tracking(
-                    cooking,
+                    newPerson,
+                    secondProject,
+                    coding,
                     new Timestamp(ZonedDateTime.now().withZoneSameInstant(ZoneId.of("UTC"))
                             .plus(2, ChronoUnit.HOURS).toInstant().toEpochMilli()),
                     new Timestamp(ZonedDateTime.now().withZoneSameInstant(ZoneId.of("UTC"))
                             .plus(3, ChronoUnit.HOURS).toInstant().toEpochMilli())
             );
-            cooking.getTrackings().add(first);
-            cooking.getTrackings().add(second);
-
-            project.getTasks().add(cooking);
-            secondProject.getTasks().add(coding);
-            secondProject.getTasks().add(cooking);
-            newPerson.getProjects().add(project);
-            newPerson.getProjects().add(secondProject);
-            project.getPersons().add(newPerson);
-            secondProject.getPersons().add(newPerson);
-
-            personService.saveNew(newPerson);
+            trackingService.save(first);
+            trackingService.save(second);
             System.out.println("____ Database is: ____ " + dbUrl);
         };
     }

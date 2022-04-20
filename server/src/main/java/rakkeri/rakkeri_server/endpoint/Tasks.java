@@ -26,7 +26,7 @@ public class Tasks {
                               @PathVariable("projectId") Long projectId,
                               @RequestBody Task task) {
         Project project = personService.getProject(authorizationToken, projectId);
-        project.getTasks().add(task);
+        // project.getTasks().add(task);
         return projectService.update(project);
     }
 
@@ -35,9 +35,9 @@ public class Tasks {
                            @PathVariable("projectId") Long projectId,
                            @PathVariable("taskId") Long taskId,
                            @RequestBody Task task) {
-        Task oldTask = taskService.getTask(authorizationToken, projectId, taskId);
-        oldTask.setName(task.getName());
-        taskService.update(oldTask);
+//        Task oldTask = taskService.getTask(authorizationToken, projectId, taskId);
+//        oldTask.setName(task.getName());
+//        taskService.update(oldTask);
     }
 
 }

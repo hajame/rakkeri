@@ -1,0 +1,74 @@
+
+person      person_projects   project       tracking        task
+-------     ---------------   --------      ---------       -----
+id          person_id         id            id              id
+name        project_id        name          task_id         name
+                                            project_id
+                                            person_id       
+                                            startTime 
+                                            endTime       
+                                              
+
+
+
+
+trackings:
+-----------
+1  id
+1 (project: home)
+2 (task: cooking)
+2001/1/1 09
+2001/1/1 10
+
+2  id
+1 (project: home)
+3 (task: cleaning)
+2001/1/1 10
+2001/1/1 12
+
+3  id
+1 (project: home)
+2 (task: cooking)
+2001/1/1 12
+2001/1/1 13
+
+
+project: home
+--------------
+
+    cooking 2h
+        - 2001/1/1 09 - 2001/1/1 10
+        - 2001/1/1 12 - 2001/1/1 13
+
+    cleaning 2h
+        - 2001/1/1 10 - 2001/1/1 12
+
+
+
+task: cooking
+------------
+
+    trackings
+        - 2001/1/1 09 - 2001/1/1 10 - cooking - home
+        - 2001/1/1 12 - 2001/1/1 14 - cooking - work
+
+    projects (aggregate)
+        - home (1h)
+        - work (2h)
+        - ...
+
+
+
+person: Harry
+--------------
+
+    projects
+        - home
+        - work
+
+    trackings
+        - 2001/1/1 09 - 2001/1/1 10 - cooking - home
+        - 2001/1/1 12 - 2001/1/1 14 - cooking - work
+        - ...
+
+

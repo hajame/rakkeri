@@ -23,9 +23,9 @@ public class PersonService {
         this.jwtService = jwtService;
     }
 
-    public void saveNew(Person person) {
+    public Person saveNew(Person person) {
         person.setPassword(new BCryptPasswordEncoder().encode(person.getPassword()));
-        personRepository.save(person);
+        return personRepository.save(person);
     }
 
     public Person update(Person person) {

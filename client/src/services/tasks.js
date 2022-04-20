@@ -30,8 +30,25 @@ const startTracking = async (project, task, tracking) => {
   return response.data;
 };
 
+const update = async (project, task, tracking) => {
+  const config = {
+    headers: { Authorization: token },
+  };
+  const data = {
+    startTime: new Date(tracking.startTime).toISOString(),
+    endTime: new Date(tracking.endTime).toISOString(),
+  };
+  console.log(data);
+  const response = await axios.put(
+    `${projectsUrl}/${project.id}/tasks/${task.id}/trackings/${tracking.id}`,
+    data,
+    config,
+  );
+  return response.data;
+};
+
 const setToken = (newToken) => {
   token = `bearer ${newToken}`;
 };
 
-export default { setToken, addTask, startTracking };
+export default { setToken, addTask, startTracking, update };

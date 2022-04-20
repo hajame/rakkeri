@@ -17,6 +17,14 @@ public class Tracking {
     private Long id;
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "person_id", nullable = false)
+    private Person person;
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "project_id", nullable = false)
+    private Project project;
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "task_id", nullable = false)
     private Task task;
     @Column(name = "start_time")
@@ -24,7 +32,9 @@ public class Tracking {
     @Column(name = "end_time")
     private Timestamp endTime;
 
-    public Tracking(Task task, Timestamp startTime, Timestamp endTime) {
+    public Tracking(Person person, Project project, Task task, Timestamp startTime, Timestamp endTime) {
+        this.person = person;
+        this.project = project;
         this.task = task;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -43,6 +53,22 @@ public class Tracking {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
     }
 
     public Task getTask() {

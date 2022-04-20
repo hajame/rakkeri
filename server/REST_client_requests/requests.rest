@@ -69,11 +69,11 @@ Authorization: bearer token
 
 put http://localhost:8080/api/projects/1/tasks/1/trackings/3
 Content-Type: application/json
-Authorization: bearer token
+Authorization: bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJ0ZXN0IiwiaWF0IjoxNjUwNDU0NTM1LCJleHAiOjE2NTE2NjQxMzV9.qkjVwJ1V33VsRO8YmmmqztovSC-0siGEXpzwPYP4cSxnfJSF44S0iFt7ibmfjqEq
 
 {
-    "startTime": "2022-04-15T09:39:15.183",
-    "endTime": "2022-04-16T09:39:15.183"
+    "startTime": "2022-04-20T11:52:02.337",
+    "endTime": "2022-04-20T11:52:02.337"
 }
 
 ###

@@ -34,6 +34,8 @@ public class Person {
             inverseJoinColumns = {@JoinColumn(name = "project_id")}
     )
     private Set<Project> projects = new HashSet<>();
+    @OneToMany(mappedBy = "person", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Tracking> trackings = new HashSet<>();
 
     public Person(String username, String email, String password) {
         this.username = username;
@@ -84,4 +86,11 @@ public class Person {
         this.projects = projects;
     }
 
+    public Set<Tracking> getTrackings() {
+        return trackings;
+    }
+
+    public void setTrackings(Set<Tracking> trackings) {
+        this.trackings = trackings;
+    }
 }

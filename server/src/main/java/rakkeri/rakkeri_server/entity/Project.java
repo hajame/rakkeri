@@ -21,13 +21,8 @@ public class Project {
     @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "projects")
     Set<Person> persons = new HashSet<>();
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "project_tasks",
-            joinColumns = {@JoinColumn(name = "project_id")},
-            inverseJoinColumns = {@JoinColumn(name = "task_id")}
-    )
-    private Set<Task> tasks = new HashSet<>();
+    @OneToMany(mappedBy = "project", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Tracking> trackings = new HashSet<>();
 
     public Project(String name) {
         this.name = name;
@@ -60,11 +55,11 @@ public class Project {
         this.persons = persons;
     }
 
-    public Set<Task> getTasks() {
-        return tasks;
+    public Set<Tracking> getTrackings() {
+        return trackings;
     }
 
-    public void setTasks(Set<Task> tasks) {
-        this.tasks = tasks;
+    public void setTrackings(Set<Tracking> trackings) {
+        this.trackings = trackings;
     }
 }
