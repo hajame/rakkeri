@@ -9,9 +9,7 @@ import Project from './Project';
 
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { grey } from '@mui/material/colors';
 
 export const Home = () => {
   const [user, setUser] = useState(null);
@@ -113,8 +111,9 @@ export const Home = () => {
                   alignItems: 'left',
                 }}
               >
-                <p>active task __ <b>{activeTask.name}</b> __ start
-                  time: {new Date(activeTask.trackings[0].startTime).toTimeString()}</p>
+                <p>active task __<b>{activeTask.name}</b>__ start
+                  time: {new Date(activeTask.trackings.find((t) => t.endTime === null).startTime).toTimeString().substring(0, 8)}
+                </p>
               </Box>
             )}
             {project !== null && (

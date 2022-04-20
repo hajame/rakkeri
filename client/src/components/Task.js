@@ -13,7 +13,7 @@ const Task = ({ task, project, setProject, activeTask, setActiveTask }) => {
       startTime: new Date().toUTCString(),
     };
     const savedTracking = await taskService.startTracking(project, task, tracking);
-    task.trackings = { ...task.trackings, savedTracking };
+    task.trackings = [...task.trackings, savedTracking];
     setActiveTask(task);
   };
 
