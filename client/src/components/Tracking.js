@@ -1,6 +1,9 @@
 const Tracking = ({ tracking }) => {
 
   function toHHMM(timeString) {
+    if (!timeString) {
+      return '';
+    }
     const date = new Date(timeString);
     return `${date.getHours()}:${date.getMinutes()}`;
   }
