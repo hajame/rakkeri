@@ -48,10 +48,24 @@
 |       | 1:13  | Planning requirements                                                      |
 |       | 2:32  | Story: User can read task tracking status                                  |
 |       | 0:11  | Documentation                                                              |
+| 17.4. | 1:04  | Story: User can start task tracking                                        |
+| 18.4. | 2:23  | Story: User can start task tracking                                        |
+| 20.4. | 1:23  | Change the data model so that a tracking is tied to a project              |
+|       | 1:47  | Ensure task has only one active tracking                                   |
+|       | 0:19  | Redesign and reimplement endpoints                                         |
+|       | 0:15  | Story: User can start task tracking                                        |
+| 21.4. | 2:22  | Fix frontend according to new datamodel                                    |
+|       | 1:36  | Redesign and reimplement endpoints                                         |
+|       | 1:15  | Story: User can start a new tracking                                       |
+|       | 0:16  | Documentation                                                              |
 |       |       |                                                                            |
 |       |       |                                                                            |
 |       |       |                                                                            |
 |       |       |                                                                            |
 |       |       |                                                                            |
 |       |       |                                                                            |
-| total | 59:12 |                                                                            |
+|       |       |                                                                            |
+|       |       |                                                                            |
+|       |       |                                                                            |
+|       |       |                                                                            |
+| total | 71:52 |                                                                            |
