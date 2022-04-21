@@ -1,6 +1,9 @@
 package rakkeri.rakkeri_server.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -15,22 +18,34 @@ public class Tracking {
     @SequenceGenerator(name = "tracking_sequence", sequenceName = "tracking_sequence", allocationSize = 1)
     @Column(name = "id", updatable = false)
     private Long id;
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "person_id", nullable = false)
-    private Person person;
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "project_id", nullable = false)
-    private Project project;
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "task_id", nullable = false)
-    private Task task;
+
     @Column(name = "start_time")
     private Timestamp startTime;
+
     @Column(name = "end_time")
     private Timestamp endTime;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "person_id", nullable = false)
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+    @JsonIdentityReference(alwaysAsId = true)
+    @JsonProperty("personId")
+    private Person person;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "project_id", nullable = false)
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+    @JsonIdentityReference(alwaysAsId = true)
+    @JsonProperty("projectId")
+    private Project project;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+    @JoinColumn(name = "task_id", nullable = false)
+    @JsonIdentityReference(alwaysAsId = true)
+    @JsonProperty("taskId")
+    private Task task;
+
 
     public Tracking(Person person, Project project, Task task, Timestamp startTime, Timestamp endTime) {
         this.person = person;
