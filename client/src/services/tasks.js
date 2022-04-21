@@ -2,16 +2,17 @@ import axios from 'axios';
 
 const usersUrl = `${process.env.REACT_APP_BACKEND_URL}/api/users`;
 const projectsUrl = `${process.env.REACT_APP_BACKEND_URL}/api/projects`;
+const tasksUrl = `${process.env.REACT_APP_BACKEND_URL}/api/tasks`;
 
 let token = null;
 
-const addTask = async (name, project) => {
+const addTask = async (name) => {
   const config = {
     headers: { Authorization: token },
   };
   const data = { name: name };
   const response = await axios.post(
-    `${projectsUrl}/${project.id}/tasks`,
+    `${tasksUrl}`,
     data,
     config,
   );

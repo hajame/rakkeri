@@ -11,21 +11,27 @@ import java.util.stream.Collectors;
 
 public class ProjectDTO {
     @JsonProperty("id")
-    private final Long id;
+    private Long id;
     private String name;
     private Set<UserWithoutTokenDTO> users;
     private Set<TrackingDTO> trackings = new HashSet<>();
+
+    public ProjectDTO() {
+    }
 
     public ProjectDTO(Long id, String name) {
         this.id = id;
         this.name = name;
     }
 
-
     public ProjectDTO(Long id, String name, Set<UserWithoutTokenDTO> users, Set<TrackingDTO> trackings) {
         this(id, name);
         this.users = users;
         this.trackings = trackings;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getName() {

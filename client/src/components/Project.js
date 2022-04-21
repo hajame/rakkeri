@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import userService from '../services/users';
-import projectService from '../services/projects';
+import taskService from '../services/tasks';
+import trackingService from '../services/trackings';
 
 import Tracking from './Tracking';
 
@@ -9,16 +10,25 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
-const Project = ({ project, setProject, activeTask, setActiveTask }) => {
+const Project = ({ user, project, setProject, activeTask, setActiveTask }) => {
   const startTracking = async () => {
     const name = prompt('What are you doing?', '');
     if (!name) {
       return;
     }
-    alert('great!');
-    // const updatedProject = await projectService.addTask(name, project);
-    // updatedProject.tasks.sort((a, b) => a.name.localeCompare(b.name));
-    // setProject(updatedProject);
+    const newTask = await taskService.addTask(name, project);
+    console.log(newTask);
+    const newTracking = await trackingService.startTracking(user, project, newTask);
+    console.log(newTracking);
+    const updatedProject = {
+      ...project,
+      trackings: [
+        ...project.trackings,
+        newTracking,
+      ],
+    };
+    console.log(updatedProject);
+    setProject(updatedProject);
   };
 
   return (

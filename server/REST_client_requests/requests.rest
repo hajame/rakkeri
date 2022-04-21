@@ -56,12 +56,21 @@ Authorization: bearer token
 
 ###
 
-post http://localhost:8080/api/projects/1/tasks/1/trackings
+post http://localhost:8080/api/trackings
 Content-Type: application/json
 Authorization: bearer token
 
 {
-    "startTime": "2022-04-15T09:39:15.183"
+    "startTime": "2022-04-15T09:39:15.183",
+    "user": {
+        "id": 1
+    },
+    "project": {
+        "id": 2
+    },
+    "task": {
+        "id": 2
+    }
 }
 
 ###

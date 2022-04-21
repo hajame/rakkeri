@@ -4,8 +4,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class TaskDTO {
     @JsonProperty("id")
-    private final Long id;
+    private Long id;
     private String name;
+
+    public TaskDTO() {
+    }
 
     public TaskDTO(Long id, String name) {
         this.id = id;

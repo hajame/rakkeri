@@ -4,9 +4,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class UserDTO {
     @JsonProperty("id")
-    private final Long id;
+    private Long id;
     private String username;
     private String token;
+
+    public UserDTO() {
+    }
 
     public UserDTO(Long id, String username) {
         this.id = id;

@@ -5,8 +5,11 @@ import rakkeri.rakkeri_server.entity.Person;
 
 public class UserWithoutTokenDTO {
     @JsonProperty("id")
-    private final Long id;
+    private Long id;
     private String username;
+
+    public UserWithoutTokenDTO() {
+    }
 
     public UserWithoutTokenDTO(Long id, String username) {
         this.id = id;

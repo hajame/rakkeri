@@ -7,12 +7,15 @@ import java.sql.Timestamp;
 
 public class TrackingDTO {
     @JsonProperty("id")
-    private final Long id;
+    private Long id;
     private Timestamp startTime;
     private Timestamp endTime;
     private UserWithoutTokenDTO user;
     private TaskDTO task;
     private ProjectDTO project;
+
+    public TrackingDTO() {
+    }
 
     public TrackingDTO(Long id) {
         this.id = id;
@@ -26,6 +29,10 @@ public class TrackingDTO {
         this.user = user;
         this.task = task;
         this.project = project;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public Timestamp getStartTime() {

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import userService from '../services/users';
 import projectService from '../services/projects';
 import taskService from '../services/tasks';
+import trackingService from '../services/trackings';
 
 import LoginForm from './LoginForm';
 import Projects from './Projects';
@@ -23,14 +24,19 @@ export const Home = () => {
     },
   });
 
+  const setToken = user => {
+    userService.setToken(user.token);
+    projectService.setToken(user.token);
+    taskService.setToken(user.token);
+    trackingService.setToken(user.token);
+  };
+
   const updateState = async () => {
     const userJSON = window.localStorage.getItem('rakkeriAppUser');
     if (userJSON) {
       const user = JSON.parse(userJSON);
       setUser(user);
-      userService.setToken(user.token);
-      projectService.setToken(user.token);
-      taskService.setToken(user.token);
+      setToken(user);
       try {
         let projects = await projectService.getProjects(user);
         projects.sort((a, b) => a.name.localeCompare(b.name));
@@ -117,7 +123,7 @@ export const Home = () => {
               </Box>
             )}
             {project !== null && (
-              <Project project={project} setProject={setProject} activeTask={activeTask}
+              <Project user={user} project={project} setProject={setProject} activeTask={activeTask}
                        setActiveTask={setActiveTask} />
             )}
           </Box>
