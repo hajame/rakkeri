@@ -10,16 +10,21 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
-const Project = ({ user, project, setProject, activeTask, setActiveTask }) => {
+const Project = ({ user, project, setProject, projects, setProjects, activeTask, setActiveTask }) => {
+  const replaceOldProject = (updatedProject) => {
+    return [
+      ...projects.filter((p) => p.id !== updatedProject.id),
+      updatedProject
+    ];
+  };
+
   const startTracking = async () => {
     const name = prompt('What are you doing?', '');
     if (!name) {
       return;
     }
     const newTask = await taskService.addTask(name, project);
-    console.log(newTask);
     const newTracking = await trackingService.startTracking(user, project, newTask);
-    console.log(newTracking);
     const updatedProject = {
       ...project,
       trackings: [
@@ -27,8 +32,10 @@ const Project = ({ user, project, setProject, activeTask, setActiveTask }) => {
         newTracking,
       ],
     };
-    console.log(updatedProject);
     setProject(updatedProject);
+    let updatedProjects = replaceOldProject(updatedProject);
+    updatedProjects.sort((a, b) => a.name.localeCompare(b.name));
+    setProjects(updatedProjects);
   };
 
   return (

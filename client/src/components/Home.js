@@ -123,7 +123,8 @@ export const Home = () => {
               </Box>
             )}
             {project !== null && (
-              <Project user={user} project={project} setProject={setProject} activeTask={activeTask}
+              <Project user={user} project={project} setProject={setProject} projects={projects}
+                       setProjects={setProjects} activeTask={activeTask}
                        setActiveTask={setActiveTask} />
             )}
           </Box>
