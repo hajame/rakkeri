@@ -10,14 +10,15 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
 const Project = ({ project, setProject, activeTask, setActiveTask }) => {
-  const createTask = async () => {
-    const name = prompt('Task name', '');
+  const startTracking = async () => {
+    const name = prompt('What are you doing?', '');
     if (!name) {
       return;
     }
-    const updatedProject = await projectService.addTask(name, project);
-    updatedProject.tasks.sort((a, b) => a.name.localeCompare(b.name));
-    setProject(updatedProject);
+    alert('great!');
+    // const updatedProject = await projectService.addTask(name, project);
+    // updatedProject.tasks.sort((a, b) => a.name.localeCompare(b.name));
+    // setProject(updatedProject);
   };
 
   return (
@@ -26,10 +27,10 @@ const Project = ({ project, setProject, activeTask, setActiveTask }) => {
         {project.name}
       </Typography>
       <Typography component='div' variant='h6'>
-        Tasks
+        Tracked items
       </Typography>
-      <Button onClick={createTask} variant='contained' sx={{ mt: 1, mb: 1 }}>
-        New task
+      <Button onClick={startTracking} variant='contained' sx={{ mt: 1, mb: 1 }}>
+        Start tracking
       </Button>
       <List>
         {project.trackings.map((tracking) => (
