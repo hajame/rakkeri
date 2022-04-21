@@ -29,7 +29,7 @@ public class Tracking {
     @JoinColumn(name = "person_id", nullable = false)
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     @JsonIdentityReference(alwaysAsId = true)
-    @JsonProperty("personId")
+    @JsonProperty("userId")
     private Person person;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

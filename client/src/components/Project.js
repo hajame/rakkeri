@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import userService from '../services/users';
 import projectService from '../services/projects';
 
-import Task from './Task';
+import Tracking from './Tracking';
 
 import List from '@mui/material/List';
 import Button from '@mui/material/Button';
@@ -32,15 +32,8 @@ const Project = ({ project, setProject, activeTask, setActiveTask }) => {
         New task
       </Button>
       <List>
-        {project.tasks.map((task) => (
-          <Task
-            key={task.id}
-            task={task}
-            project={project}
-            setProject={setProject}
-            activeTask={activeTask}
-            setActiveTask={setActiveTask}
-          />
+        {project.trackings.map((tracking) => (
+          <Tracking tracking={tracking} />
         ))}
       </List>
     </Box>
