@@ -33,9 +33,10 @@ const Project = ({ project, setProject, activeTask, setActiveTask }) => {
       </Button>
       <List>
         {project.trackings.map((tracking) => (
-          <Tracking tracking={tracking} />
+          <Tracking key={tracking.id} tracking={tracking} />
         ))}
       </List>
+
     </Box>
   );
 };

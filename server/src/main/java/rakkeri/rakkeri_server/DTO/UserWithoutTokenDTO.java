@@ -1,6 +1,7 @@
 package rakkeri.rakkeri_server.DTO;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import rakkeri.rakkeri_server.entity.Person;
 
 public class UserWithoutTokenDTO {
     @JsonProperty("id")
@@ -30,5 +31,9 @@ public class UserWithoutTokenDTO {
                 "id=" + id +
                 ", username='" + username + '\'' +
                 '}';
+    }
+
+    public static UserWithoutTokenDTO toDTO(Person person) {
+        return new UserWithoutTokenDTO(person.getId(), person.getUsername());
     }
 }

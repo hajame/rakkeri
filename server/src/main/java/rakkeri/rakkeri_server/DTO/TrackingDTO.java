@@ -1,6 +1,7 @@
 package rakkeri.rakkeri_server.DTO;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import rakkeri.rakkeri_server.entity.Tracking;
 
 import java.sql.Timestamp;
 
@@ -65,6 +66,17 @@ public class TrackingDTO {
 
     public void setProject(ProjectDTO project) {
         this.project = project;
+    }
+
+    public static TrackingDTO toDTO(Tracking tracking) {
+        return new TrackingDTO(
+                tracking.getId(),
+                tracking.getStartTime(),
+                tracking.getEndTime(),
+                new UserWithoutTokenDTO(tracking.getPerson().getId(), tracking.getPerson().getUsername()),
+                new TaskDTO(tracking.getTask().getId(), tracking.getTask().getName()),
+                new ProjectDTO(tracking.getProject().getId(), tracking.getProject().getName())
+        );
     }
 
     @Override
