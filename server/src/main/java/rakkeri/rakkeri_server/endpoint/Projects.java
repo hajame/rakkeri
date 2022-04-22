@@ -21,7 +21,7 @@ public class Projects {
     @GetMapping("/api/users/{userId}/projects")
     public List<ProjectDTO> getProjects(@RequestHeader("Authorization") String authorizationToken,
                                         @PathVariable("userId") Long userId) {
-        Person person = personService.authenticatePerson(authorizationToken, userId);
+        Person person = personService.authenticateAndGetPerson(authorizationToken, userId);
         Set<Project> projects = person.getProjects();
         return ProjectDTO.toProjectDTOs(projects);
     }
@@ -29,7 +29,7 @@ public class Projects {
     @PostMapping("/api/users/{userId}/projects")
     public List<ProjectDTO> createProject(@RequestHeader("Authorization") String authorizationToken,
                                           @PathVariable("userId") Long userId, @RequestBody Project project) {
-        Person person = personService.authenticatePerson(authorizationToken, userId);
+        Person person = personService.authenticateAndGetPerson(authorizationToken, userId);
         person.getProjects().add(project);
         Person updatedPerson = personService.update(person);
         Set<Project> updatedProjects = updatedPerson.getProjects();

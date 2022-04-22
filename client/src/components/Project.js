@@ -18,25 +18,43 @@ const Project = ({ user, project, setProject, projects, setProjects, activeTrack
     ];
   };
 
-  const handleTracking = async () => {
+  function updateProjectState(newTracking) {
+    const updatedProject = {
+      ...project,
+      trackings: [
+        ...project.trackings.filter((t) => t.id !== newTracking.id),
+        newTracking,
+      ],
+    };
+    setProject(updatedProject);
+    let updatedProjects = replaceOldProject(updatedProject);
+    updatedProjects.sort((a, b) => a.name.localeCompare(b.name));
+    setProjects(updatedProjects);
+  }
+
+  async function stopTracking() {
+    const updatedTracking = await trackingService.stopTracking(activeTracking);
+    updateProjectState(updatedTracking);
+    setActiveTracking(null);
+  }
+
+  async function startTracking() {
     const name = prompt('What are you doing?', '');
     if (!name) {
       return;
     }
     const newTask = await taskService.addTask(name, project);
     const newTracking = await trackingService.startTracking(user, project, newTask);
-    const updatedProject = {
-      ...project,
-      trackings: [
-        ...project.trackings,
-        newTracking,
-      ],
-    };
+    updateProjectState(newTracking);
     setActiveTracking(newTracking);
-    setProject(updatedProject);
-    let updatedProjects = replaceOldProject(updatedProject);
-    updatedProjects.sort((a, b) => a.name.localeCompare(b.name));
-    setProjects(updatedProjects);
+  }
+
+  const handleTracking = async () => {
+    if (activeTracking !== null) {
+      await stopTracking();
+      return;
+    }
+    await startTracking();
   };
 
   return (

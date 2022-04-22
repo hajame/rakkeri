@@ -44,7 +44,15 @@ public class PersonService {
         return personRepository.findById(personId).get();
     }
 
-    public Person authenticatePerson(String authorizationToken, Long userId) {
+    public void authenticatePerson(String authorizationToken, Long userId) {
+        try {
+            jwtService.parseToken(authorizationToken, userId);
+        } catch (Exception exception) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid token", exception);
+        }
+    }
+
+    public Person authenticateAndGetPerson(String authorizationToken, Long userId) {
         Person person;
         try {
             person = jwtService.parseToken(authorizationToken, userId);
@@ -54,7 +62,7 @@ public class PersonService {
         return findOne(person.getId());
     }
 
-    public Person authenticatePerson(String authorizationToken) {
+    public Person authenticateAndGetPerson(String authorizationToken) {
         Person person;
         try {
             person = jwtService.parseToken(authorizationToken);
@@ -65,7 +73,7 @@ public class PersonService {
     }
 
     public Project getProject(String authorizationToken, Long projectId) {
-        Person person = authenticatePerson(authorizationToken);
+        Person person = authenticateAndGetPerson(authorizationToken);
         return person.getProjects().stream()
                 .filter(proj -> Objects.equals(proj.getId(), projectId))
                 .findFirst()

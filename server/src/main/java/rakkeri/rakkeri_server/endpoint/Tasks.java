@@ -22,7 +22,7 @@ public class Tasks {
 
     @PostMapping("/api/tasks")
     public Task createTask(@RequestHeader("Authorization") String authorizationToken, @RequestBody Task task) {
-        personService.authenticatePerson(authorizationToken);
+        personService.authenticateAndGetPerson(authorizationToken);
         return taskService.save(task);
     }
 
@@ -30,7 +30,7 @@ public class Tasks {
     public void updateTask(@RequestHeader("Authorization") String authorizationToken,
                            @PathVariable("taskId") Long taskId,
                            @RequestBody Task task) {
-        personService.authenticatePerson(authorizationToken);
+        personService.authenticateAndGetPerson(authorizationToken);
         Task oldTask = taskService.getTask(taskId);
         oldTask.setName(task.getName());
         taskService.save(oldTask);
