@@ -16,7 +16,7 @@ export const Home = () => {
   const [user, setUser] = useState(null);
   const [projects, setProjects] = useState([]);
   const [project, setProject] = useState(null);
-  const [activeTask, setActiveTask] = useState(null);
+  const [activeTracking, setActiveTracking] = useState(null);
 
   const theme = createTheme({
     palette: {
@@ -108,7 +108,7 @@ export const Home = () => {
               alignItems: 'left',
             }}
           >
-            {user !== null && activeTask !== null && (
+            {user !== null && activeTracking !== null && (
               <Box
                 sx={{
                   marginTop: 1,
@@ -117,15 +117,15 @@ export const Home = () => {
                   alignItems: 'left',
                 }}
               >
-                <p>active task __<b>{activeTask.name}</b>__ start
-                  time: {new Date(activeTask.trackings.find((t) => t.endTime === null).startTime).toTimeString().substring(0, 8)}
+                <p>active: __<b>{activeTracking.task.name}</b>__
+                  start time: {new Date(activeTracking.startTime).toTimeString().substring(0, 8)}
                 </p>
               </Box>
             )}
             {project !== null && (
               <Project user={user} project={project} setProject={setProject} projects={projects}
-                       setProjects={setProjects} activeTask={activeTask}
-                       setActiveTask={setActiveTask} />
+                       setProjects={setProjects} activeTracking={activeTracking}
+                       setActiveTracking={setActiveTracking} />
             )}
           </Box>
         </Box>

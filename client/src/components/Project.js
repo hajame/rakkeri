@@ -10,15 +10,15 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
-const Project = ({ user, project, setProject, projects, setProjects, activeTask, setActiveTask }) => {
+const Project = ({ user, project, setProject, projects, setProjects, activeTracking, setActiveTracking }) => {
   const replaceOldProject = (updatedProject) => {
     return [
       ...projects.filter((p) => p.id !== updatedProject.id),
-      updatedProject
+      updatedProject,
     ];
   };
 
-  const startTracking = async () => {
+  const handleTracking = async () => {
     const name = prompt('What are you doing?', '');
     if (!name) {
       return;
@@ -32,6 +32,7 @@ const Project = ({ user, project, setProject, projects, setProjects, activeTask,
         newTracking,
       ],
     };
+    setActiveTracking(newTracking);
     setProject(updatedProject);
     let updatedProjects = replaceOldProject(updatedProject);
     updatedProjects.sort((a, b) => a.name.localeCompare(b.name));
@@ -46,8 +47,8 @@ const Project = ({ user, project, setProject, projects, setProjects, activeTask,
       <Typography component='div' variant='h6'>
         Tracked items
       </Typography>
-      <Button onClick={startTracking} variant='contained' sx={{ mt: 1, mb: 1 }}>
-        Start tracking
+      <Button onClick={handleTracking} variant='contained' sx={{ mt: 1, mb: 1 }}>
+        {activeTracking === null ? 'Start tracking' : 'Stop tracking'}
       </Button>
       <List>
         {project.trackings.map((tracking) => (
