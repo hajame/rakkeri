@@ -5,11 +5,11 @@ const Tracking = ({ tracking }) => {
       return '';
     }
     const date = new Date(timeString);
-    return `${date.getHours()}:${date.getMinutes()}`;
+    return `${date.getDate()}/${date.getMonth()}/${date.getFullYear().toString().slice(2, 4)} ${date.getHours()}:${date.getMinutes()}`;
   }
 
   return (
-    <p>{tracking.task.name} : {tracking.user.username} :
+    <p>Task: {tracking.task.name}, User: {tracking.user.username}, <br />
       {toHHMM(tracking.startTime)} - {toHHMM(tracking.endTime)}</p>
   );
 
