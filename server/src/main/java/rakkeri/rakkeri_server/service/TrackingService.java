@@ -34,4 +34,7 @@ public class TrackingService {
         return null;
     }
 
+    public boolean exists(Long id) {
+        return trackingRepository.findById(id).isPresent();
+    }
 }

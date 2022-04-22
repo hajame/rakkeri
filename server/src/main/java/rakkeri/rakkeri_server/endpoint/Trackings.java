@@ -1,7 +1,10 @@
 package rakkeri.rakkeri_server.endpoint;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import rakkeri.rakkeri_server.DTO.TrackingDTO;
 import rakkeri.rakkeri_server.entity.Person;
@@ -30,9 +33,21 @@ public class Trackings {
     }
 
     @PostMapping("/api/trackings")
-    public TrackingDTO createTracking(@RequestHeader("Authorization") String authorizationToken,
-                                      @RequestBody TrackingDTO trackingDTO) {
-        Person person = personService.authenticateAndGetPerson(authorizationToken, trackingDTO.getUser().getId());
+    public TrackingDTO saveOrUpdateTracking(@RequestHeader("Authorization") String authorizationToken,
+                                            @RequestBody TrackingDTO trackingDTO) {
+        Person person = personService.authenticateAndGetPerson(authorizationToken);
+        if (trackingDTO.getId() != null) {
+            return updateExistingTracking(trackingDTO, person);
+        }
+        return saveNewTracking(trackingDTO, person);
+    }
+
+    private TrackingDTO saveNewTracking(TrackingDTO trackingDTO, Person person) {
+        boolean isProjectOwner = person.getProjects().stream()
+                .anyMatch(project -> trackingDTO.getProject().getId().equals(project.getId()));
+        if (!isProjectOwner) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Unauthorized user");
+        }
         Task task = taskService.getTask(trackingDTO.getTask().getId());
         Project project = projectService.findOne(trackingDTO.getProject().getId());
         Tracking tracking = new Tracking(person, project, task, trackingDTO.getStartTime(), trackingDTO.getEndTime());
@@ -40,12 +55,8 @@ public class Trackings {
         return TrackingDTO.toDTO(savedTracking);
     }
 
-    @PutMapping("/api/trackings/{trackingId}")
-    public TrackingDTO updateTracking(@RequestHeader("Authorization") String authorizationToken,
-                                      @PathVariable("trackingId") Long trackingId,
-                                      @RequestBody TrackingDTO trackingDTO) {
-        Person person = personService.authenticateAndGetPerson(authorizationToken);
-        Tracking tracking = trackingService.findOne(trackingId);
+    private TrackingDTO updateExistingTracking(TrackingDTO trackingDTO, Person person) {
+        Tracking tracking = trackingService.findOne(trackingDTO.getId());
         boolean isProjectOwner = person.getProjects().stream()
                 .anyMatch(project -> tracking.getProject().getId().equals(project.getId()));
         if (!isProjectOwner) {
@@ -57,5 +68,5 @@ public class Trackings {
         Tracking savedTracking = trackingService.save(tracking);
         return TrackingDTO.toDTO(savedTracking);
     }
-
+    
 }

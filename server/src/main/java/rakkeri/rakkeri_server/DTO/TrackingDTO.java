@@ -35,6 +35,10 @@ public class TrackingDTO {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Timestamp getStartTime() {
         return startTime;
     }

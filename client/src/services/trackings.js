@@ -36,6 +36,7 @@ const stopTracking = async (tracking) => {
   const config = {
     headers: { Authorization: token },
   };
+  console.log(tracking, config);
   const updatedTracking = {
     id: tracking.id,
     startTime: tracking.startTime,
@@ -50,8 +51,8 @@ const stopTracking = async (tracking) => {
       id: tracking.task.id,
     },
   };
-  const response = await axios.put(
-    `${trackingsUrl}/${tracking.id}`,
+  const response = await axios.post(
+    `${trackingsUrl}/`,
     updatedTracking,
     config,
   );

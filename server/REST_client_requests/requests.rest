@@ -73,15 +73,15 @@ Authorization: bearer token
     }
 }
 
-###
+### POST also updates, if id is provided, because Spring refused PUT requests....
 
-
-put http://localhost:8080/api/trackings/1
+post http://localhost:8080/api/trackings
 Content-Type: application/json
 Authorization: bearer token
 
 {
-    "startTime": "2022-04-20T11:52:00.720Z",
+    "id": 1,
+    "startTime": "2022-04-20T11:52:10.720Z",
     "endTime": "2022-04-20T11:52:00.720Z",
     "user": {
         "id": 1
