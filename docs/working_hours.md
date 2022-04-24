@@ -63,7 +63,7 @@
 |       | 1:00  | Solving problems with Spring and CORS                                      |
 | 24.4  | 1:25  | Planning requirements                                                      |
 |       | 1:40  | Story: Tracking continues after refresh/logout                             |
-|       | 1:05  | Story: User can log out                                                    |
+|       | 1:15  | Story: User can log out                                                    |
 |       | 0:10  | Documentation                                                              |
 |       |       |                                                                            |
 |       |       |                                                                            |
@@ -76,4 +76,4 @@
 |       |       |                                                                            |
 |       |       |                                                                            |
 |       |       |                                                                            |
-| total | 81:03 |                                                                            |
+| total | 81:13 |                                                                            |
