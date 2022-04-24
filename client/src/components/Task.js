@@ -14,7 +14,6 @@ const Task = ({ task, project, setProject, activeTask, setActiveTask }) => {
 
   const startTracking = async (task) => {
     if (activeTask !== null) {
-      console.log(activeTask);
       const activeTracking = activeTask.trackings.find((t) => t.endTime === null);
       const endedTracking = {
         ...activeTracking,

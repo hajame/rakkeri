@@ -20,7 +20,7 @@ export const Home = () => {
 
   const theme = createTheme({
     palette: {
-      mode: 'dark',
+      mode: 'dark', // always dark mode
     },
   });
 
@@ -31,18 +31,44 @@ export const Home = () => {
     trackingService.setToken(user.token);
   };
 
+  const fetchProjects = async user => {
+    try {
+      let projects = await projectService.getProjects(user);
+      projects.sort((a, b) => a.name.localeCompare(b.name));
+      setProjects(projects);
+      return projects;
+    } catch {
+      console.error('failed to fetch projects');
+    }
+  };
+
+  const updateActiveProject = fetchedProjects => {
+    const activeProjects = fetchedProjects.filter(p => {
+      return p.trackings
+        .filter(tracking => !tracking.endTime)
+        .length > 0;
+    });
+    if (activeProjects.length > 0) {
+      setProject(activeProjects[0]);
+    }
+    return activeProjects[0];
+  };
+
+  const updateActiveTracking = activeProject => {
+    const activeTrackings = activeProject.trackings
+      .filter(tracking => !tracking.endTime);
+    setActiveTracking(activeTrackings[0]);
+  };
+
   const updateState = async () => {
     const userJSON = window.localStorage.getItem('rakkeriAppUser');
     if (userJSON) {
       const user = JSON.parse(userJSON);
       setUser(user);
       setToken(user);
-      try {
-        let projects = await projectService.getProjects(user);
-        projects.sort((a, b) => a.name.localeCompare(b.name));
-        setProjects(projects);
-      } catch {
-      }
+      const fetchedProjects = await fetchProjects(user);
+      const activeProject = updateActiveProject(fetchedProjects);
+      updateActiveTracking(activeProject);
     }
   };
 

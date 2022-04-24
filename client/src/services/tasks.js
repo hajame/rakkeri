@@ -39,7 +39,6 @@ const update = async (project, task, tracking) => {
     startTime: new Date(tracking.startTime).toISOString(),
     endTime: new Date(tracking.endTime).toISOString(),
   };
-  console.log(data);
   const response = await axios.put(
     `${projectsUrl}/${project.id}/tasks/${task.id}/trackings/${tracking.id}`,
     data,

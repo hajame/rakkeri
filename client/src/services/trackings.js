@@ -36,7 +36,6 @@ const stopTracking = async (tracking) => {
   const config = {
     headers: { Authorization: token },
   };
-  console.log(tracking, config);
   const updatedTracking = {
     id: tracking.id,
     startTime: tracking.startTime,
