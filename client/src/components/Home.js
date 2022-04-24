@@ -14,11 +14,16 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-export const Home = () => {
-  const [user, setUser] = useState(null);
-  const [projects, setProjects] = useState([]);
-  const [project, setProject] = useState(null);
-  const [activeTracking, setActiveTracking] = useState(null);
+export const Home = ({
+                       user,
+                       setUser,
+                       project,
+                       setProject,
+                       projects,
+                       setProjects,
+                       activeTracking,
+                       setActiveTracking,
+                     }) => {
 
   const theme = createTheme({
     palette: {
