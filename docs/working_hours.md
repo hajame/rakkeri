@@ -58,6 +58,13 @@
 |       | 1:36  | Redesign and reimplement endpoints                                         |
 |       | 1:15  | Story: User can start a new tracking                                       |
 |       | 0:16  | Documentation                                                              |
+| 22.4. | 1:05  | Planning requirements                                                      |
+|       | 2:46  | Story: User can stop a tracking                                            |
+|       | 1:00  | Solving problems with Spring and CORS                                      |
+| 24.4  | 1:25  | Planning requirements                                                      |
+|       | 1:40  | Story: Tracking continues after refresh/logout                             |
+|       | 1:05  | Story: User can log out                                                    |
+|       | 0:10  | Documentation                                                              |
 |       |       |                                                                            |
 |       |       |                                                                            |
 |       |       |                                                                            |
@@ -68,4 +75,5 @@
 |       |       |                                                                            |
 |       |       |                                                                            |
 |       |       |                                                                            |
-| total | 71:52 |                                                                            |
+|       |       |                                                                            |
+| total | 81:03 |                                                                            |
