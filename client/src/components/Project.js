@@ -78,7 +78,7 @@ const Project = ({
           startTracking={startTracking} tasks={tasks}
         />
         :
-        <Button onClick={stopTracking} variant='contained' sx={{ mt: 1, mb: 0 }}>
+        <Button color={'warning'} onClick={stopTracking} variant='contained' sx={{ mt: 1, mb: 0 }}>
           Stop tracking
         </Button>
       }
