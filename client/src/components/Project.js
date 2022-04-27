@@ -1,14 +1,15 @@
-import { useState, useEffect } from 'react';
-import userService from '../services/users';
 import taskService from '../services/tasks';
 import trackingService from '../services/trackings';
 
 import Tracking from './Tracking';
+import StartTrackingDialogButton from './StartTrackingDialogButton';
 
 import List from '@mui/material/List';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import { useState } from 'react';
+import * as React from 'react';
 
 const Project = ({ user, project, setProject, projects, setProjects, activeTracking, setActiveTracking }) => {
   const replaceOldProject = (updatedProject) => {
@@ -38,23 +39,22 @@ const Project = ({ user, project, setProject, projects, setProjects, activeTrack
     setActiveTracking(null);
   }
 
-  async function startTracking() {
-    const name = prompt('What are you doing?', '');
-    if (!name) {
+  const startTracking = async taskName => {
+    if (!taskName) {
       return;
     }
-    const newTask = await taskService.addTask(name, project);
+    const newTask = await taskService.addTask(taskName, project);
     const newTracking = await trackingService.startTracking(user, project, newTask);
     updateProjectState(newTracking);
     setActiveTracking(newTracking);
-  }
+  };
 
-  const handleTracking = async () => {
+  const handleTracking = async (taskName) => {
     if (activeTracking !== null) {
       await stopTracking();
       return;
     }
-    await startTracking();
+    await startTracking(taskName);
   };
 
   return (
@@ -62,18 +62,20 @@ const Project = ({ user, project, setProject, projects, setProjects, activeTrack
       <Typography component='div' variant='h6' mb={3}>
         {project.name}
       </Typography>
-      <Typography component='div' variant='h6'>
-        Tracked items
-      </Typography>
-      <Button onClick={handleTracking} variant='contained' sx={{ mt: 1, mb: 1 }}>
-        {activeTracking === null ? 'Start tracking' : 'Stop tracking'}
-      </Button>
+      {activeTracking === null ?
+        <StartTrackingDialogButton
+          startTracking={startTracking}
+        />
+        :
+        <Button onClick={stopTracking} variant='contained' sx={{ mt: 1, mb: 0 }}>
+          {'Stop tracking'}
+        </Button>
+      }
       <List>
         {project.trackings.map((tracking) => (
           <Tracking key={tracking.id} tracking={tracking} />
         ))}
       </List>
-
     </Box>
   );
 };
