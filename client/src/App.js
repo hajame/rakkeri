@@ -46,6 +46,7 @@ const App = () => {
           <Home user={user} setUser={setUser}
                 project={project} setProject={setProject}
                 projects={projects} setProjects={setProjects}
+                tasks={tasks} setTasks={setTasks}
                 activeTracking={activeTracking} setActiveTracking={setActiveTracking}
           />
         } />

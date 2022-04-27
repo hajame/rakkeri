@@ -19,9 +19,19 @@ const getActiveProject = (fetchedProjects) => {
   return activeProjects[0];
 };
 
+const getTaskSet = (fetchedProjects) => {
+  let taskSet = new Set();
+  fetchedProjects.forEach((p) => {
+    p.tasks.forEach((t) => {
+      taskSet.add(t);
+    })
+  })
+  return taskSet;
+};
+
 const getActiveTracking = activeProject => {
   const activeTrackings = activeProject.trackings.filter(tracking => !tracking.endTime);
   return activeTrackings[0];
 };
 
-export default { fetchProjects, getActiveProject, getActiveTracking };
+export default { fetchProjects, getActiveProject, getActiveTracking, getTaskSet };

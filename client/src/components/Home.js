@@ -19,6 +19,8 @@ export const Home = ({
                        setUser,
                        project,
                        setProject,
+                       tasks,
+                       setTasks,
                        projects,
                        setProjects,
                        activeTracking,
@@ -46,6 +48,7 @@ export const Home = ({
       setToken(user);
       let fetchedProjects = await controller.fetchProjects(user);
       setProjects(fetchedProjects);
+      setTasks(controller.getTaskSet(fetchedProjects));
       const activeProject = controller.getActiveProject(fetchedProjects);
       if (activeProject) {
         setProject(activeProject);
