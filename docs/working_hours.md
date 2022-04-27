@@ -61,9 +61,16 @@
 | 22.4. | 1:05  | Planning requirements                                                      |
 |       | 2:46  | Story: User can stop a tracking                                            |
 |       | 1:00  | Solving problems with Spring and CORS                                      |
-| 24.4  | 1:25  | Planning requirements                                                      |
+| 24.4. | 1:25  | Planning requirements                                                      |
 |       | 1:40  | Story: Tracking continues after refresh/logout                             |
 |       | 1:15  | Story: User can log out                                                    |
+|       | 0:10  | Documentation                                                              |
+| 27.4. | 0:31  | Create project - task - many to many link                                  |
+|       | 1:12  | Planning requirements                                                      |
+|       | 0:17  | Story: Editable tracking time                                              |
+|       | 0:28  | Story: Show tracking time in HH:MM format                                  |
+|       | 0:10  | Story: Stories can be autocompleted                                        |
+|       | 3:30  | Story: Track same task again                                               |
 |       | 0:10  | Documentation                                                              |
 |       |       |                                                                            |
 |       |       |                                                                            |
@@ -73,7 +80,4 @@
 |       |       |                                                                            |
 |       |       |                                                                            |
 |       |       |                                                                            |
-|       |       |                                                                            |
-|       |       |                                                                            |
-|       |       |                                                                            |
-| total | 81:13 |                                                                            |
+| total | 87:32 |                                                                            |
