@@ -19,14 +19,14 @@ const getActiveProject = (fetchedProjects) => {
   return activeProjects[0];
 };
 
-const getTaskSet = (fetchedProjects) => {
-  let taskSet = new Set();
+const getTaskMap = (fetchedProjects) => {
+  let taskMap = new Map();
   fetchedProjects.forEach((p) => {
     p.tasks.forEach((t) => {
-      taskSet.add(t);
-    })
-  })
-  return taskSet;
+      taskMap.set(t.name, t);
+    });
+  });
+  return taskMap;
 };
 
 const getActiveTracking = activeProject => {
@@ -34,4 +34,4 @@ const getActiveTracking = activeProject => {
   return activeTrackings[0];
 };
 
-export default { fetchProjects, getActiveProject, getActiveTracking, getTaskSet };
+export default { fetchProjects, getActiveProject, getActiveTracking, getTaskMap };

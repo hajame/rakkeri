@@ -9,7 +9,7 @@ import { useState } from 'react';
 const App = () => {
   const [user, setUser] = useState(null);
   const [projects, setProjects] = useState([]);
-  const [tasks, setTasks] = useState(new Set());
+  const [tasks, setTasks] = useState(new Map());
   const [project, setProject] = useState(null);
   const [activeTracking, setActiveTracking] = useState(null);
 
@@ -18,7 +18,7 @@ const App = () => {
     window.location.reload();
     setUser(null);
     setProjects([]);
-    setTasks(new Set());
+    setTasks(new Map());
     setProject(null);
     setActiveTracking(null);
   };

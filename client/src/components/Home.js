@@ -48,7 +48,7 @@ export const Home = ({
       setToken(user);
       let fetchedProjects = await controller.fetchProjects(user);
       setProjects(fetchedProjects);
-      setTasks(controller.getTaskSet(fetchedProjects));
+      setTasks(controller.getTaskMap(fetchedProjects));
       const activeProject = controller.getActiveProject(fetchedProjects);
       if (activeProject) {
         setProject(activeProject);
@@ -135,9 +135,11 @@ export const Home = ({
               </Box>
             )}
             {project !== null && (
-              <Project user={user} project={project} setProject={setProject} projects={projects}
-                       setProjects={setProjects} activeTracking={activeTracking}
-                       setActiveTracking={setActiveTracking} />
+              <Project user={user}
+                       project={project} setProject={setProject}
+                       projects={projects} setProjects={setProjects}
+                       tasks={tasks} setTasks={setTasks}
+                       activeTracking={activeTracking} setActiveTracking={setActiveTracking} />
             )}
           </Box>
         </Box>

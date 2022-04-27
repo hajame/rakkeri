@@ -10,7 +10,17 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import * as React from 'react';
 
-const Project = ({ user, project, setProject, projects, setProjects, activeTracking, setActiveTracking }) => {
+const Project = ({
+                   user,
+                   project,
+                   setProject,
+                   projects,
+                   setProjects,
+                   tasks,
+                   setTasks,
+                   activeTracking,
+                   setActiveTracking,
+                 }) => {
   const replaceOldProject = (updatedProject) => {
     return [
       ...projects.filter((p) => p.id !== updatedProject.id),
@@ -18,22 +28,25 @@ const Project = ({ user, project, setProject, projects, setProjects, activeTrack
     ];
   };
 
-  function updateProjectState(newTracking) {
-    const projectToUpdate = projects.filter((p) => p.id === newTracking.project.id)[0];
+  function updateProjectState(tracking) {
+    const projectToUpdate = projects.filter((p) => p.id === tracking.project.id)[0];
     const updatedProject = {
       ...projectToUpdate,
       trackings: [
-        ...projectToUpdate.trackings.filter((t) => t.id !== newTracking.id),
-        newTracking,
+        ...projectToUpdate.trackings.filter((t) => t.id !== tracking.id),
+        tracking,
       ],
       tasks: [
-        ...projectToUpdate.tasks.filter((task) => task.id !== newTracking.task.id),
-        newTracking.task,
+        ...projectToUpdate.tasks.filter((task) => task.id !== tracking.task.id),
+        tracking.task,
       ],
     };
     let updatedProjects = replaceOldProject(updatedProject);
     updatedProjects.sort((a, b) => a.name.localeCompare(b.name));
     setProjects(updatedProjects);
+    if (!tasks.has(tracking.task.name)) {
+      setTasks(tasks.set(tracking.task.name, tracking.task));
+    }
     setProject(updatedProjects.filter((p) => p.id === project.id)[0]);
   }
 
@@ -47,8 +60,10 @@ const Project = ({ user, project, setProject, projects, setProjects, activeTrack
     if (!taskName) {
       return;
     }
-    const newTask = await taskService.addTask(taskName, project);
-    const newTracking = await trackingService.startTracking(user, project, newTask);
+    let task = tasks.has(taskName) ?
+      tasks.get(taskName)
+      : await taskService.addTask(taskName, project);
+    const newTracking = await trackingService.startTracking(user, project, task);
     updateProjectState(newTracking);
     setActiveTracking(newTracking);
   };
