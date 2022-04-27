@@ -16,11 +16,14 @@ public class Task {
     private Long id;
     @Column(name = "name", nullable = false, columnDefinition = "VARCHAR(255)")
     private String name;
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "tasks")
+    Set<Project> projects = new HashSet<>();
     @OneToMany(mappedBy = "task", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Tracking> trackings = new HashSet<>();
 
-    public Task(String name) {
+    public Task(String name, Project project) {
         this.name = name;
+        this.projects.add(project);
     }
 
     public Task() {
@@ -40,6 +43,14 @@ public class Task {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(Set<Project> projects) {
+        this.projects = projects;
     }
 
     public Set<Tracking> getTrackings() {

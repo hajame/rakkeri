@@ -12,8 +12,13 @@ import java.util.stream.Collectors;
 public class ProjectDTO {
     @JsonProperty("id")
     private Long id;
+    @JsonProperty("name")
     private String name;
+    @JsonProperty("users")
     private Set<UserWithoutTokenDTO> users;
+    @JsonProperty("tasks")
+    private Set<TaskDTO> tasks = new HashSet<>();
+    @JsonProperty("trackings")
     private Set<TrackingDTO> trackings = new HashSet<>();
 
     public ProjectDTO() {
@@ -24,9 +29,11 @@ public class ProjectDTO {
         this.name = name;
     }
 
-    public ProjectDTO(Long id, String name, Set<UserWithoutTokenDTO> users, Set<TrackingDTO> trackings) {
+    public ProjectDTO(Long id, String name, Set<UserWithoutTokenDTO> users, Set<TaskDTO> tasks,
+                      Set<TrackingDTO> trackings) {
         this(id, name);
         this.users = users;
+        this.tasks = tasks;
         this.trackings = trackings;
     }
 
@@ -62,14 +69,17 @@ public class ProjectDTO {
         List<ProjectDTO> projectDTOs = new ArrayList<>();
 
         for (Project p : projects) {
-            Set<TrackingDTO> trackingDTOs = p.getTrackings().stream()
-                    .map(TrackingDTO::toDTO)
-                    .collect(Collectors.toSet());
             Set<UserWithoutTokenDTO> userDTOs = p.getPersons().stream()
                     .map(UserWithoutTokenDTO::toDTO)
                     .collect(Collectors.toSet());
+            Set<TaskDTO> taskDTOs = p.getTasks().stream()
+                    .map(TaskDTO::toDTO)
+                    .collect(Collectors.toSet());
+            Set<TrackingDTO> trackingDTOs = p.getTrackings().stream()
+                    .map(TrackingDTO::toDTO)
+                    .collect(Collectors.toSet());
             projectDTOs.add(
-                    new ProjectDTO(p.getId(), p.getName(), userDTOs, trackingDTOs)
+                    new ProjectDTO(p.getId(), p.getName(), userDTOs, taskDTOs, trackingDTOs)
             );
         }
         return projectDTOs;
@@ -80,7 +90,8 @@ public class ProjectDTO {
         return "ProjectDTO{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", user=" + users +
+                ", users=" + users +
+                ", tasks=" + tasks +
                 ", trackings=" + trackings +
                 '}';
     }

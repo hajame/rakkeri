@@ -1,6 +1,7 @@
 package rakkeri.rakkeri_server.DTO;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import rakkeri.rakkeri_server.entity.Task;
 
 public class TaskDTO {
     @JsonProperty("id")
@@ -33,5 +34,9 @@ public class TaskDTO {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';
+    }
+
+    public static TaskDTO toDTO(Task task) {
+        return new TaskDTO(task.getId(), task.getName());
     }
 }

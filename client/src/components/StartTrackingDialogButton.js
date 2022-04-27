@@ -7,8 +7,9 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useState } from 'react';
+import Autocomplete from '@mui/material/Autocomplete';
 
-const StartTrackingDialogButton = ({ startTracking }) => {
+const StartTrackingDialogButton = ({ startTracking, tasks }) => {
   const [open, setOpen] = useState(false);
 
   const handleClick = () => {
@@ -27,7 +28,7 @@ const StartTrackingDialogButton = ({ startTracking }) => {
   return (
     <div>
       <Button onClick={handleClick} variant='contained' sx={{ mt: 1, mb: 0 }}>
-        {'Start tracking'}
+        Start Tracking
       </Button>
       <Dialog
         open={open}
@@ -35,24 +36,36 @@ const StartTrackingDialogButton = ({ startTracking }) => {
         fullWidth
         maxWidth='sm'
       >
-        <DialogTitle>New Tracking</DialogTitle>
+        <DialogTitle>Start Tracking</DialogTitle>
         <DialogContent>
           {/*<DialogContentText>
           What are you doing?
         </DialogContentText>*/}
-          <TextField
+          <Autocomplete
+            fullWidth
             onKeyPress={(e) => {
               if (e.key === 'Enter') {
                 submit(e.target.value);
               }
             }}
-            autoFocus
-            fullWidth
-            margin='dense'
+            freeSolo
             id='task_text'
-            label='What are you doing?'
-            type='text'
-            variant='outlined'
+            disableClearable
+            options={['testing', 'names']
+              //.map((option) => option.title)
+            }
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                autoFocus
+                label='What are you doing?'
+                margin='dense'
+                InputProps={{
+                  ...params.InputProps,
+                  type: 'search',
+                }}
+              />
+            )}
           />
         </DialogContent>
       </Dialog>

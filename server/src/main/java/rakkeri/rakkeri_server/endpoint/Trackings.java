@@ -51,6 +51,8 @@ public class Trackings {
         Task task = taskService.getTask(trackingDTO.getTask().getId());
         Project project = projectService.findOne(trackingDTO.getProject().getId());
         Tracking tracking = new Tracking(person, project, task, trackingDTO.getStartTime(), trackingDTO.getEndTime());
+        project.getTasks().add(task);
+        projectService.update(project);
         Tracking savedTracking = trackingService.save(tracking);
         return TrackingDTO.toDTO(savedTracking);
     }
@@ -68,5 +70,5 @@ public class Trackings {
         Tracking savedTracking = trackingService.save(tracking);
         return TrackingDTO.toDTO(savedTracking);
     }
-    
+
 }

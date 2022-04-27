@@ -51,8 +51,11 @@ public class RakkeriServerApplication {
             Person newPerson = new Person("test", "test@example.com", "testpass");
             Project project = new Project("Best Test Project");
             Project secondProject = new Project("Second Project");
-            Task cooking = new Task("cooking");
-            Task coding = new Task("coding");
+            Task cooking = new Task("cooking", project);
+            project.getTasks().add(cooking);
+            Task coding = new Task("coding", secondProject);
+            secondProject.getTasks().add(coding);
+
 
             newPerson = personService.saveNew(newPerson);
             cooking = taskService.save(cooking);
