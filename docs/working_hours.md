@@ -64,9 +64,9 @@
 | 24.4. | 1:25  | Planning requirements                                                      |
 |       | 1:40  | Story: Tracking continues after refresh/logout                             |
 |       | 1:15  | Story: User can log out                                                    |
-|       | 0:10  | Documentation                                                              |
+|       | 0:45  | Documentation                                                              |
 | 27.4. | 0:31  | Create project - task - many to many link                                  |
-|       | 1:12  | Planning requirements                                                      |
+|       | 1:42  | Planning requirements                                                      |
 |       | 0:17  | Story: Editable tracking time                                              |
 |       | 0:28  | Story: Show tracking time in HH:MM format                                  |
 |       | 0:10  | Story: Stories can be autocompleted                                        |
@@ -80,4 +80,4 @@
 |       |       |                                                                            |
 |       |       |                                                                            |
 |       |       |                                                                            |
-| total | 87:32 |                                                                            |
+| total | 88:37 |                                                                            |
