@@ -51,9 +51,7 @@ const StartTrackingDialogButton = ({ startTracking, tasks }) => {
             freeSolo
             id='task_text'
             disableClearable
-            options={['testing', 'names']
-              //.map((option) => option.title)
-            }
+            options={Array.from(tasks.keys())}
             renderInput={(params) => (
               <TextField
                 {...params}
