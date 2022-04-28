@@ -26,7 +26,7 @@ public class RakkeriServerApplication {
 
     @Bean
     CommandLineRunner commandLineRunner() {
-        return args -> System.out.println("\n****\nSERVER STARTED SUCCESSFULLY");
+        return args -> System.out.println("\n****\nSERVER STARTED SUCCESSFULLY\n****\n");
     }
 
 }
