@@ -72,6 +72,9 @@
 |       | 0:10  | Story: Stories can be autocompleted                                        |
 |       | 3:30  | Story: Track same task again                                               |
 |       | 0:10  | Documentation                                                              |
+| 28.4. | 0:05  | Documentation                                                              |
+|       | 1:13  | Planning requirements                                                      |
+|       | 0:49  | Setting up production                                                      |
 |       |       |                                                                            |
 |       |       |                                                                            |
 |       |       |                                                                            |
@@ -79,5 +82,4 @@
 |       |       |                                                                            |
 |       |       |                                                                            |
 |       |       |                                                                            |
-|       |       |                                                                            |
-| total | 88:37 |                                                                            |
+| total | 90:44 |                                                                            |
