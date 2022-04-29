@@ -6,8 +6,8 @@ import Typography from '@mui/material/Typography';
 import taskService from '../services/tasks';
 import trackingService from '../services/trackings';
 
-import Tracking from './Tracking';
 import StartTrackingDialogButton from './StartTrackingDialogButton';
+import TrackingList from './TrackingList';
 
 const Project = ({
                    user,
@@ -88,11 +88,7 @@ const Project = ({
           Stop tracking
         </Button>
       }
-      <List>
-        {project.trackings.map((tracking) => (
-          <Tracking key={tracking.id} tracking={tracking} updateTracking={updateTracking} />
-        ))}
-      </List>
+      <TrackingList trackings={project.trackings} updateTracking={updateTracking} />
     </Box>
   );
 };
