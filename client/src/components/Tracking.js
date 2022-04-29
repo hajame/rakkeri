@@ -1,3 +1,6 @@
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItem from '@mui/material/ListItem';
+
 const Tracking = ({ tracking, updateTracking }) => {
 
   const toDDMMYY = timeString => {
@@ -30,12 +33,16 @@ const Tracking = ({ tracking, updateTracking }) => {
   };
 
   return (
-    <p
+    <ListItem
       style={{ display: tracking.endTime ? '' : 'none' }}
-      onClick={() => handleUpdateTracking(tracking)}
-    >
-      {toDDMMYY(tracking.startTime)} [{getTime(tracking.startTime, tracking.endTime)}] {tracking.task.name}
-    </p>
+      alignItems='flex-start' disablePadding>
+      <ListItemButton
+        dense={false}
+        onClick={() => handleUpdateTracking(tracking)}
+      >
+        {toDDMMYY(tracking.startTime)} [{getTime(tracking.startTime, tracking.endTime)}] {tracking.task.name}
+      </ListItemButton>
+    </ListItem>
   );
 
 };
