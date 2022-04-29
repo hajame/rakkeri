@@ -21,7 +21,7 @@ const toDDMMYY = timeString => {
   return `${date.getDate()}/${date.getMonth()}/${date.getFullYear().toString()}`;
 };
 
-const getTime = (start, end) => {
+const getDuration = (start, end) => {
   if (!start) {
     return '';
   }
@@ -33,4 +33,27 @@ const getTime = (start, end) => {
   return toHHMM(hours, minutes);
 };
 
-export default { now, toDoubleDigits, toHHMM, getHHMM, toDDMMYY, getTime };
+const setHHMM = (date, HHMM) => {
+  date.setHours(parseInt(HHMM.substring(0, 2)));
+  date.setMinutes(parseInt(HHMM.substring(3, 5)));
+};
+
+const validateHHMM = (HHMM) => {
+  if (HHMM.length !== 5) {
+    return false;
+  }
+  if (HHMM[2] !== ':') {
+    return false;
+  }
+  try {
+    const HH = parseInt(HHMM.substring(0, 2));
+    const MM = parseInt(HHMM.substring(3, 5));
+    const isGoodHH = HH >= 0 && HH < 24;
+    const isGoodMM = MM >= 0 && MM < 60;
+    return isGoodHH && isGoodMM;
+  } catch {
+    return false;
+  }
+};
+
+export default { now, toDoubleDigits, toHHMM, getHHMM, toDDMMYY, getDuration, setHHMM, validateHHMM };

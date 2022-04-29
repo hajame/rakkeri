@@ -68,7 +68,7 @@ const StartTrackingDialogButton = ({ startTracking, project, tasks }) => {
         </DialogContent>
         <DialogActions>
           <Button onClick={closeDialog}>Cancel</Button>
-          <Button onClick={() => submit(taskNameValue)}>Start</Button>
+          <Button variant='contained' onClick={() => submit(taskNameValue)}>Start</Button>
         </DialogActions>
       </Dialog>
     </div>
