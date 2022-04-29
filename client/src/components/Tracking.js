@@ -14,10 +14,12 @@ import time from '../services/time';
 const Tracking = ({ tracking, updateTracking }) => {
 
   const [editDialogOpen, setEditDialogOpen] = useState(false);
-  const [startTimeValue, setStartTimeValue] = useState(time.getHHMM(tracking.startTime));
-  const [endTimeValue, setEndTimeValue] = useState(time.getHHMM(tracking.endTime));
+  const [startTimeValue, setStartTimeValue] = useState('');
+  const [endTimeValue, setEndTimeValue] = useState('');
 
-  const openDialog = tracking => {
+  const openDialog = () => {
+    setStartTimeValue(time.getHHMM(tracking.startTime));
+    setEndTimeValue(time.getHHMM(tracking.endTime));
     setEditDialogOpen(true);
   };
 
@@ -54,56 +56,60 @@ const Tracking = ({ tracking, updateTracking }) => {
         {time.toDDMMYY(tracking.startTime)} [{time.getDuration(tracking.startTime, tracking.endTime)}] {tracking.task.name}
       </ListItemButton>
 
-      <Dialog
-        open={editDialogOpen}
-        onClose={closeDialog}
-        fullWidth
-        maxWidth='sm'
-      >
-        <DialogTitle>Edit tracking</DialogTitle>
-        <DialogContent>
-          <TextField
-            value={startTimeValue}
-            error={!time.validateHHMM(startTimeValue)}
-            autoFocus
-            margin='dense'
-            id={'tracking_startTime_field_' + tracking.id}
-            onChange={(event) => {
-              setStartTimeValue(event.target.value);
-            }}
-            onKeyPress={(e) => {
-              if (e.key === 'Enter') {
-                handleUpdateTracking();
-              }
-            }}
-            label='Start Time'
-            type='text'
-            variant='outlined'
-          />
-          <TextField
-            value={endTimeValue}
-            error={!time.validateHHMM(endTimeValue)}
-            autoFocus
-            margin='dense'
-            id={'tracking_endTime_field_' + tracking.id}
-            onChange={(event) => {
-              setEndTimeValue(event.target.value);
-            }}
-            onKeyPress={(e) => {
-              if (e.key === 'Enter') {
-                handleUpdateTracking();
-              }
-            }}
-            label='End Time'
-            type='text'
-            variant='outlined'
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => closeDialog(tracking)}>Cancel</Button>
-          <Button variant='contained' onClick={handleUpdateTracking}>Save</Button>
-        </DialogActions>
-      </Dialog>
+      {
+        editDialogOpen ?
+          <Dialog
+            open={editDialogOpen}
+            onClose={closeDialog}
+            fullWidth
+            maxWidth='sm'
+          >
+            <DialogTitle>Edit tracking</DialogTitle>
+            <DialogContent>
+              <TextField
+                value={startTimeValue}
+                error={!time.validateHHMM(startTimeValue)}
+                autoFocus
+                margin='dense'
+                id={'tracking_startTime_field_' + tracking.id}
+                onChange={(event) => {
+                  setStartTimeValue(event.target.value);
+                }}
+                onKeyPress={(e) => {
+                  if (e.key === 'Enter') {
+                    handleUpdateTracking();
+                  }
+                }}
+                label='Start Time'
+                type='text'
+                variant='outlined'
+              />
+              <TextField
+                value={endTimeValue}
+                error={!time.validateHHMM(endTimeValue)}
+                autoFocus
+                margin='dense'
+                id={'tracking_endTime_field_' + tracking.id}
+                onChange={(event) => {
+                  setEndTimeValue(event.target.value);
+                }}
+                onKeyPress={(e) => {
+                  if (e.key === 'Enter') {
+                    handleUpdateTracking();
+                  }
+                }}
+                label='End Time'
+                type='text'
+                variant='outlined'
+              />
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={() => closeDialog(tracking)}>Cancel</Button>
+              <Button variant='contained' onClick={handleUpdateTracking}>Save</Button>
+            </DialogActions>
+          </Dialog>
+          : ''
+      }
 
     </ListItem>
   );
