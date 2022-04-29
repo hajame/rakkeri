@@ -1,47 +1,72 @@
+import { useState } from 'react';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import * as React from 'react';
+import TextField from '@mui/material/TextField';
+
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItem from '@mui/material/ListItem';
+import time from '../services/time';
 
 const Tracking = ({ tracking, updateTracking }) => {
 
-  const toDDMMYY = timeString => {
-    if (!timeString) {
-      return '';
-    }
-    const date = new Date(timeString);
-    return `${date.getDate()}/${date.getMonth()}/${date.getFullYear().toString()}`;
+  const [editDialogOpen, setEditDialogOpen] = useState(false);
+
+  const openDialog = tracking => {
+    setEditDialogOpen(true);
   };
 
-  const toDoubleDigits = value => {
-    return value > 9 ? value : '0' + value;
+  const closeDialog = () => {
+    setEditDialogOpen(false);
   };
-
-  function getTime(start, end) {
-    if (!start) {
-      return '';
-    }
-    let startDate = new Date(start);
-    let endDate = end ? new Date(end) : new Date();
-    const differenceInMinutes = (endDate - startDate) / 1000 / 60;
-    const hours = parseInt(differenceInMinutes / 60);
-    const minutes = parseInt(differenceInMinutes % 60);
-    return `${toDoubleDigits(hours)}:${toDoubleDigits(minutes)}`;
-  }
 
   const handleUpdateTracking = tracking => {
     tracking.endTime = new Date().toISOString();
     updateTracking(tracking);
+    closeDialog();
   };
 
   return (
     <ListItem
       style={{ display: tracking.endTime ? '' : 'none' }}
-      alignItems='flex-start' disablePadding>
+      alignItems='flex-start' disablePadding
+    >
+
       <ListItemButton
         dense={false}
-        onClick={() => handleUpdateTracking(tracking)}
+        onClick={() => openDialog(tracking)}
       >
-        {toDDMMYY(tracking.startTime)} [{getTime(tracking.startTime, tracking.endTime)}] {tracking.task.name}
+        {time.toDDMMYY(tracking.startTime)} [{time.getTime(tracking.startTime, tracking.endTime)}] {tracking.task.name}
       </ListItemButton>
+
+      <Dialog
+        open={editDialogOpen}
+        onClose={closeDialog}
+        fullWidth
+        maxWidth='sm'
+      >
+        <DialogTitle>Hello</DialogTitle>
+        <DialogContent>
+          <TextField
+            autoFocus
+            margin='dense'
+            id='name'
+            label='End Time'
+            type='text'
+            defaultValue={time.getHHMM(tracking.endTime)}
+            fullWidth
+            variant='standard'
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={closeDialog}>Cancel</Button>
+          <Button onClick={() => handleUpdateTracking(tracking)}>Start</Button>
+        </DialogActions>
+      </Dialog>
+
     </ListItem>
   );
 
