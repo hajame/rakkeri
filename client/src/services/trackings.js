@@ -58,9 +58,35 @@ const stopTracking = async (tracking) => {
   return response.data;
 };
 
+const updateTracking = async (tracking) => {
+  const config = {
+    headers: { Authorization: token },
+  };
+  const updatedTracking = {
+    id: tracking.id,
+    startTime: tracking.startTime,
+    endTime: tracking.endTime,
+    user: {
+      id: tracking.user.id,
+    },
+    project: {
+      id: tracking.project.id,
+    },
+    task: {
+      id: tracking.task.id,
+    },
+  };
+  const response = await axios.post(
+    `${trackingsUrl}/`,
+    updatedTracking,
+    config,
+  );
+  return response.data;
+};
+
 
 const setToken = (newToken) => {
   token = `bearer ${newToken}`;
 };
 
-export default { setToken, startTracking, stopTracking };
+export default { setToken, startTracking, stopTracking, updateTracking };

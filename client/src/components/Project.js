@@ -21,6 +21,7 @@ const Project = ({
                    activeTracking,
                    setActiveTracking,
                  }) => {
+
   const replaceOldProject = (updatedProject) => {
     return [
       ...projects.filter((p) => p.id !== updatedProject.id),
@@ -28,7 +29,7 @@ const Project = ({
     ];
   };
 
-  function updateProjectState(tracking) {
+  const updateProjectState = tracking => {
     const projectToUpdate = projects.filter((p) => p.id === tracking.project.id)[0];
     const updatedProject = {
       ...projectToUpdate,
@@ -48,13 +49,18 @@ const Project = ({
       setTasks(tasks.set(tracking.task.name, tracking.task));
     }
     setProject(updatedProjects.filter((p) => p.id === project.id)[0]);
-  }
+  };
 
-  async function stopTracking() {
+  const stopTracking = async () => {
     const updatedTracking = await trackingService.stopTracking(activeTracking);
     updateProjectState(updatedTracking);
     setActiveTracking(null);
-  }
+  };
+
+  const updateTracking = async tracking => {
+    const updatedTracking = await trackingService.updateTracking(tracking);
+    updateProjectState(updatedTracking);
+  };
 
   const startTracking = async taskName => {
     if (!taskName) {
@@ -84,7 +90,7 @@ const Project = ({
       }
       <List>
         {project.trackings.map((tracking) => (
-          <Tracking key={tracking.id} tracking={tracking} />
+          <Tracking key={tracking.id} tracking={tracking} updateTracking={updateTracking} />
         ))}
       </List>
     </Box>

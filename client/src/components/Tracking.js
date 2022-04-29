@@ -1,4 +1,4 @@
-const Tracking = ({ tracking }) => {
+const Tracking = ({ tracking, updateTracking }) => {
 
   const toDDMMYY = timeString => {
     if (!timeString) {
@@ -24,9 +24,15 @@ const Tracking = ({ tracking }) => {
     return `${toDoubleDigits(hours)}:${toDoubleDigits(minutes)}`;
   }
 
+  const handleUpdateTracking = tracking => {
+    tracking.endTime = new Date().toISOString();
+    updateTracking(tracking);
+  };
+
   return (
     <p
       style={{ display: tracking.endTime ? '' : 'none' }}
+      onClick={() => handleUpdateTracking(tracking)}
     >
       {toDDMMYY(tracking.startTime)} [{getTime(tracking.startTime, tracking.endTime)}] {tracking.task.name}
     </p>
