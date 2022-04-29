@@ -25,7 +25,11 @@ const Tracking = ({ tracking }) => {
   }
 
   return (
-    <p>{toDDMMYY(tracking.startTime)} [{getTime(tracking.startTime, tracking.endTime)}] {tracking.task.name}</p>
+    <p
+      style={{ display: tracking.endTime ? '' : 'none' }}
+    >
+      {toDDMMYY(tracking.startTime)} [{getTime(tracking.startTime, tracking.endTime)}] {tracking.task.name}
+    </p>
   );
 
 };

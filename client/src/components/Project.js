@@ -75,7 +75,7 @@ const Project = ({
       </Typography>
       {activeTracking === null ?
         <StartTrackingDialogButton
-          startTracking={startTracking} tasks={tasks}
+          startTracking={startTracking} project={project} tasks={tasks}
         />
         :
         <Button color={'warning'} onClick={stopTracking} variant='contained' sx={{ mt: 1, mb: 0 }}>

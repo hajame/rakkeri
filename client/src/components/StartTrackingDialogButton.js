@@ -9,48 +9,48 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { useState } from 'react';
 import Autocomplete from '@mui/material/Autocomplete';
 
-const StartTrackingDialogButton = ({ startTracking, tasks }) => {
+const StartTrackingDialogButton = ({ startTracking, project, tasks }) => {
   const [open, setOpen] = useState(false);
+  const [taskNameValue, setTaskNameValue] = useState('');
 
-  const handleClick = () => {
+  const openDialog = () => {
     setOpen(true);
   };
 
-  const handleClose = () => {
+  const closeDialog = () => {
     setOpen(false);
   };
 
   function submit(taskName) {
     startTracking(taskName);
-    handleClose();
+    closeDialog();
   }
 
   return (
     <div>
-      <Button onClick={handleClick} variant='contained' sx={{ mt: 1, mb: 0 }}>
+      <Button onClick={openDialog} variant='contained' sx={{ mt: 1, mb: 0 }}>
         Start Tracking
       </Button>
       <Dialog
         open={open}
-        onClose={handleClose}
+        onClose={closeDialog}
         fullWidth
         maxWidth='sm'
       >
-        <DialogTitle>Start Tracking</DialogTitle>
+        <DialogTitle>Start tracking for project <i>{project.name}</i></DialogTitle>
         <DialogContent>
-          {/*<DialogContentText>
-          What are you doing?
-        </DialogContentText>*/}
           <Autocomplete
+            id='task_text'
             fullWidth
+            freeSolo
+            onInputChange={(event, newInputValue) => {
+              setTaskNameValue(newInputValue);
+            }}
             onKeyPress={(e) => {
               if (e.key === 'Enter') {
-                submit(e.target.value);
+                submit(taskNameValue);
               }
             }}
-            freeSolo
-            id='task_text'
-            disableClearable
             options={Array.from(tasks.keys())}
             renderInput={(params) => (
               <TextField
@@ -66,6 +66,10 @@ const StartTrackingDialogButton = ({ startTracking, tasks }) => {
             )}
           />
         </DialogContent>
+        <DialogActions>
+          <Button onClick={closeDialog}>Cancel</Button>
+          <Button onClick={() => submit(taskNameValue)}>Start</Button>
+        </DialogActions>
       </Dialog>
     </div>
   );
