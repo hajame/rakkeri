@@ -1,14 +1,13 @@
+import List from '@mui/material/List';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+
 import taskService from '../services/tasks';
 import trackingService from '../services/trackings';
 
 import Tracking from './Tracking';
 import StartTrackingDialogButton from './StartTrackingDialogButton';
-
-import List from '@mui/material/List';
-import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import * as React from 'react';
 
 const Project = ({
                    user,
@@ -31,7 +30,7 @@ const Project = ({
 
   const updateProjectState = tracking => {
     const projectToUpdate = projects.filter((p) => p.id === tracking.project.id)[0];
-    const updatedProject = {
+    let updatedProject = {
       ...projectToUpdate,
       trackings: [
         ...projectToUpdate.trackings.filter((t) => t.id !== tracking.id),
@@ -42,6 +41,7 @@ const Project = ({
         tracking.task,
       ],
     };
+    trackingService.sortTrackings(updatedProject.trackings);
     let updatedProjects = replaceOldProject(updatedProject);
     updatedProjects.sort((a, b) => a.name.localeCompare(b.name));
     setProjects(updatedProjects);

@@ -84,9 +84,21 @@ const updateTracking = async (tracking) => {
   return response.data;
 };
 
+const sortTrackings = trackings => {
+  trackings.sort((a, b) => {
+    if (a.endTime === null) {
+      return -1;
+    }
+    if (b.endTime === null) {
+      return 1;
+    }
+    return b.endTime.localeCompare(a.endTime);
+  });
+};
+
 
 const setToken = (newToken) => {
   token = `bearer ${newToken}`;
 };
 
-export default { setToken, startTracking, stopTracking, updateTracking };
+export default { setToken, startTracking, stopTracking, updateTracking, sortTrackings };

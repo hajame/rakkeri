@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+import trackingService from './trackings';
+
 const usersUrl = `${process.env.REACT_APP_BACKEND_URL}/api/users`;
 const projectsUrl = `${process.env.REACT_APP_BACKEND_URL}/api/projects`;
 
@@ -10,7 +12,9 @@ const getProjects = async (user) => {
     headers: { Authorization: token },
   };
   const response = await axios.get(`${usersUrl}/${user.id}/projects`, config);
-  return response.data;
+  let projects = response.data;
+  projects.forEach((p) => trackingService.sortTrackings(p.trackings));
+  return projects;
 };
 
 const create = async (name, user) => {

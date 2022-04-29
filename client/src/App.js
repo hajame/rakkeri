@@ -33,10 +33,7 @@ const App = () => {
         <Link to='/'><Button>{hasUser() ? 'Home' : 'Login'}</Button></Link>
         {user === null ?
           <Link to='/signup'><Button>Sign up</Button></Link>
-          : ''}
-        {user !== null ?
-          <Button onClick={() => handleLogout()}>Logout</Button>
-          : ''}
+          : <Button onClick={() => handleLogout()}>Logout</Button>}
 
       </div>
 
