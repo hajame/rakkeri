@@ -21,13 +21,28 @@ const toDDMMYY = timeString => {
   return `${date.getDate()}/${date.getMonth()}/${date.getFullYear().toString()}`;
 };
 
+const getDurationInSeconds = (start, end) => {
+  if (!start) {
+    return '';
+  }
+  let startDate = new Date(start);
+  let endDate = end ? new Date(end) : new Date();
+  return parseInt((endDate - startDate) / 1000);
+};
+
+const HHMMFromSeconds = seconds => {
+  const hours = parseInt(seconds / 60 / 60);
+  const minutes = parseInt((seconds / 60) % 60);
+  return toHHMM(hours, minutes);
+};
+
 const getDuration = (start, end) => {
   if (!start) {
     return '';
   }
   let startDate = new Date(start);
   let endDate = end ? new Date(end) : new Date();
-  const differenceInMinutes = (endDate - startDate) / 1000 / 60;
+  const differenceInMinutes = (endDate - startDate) / 60000;
   const hours = parseInt(differenceInMinutes / 60);
   const minutes = parseInt(differenceInMinutes % 60);
   return toHHMM(hours, minutes);
@@ -56,4 +71,15 @@ const validateHHMM = (HHMM) => {
   }
 };
 
-export default { now, toDoubleDigits, toHHMM, getHHMM, toDDMMYY, getDuration, setHHMM, validateHHMM };
+export default {
+  now,
+  toDoubleDigits,
+  toHHMM,
+  getHHMM,
+  toDDMMYY,
+  getDuration,
+  setHHMM,
+  validateHHMM,
+  getDurationInSeconds,
+  HHMMFromSeconds,
+};
