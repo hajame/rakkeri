@@ -75,11 +75,11 @@
 | 28.4. | 0:05  | Documentation                                                              |
 |       | 1:13  | Planning requirements                                                      |
 |       | 0:49  | Setting up production                                                      |
+| 29.4. | 2:16  | Planning requirements                                                      |
+|       | 2:48  | Story: Editable tracking time                                              |
+|       | 2:12  | UI improvements - Project view                                             |
+| 30.4. | 0:05  | Documentation                                                              |
+|       | 0:55  | Planning requirements                                                      |
+|       | 0:54  | Story: User can export a project report                                    |
 |       |       |                                                                            |
-|       |       |                                                                            |
-|       |       |                                                                            |
-|       |       |                                                                            |
-|       |       |                                                                            |
-|       |       |                                                                            |
-|       |       |                                                                            |
-| total | 90:44 |                                                                            |
+| total | 99:54 |                                                                            |
