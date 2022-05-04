@@ -1,14 +1,17 @@
 import time from './time';
 
+let output = '';
+
 const getSum = (total, tracking) => {
   return total + time.getDurationInSeconds(tracking.startTime, tracking.endTime);
 };
 
 function println(string) {
-  console.log(string);
+  output = output + string + '\n';
 }
 
 const printReport = (project) => {
+  output = '';
   println('# Times by task in project: ' + project.name + '\n\n');
   println('| Task | hh:mm |');
   println('| ---- | ----- |');
@@ -21,6 +24,7 @@ const printReport = (project) => {
     println('| ' + task.name + ' | ' + time.HHMMFromSeconds(seconds) + ' |');
   });
   println('| TOTAL | ' + time.HHMMFromSeconds(totalSeconds) + ' |');
+  return output;
 };
 
 export default { printReport };

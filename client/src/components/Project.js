@@ -88,7 +88,7 @@ const Project = ({
           Stop tracking
         </Button>
       }
-      <Button onClick={() => reportService.printReport(project)} variant='contained' sx={{ mt: 1, mb: 0 }}>
+      <Button onClick={() => alert(reportService.printReport(project))} variant='contained' sx={{ mt: 1, mb: 0 }}>
         Print report to console
       </Button>
       <TrackingList trackings={project.trackings} updateTracking={updateTracking} />
