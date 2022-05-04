@@ -7,7 +7,6 @@ import trackingService from '../services/trackings';
 
 import StartTrackingDialogButton from './StartTrackingDialogButton';
 import TrackingList from './TrackingList';
-import reportService from '../services/reports';
 import ReportDialogButton from './ReportDialogButton';
 
 const Project = ({
