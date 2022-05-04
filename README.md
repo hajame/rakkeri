@@ -14,14 +14,15 @@ Räkkeri let's you
 
 ### Reporting
 
-The first report will be for project hour report commonly used in CS programmes at the University of Helsinki.
+Räkkeri can produce a report that is commonly used for project work at the Computer Science programme at the University of Helsinki.
 
-| Date      | h:mm     | Task              |
-| --------- | -------- | ----------------- |
-| 25.3.     | 1:05     | Write README      |
-|           | 1:34     | Plan requirements |
-| 26.3.     | 3:17     | Build spaceship   |
-| **total** | **5:56** |                   |
+| Date       | hh:mm | Task              |
+| ---------- | ----- | ----------------- |
+| 2022-04-28 | 01:34 | Plan requirements |
+|            | 01:05 | Write README      |
+| 2022-05-04 | 01:34 | Plan requirements |
+|            | 03:17 | Build spaceship   |
+| TOTAL      | 05:56 |                   |
 
 ## Documentation
 
