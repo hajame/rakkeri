@@ -1,4 +1,5 @@
 import time from './time';
+import trackingService from './trackings';
 
 let output = '';
 
@@ -56,15 +57,6 @@ const printReport = (project) => {
   return output;
 };
 
-const getTrackingsByDate = trackings => {
-  return trackings.reduce((trackings, tracking) => {
-    const date = tracking.startTime.substring(0, 10);
-    trackings[date] = trackings[date] || [];
-    trackings[date].push(tracking);
-    return trackings;
-  }, {});
-};
-
 const printHelsinkiReport = (project) => {
   output = '';
   println('# Daily times by task in project: ' + project.name);
@@ -72,7 +64,7 @@ const printHelsinkiReport = (project) => {
   println('| Date       | hh:mm | Task |');
   println('| ---------- | ----- | ---- |');
   let totalSeconds = 0;
-  const trackingsByDate = getTrackingsByDate(project.trackings);
+  const trackingsByDate = trackingService.getTrackingsByDate(project.trackings);
   for (const date in trackingsByDate) {
     let taskIds = new Set();
     let uniqueTasks = [];

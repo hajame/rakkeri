@@ -18,7 +18,7 @@ const toDDMMYY = timeString => {
     return '';
   }
   const date = new Date(timeString);
-  return `${date.getDate()}/${date.getMonth()}/${date.getFullYear().toString()}`;
+  return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear().toString()}`;
 };
 
 const getDurationInSeconds = (start, end) => {

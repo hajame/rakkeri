@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+import timeService from './time';
+
 const trackingsUrl = `${process.env.REACT_APP_BACKEND_URL}/api/trackings`;
 
 let token = null;
@@ -96,9 +98,35 @@ const sortTrackings = trackings => {
   });
 };
 
+const getTrackingsByDate = trackings => {
+  return trackings.reduce((trackings, tracking) => {
+    const date = timeService.toDDMMYY(tracking.startTime);
+    trackings[date] = trackings[date] || [];
+    trackings[date].push(tracking);
+    return trackings;
+  }, {});
+};
+
+function getTotalSeconds(trackings) {
+  let totalSeconds = 0;
+  trackings.forEach(t => {
+    const seconds = timeService.getDurationInSeconds(t.startTime, t.endTime);
+    totalSeconds += seconds;
+  });
+  return timeService.HHMMFromSeconds(totalSeconds);
+}
+
 
 const setToken = (newToken) => {
   token = `bearer ${newToken}`;
 };
 
-export default { setToken, startTracking, stopTracking, updateTracking, sortTrackings };
+export default {
+  setToken,
+  startTracking,
+  stopTracking,
+  updateTracking,
+  sortTrackings,
+  getTrackingsByDate,
+  getTotalSeconds,
+};

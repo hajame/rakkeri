@@ -95,7 +95,8 @@ const Project = ({
         <ReportDialogButton project={project} type={'tasks'} />
         <ReportDialogButton project={project} type={'helsinki'} />
       </Box>
-      <TrackingList trackings={project.trackings} updateTracking={updateTracking} />
+      <TrackingList trackingsByDate={trackingService.getTrackingsByDate(project.trackings)}
+                    updateTracking={updateTracking} />
     </Box>
   );
 };
