@@ -81,7 +81,7 @@
 | 30.4. | 0:05   | Documentation                                                              |
 |       | 0:55   | Planning requirements                                                      |
 |       | 0:54   | Story: User can export a project report                                    |
-| 4.5.  | 0:10   | Documentation                                                              |
+| 4.5.  | 0:30   | Documentation                                                              |
 |       | 1:20   | Planning requirements                                                      |
 |       | 1:23   | Story: Group Trackings by day                                              |
 |       | 1:01   | Story: Nicer UI for reports                                                |
@@ -100,4 +100,4 @@
 |       |        |                                                                            |
 |       |        |                                                                            |
 |       |        |                                                                            |
-| total | 106:28 |                                                                            |
+| total | 106:48 |                                                                            |
