@@ -78,6 +78,10 @@ const Project = ({
     alert(reportService.printReport(project));
   };
 
+  const handleHelsinkiReportClick = () => {
+    alert(reportService.printHelsinkiReport(project));
+  };
+
   return (
     <Box sx={{ mt: 1 }}>
       <Typography component='div' variant='h6' mb={1}>
@@ -100,6 +104,13 @@ const Project = ({
           <Button color={'secondary'} onClick={handleReportClick} variant='contained'
                   sx={{ mt: 1, mb: 0, marginRight: '12px' }}>
             Times by task
+          </Button>
+          : ''
+        }
+        {project.trackings.length > 0 ?
+          <Button color={'secondary'} onClick={handleHelsinkiReportClick} variant='contained'
+                  sx={{ mt: 1, mb: 0, marginRight: '12px' }}>
+            CS-Helsinki report
           </Button>
           : ''
         }
