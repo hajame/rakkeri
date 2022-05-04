@@ -80,7 +80,7 @@ const Project = ({
 
   return (
     <Box sx={{ mt: 1 }}>
-      <Typography component='div' variant='h6' mb={3}>
+      <Typography component='div' variant='h6' mb={1}>
         {project.name}
       </Typography>
       <Box
