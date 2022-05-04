@@ -25,22 +25,22 @@ function printTaskTotalsAndGetTotalSeconds(tasks, trackings) {
   tasks.forEach(task => {
     const seconds = getSecondsForTask(trackings, task);
     totalSeconds += seconds;
-    println('| ' + task.name + ' | ' + time.HHMMFromSeconds(seconds) + ' |');
+    println('| ' + time.HHMMFromSeconds(seconds) + ' | ' + task.name + ' |');
   });
   return totalSeconds;
 }
 
 function printTaskTotalsWithDateAndGetTotalSeconds(tasks, trackings) {
   let totalSeconds = 0;
-  print('| ' + trackings[0].startTime.substring(0, 10) + '');
+  print('| ' + trackings[0].startTime.substring(0, 10) + ' ');
   const seconds = getSecondsForTask(trackings, tasks[0]);
   totalSeconds += seconds;
-  println('| ' + tasks[0].name + ' | ' + time.HHMMFromSeconds(seconds) + ' |');
+  println('| ' + time.HHMMFromSeconds(seconds) + ' | ' + tasks[0].name + ' |');
   tasks.shift();
   tasks.forEach(task => {
     const seconds = getSecondsForTask(trackings, task);
     totalSeconds += seconds;
-    println('|            | ' + task.name + ' | ' + time.HHMMFromSeconds(seconds) + ' |');
+    println('|            | ' + time.HHMMFromSeconds(seconds) + ' | ' + task.name + ' |');
   });
   return totalSeconds;
 }
@@ -49,8 +49,8 @@ const printReport = (project) => {
   output = '';
   println('# Times by task in project: ' + project.name);
   println('');
-  println('| Task | hh:mm |');
-  println('| ---- | ----- |');
+  println('| hh:mm | Task |');
+  println('| ----- | ---- |');
   let totalSeconds = printTaskTotalsAndGetTotalSeconds(project.tasks, project.trackings);
   println('| TOTAL | ' + time.HHMMFromSeconds(totalSeconds) + ' |');
   return output;
@@ -60,8 +60,8 @@ const printHelsinkiReport = (project) => {
   output = '';
   println('# Daily times by task in project: ' + project.name);
   println('');
-  println('| Date       | Task | hh:mm |');
-  println('| ---------- | ---- | ----- |');
+  println('| Date       | hh:mm | Task |');
+  println('| ---------- | ----- | ---- |');
   let totalSeconds = 0;
   const trackingsByDate = project.trackings.reduce((trackings, tracking) => {
     const year = tracking.startTime.substring(0, 10);
@@ -80,8 +80,8 @@ const printHelsinkiReport = (project) => {
     });
     totalSeconds += printTaskTotalsWithDateAndGetTotalSeconds(uniqueTasks, trackingsByDate[date]);
   }
-  
-  println('| TOTAL | ' + time.HHMMFromSeconds(totalSeconds) + ' |');
+
+  println('| TOTAL      | ' + time.HHMMFromSeconds(totalSeconds) + ' |' + '      |');
   return output;
 };
 

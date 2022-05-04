@@ -8,6 +8,7 @@ import trackingService from '../services/trackings';
 import StartTrackingDialogButton from './StartTrackingDialogButton';
 import TrackingList from './TrackingList';
 import reportService from '../services/reports';
+import ReportDialogButton from './ReportDialogButton';
 
 const Project = ({
                    user,
@@ -74,14 +75,6 @@ const Project = ({
     setActiveTracking(newTracking);
   };
 
-  const handleReportClick = () => {
-    alert(reportService.printReport(project));
-  };
-
-  const handleHelsinkiReportClick = () => {
-    alert(reportService.printHelsinkiReport(project));
-  };
-
   return (
     <Box sx={{ mt: 1 }}>
       <Typography component='div' variant='h6' mb={1}>
@@ -100,20 +93,8 @@ const Project = ({
             Stop tracking
           </Button>
         }
-        {project.trackings.length > 0 ?
-          <Button color={'secondary'} onClick={handleReportClick} variant='contained'
-                  sx={{ mt: 1, mb: 0, marginRight: '12px' }}>
-            Times by task
-          </Button>
-          : ''
-        }
-        {project.trackings.length > 0 ?
-          <Button color={'secondary'} onClick={handleHelsinkiReportClick} variant='contained'
-                  sx={{ mt: 1, mb: 0, marginRight: '12px' }}>
-            CS-Helsinki report
-          </Button>
-          : ''
-        }
+        <ReportDialogButton project={project} type={'tasks'} />
+        <ReportDialogButton project={project} type={'helsinki'} />
       </Box>
       <TrackingList trackings={project.trackings} updateTracking={updateTracking} />
     </Box>
