@@ -57,7 +57,6 @@ const printReport = (project) => {
 };
 
 const printHelsinkiReport = (project) => {
-  
   output = '';
   println('# Daily times by task in project: ' + project.name);
   println('');
@@ -79,10 +78,9 @@ const printHelsinkiReport = (project) => {
         uniqueTasks.push(t.task);
       }
     });
-    printTaskTotalsWithDateAndGetTotalSeconds(uniqueTasks, trackingsByDate[date]);
+    totalSeconds += printTaskTotalsWithDateAndGetTotalSeconds(uniqueTasks, trackingsByDate[date]);
   }
-
-
+  
   println('| TOTAL | ' + time.HHMMFromSeconds(totalSeconds) + ' |');
   return output;
 };
