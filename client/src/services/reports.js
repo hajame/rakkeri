@@ -12,7 +12,8 @@ function println(string) {
 
 const printReport = (project) => {
   output = '';
-  println('# Times by task in project: ' + project.name + '\n\n');
+  println('# Times by task in project: ' + project.name);
+  println('');
   println('| Task | hh:mm |');
   println('| ---- | ----- |');
   let totalSeconds = 0;

@@ -74,6 +74,10 @@ const Project = ({
     setActiveTracking(newTracking);
   };
 
+  const handleReportClick = () => {
+    alert(reportService.printReport(project));
+  };
+
   return (
     <Box sx={{ mt: 1 }}>
       <Typography component='div' variant='h6' mb={3}>
@@ -88,8 +92,8 @@ const Project = ({
           Stop tracking
         </Button>
       }
-      <Button onClick={() => alert(reportService.printReport(project))} variant='contained' sx={{ mt: 1, mb: 0 }}>
-        Print report to console
+      <Button onClick={handleReportClick} variant='contained' sx={{ mt: 1, mb: 0 }}>
+        Times by task
       </Button>
       <TrackingList trackings={project.trackings} updateTracking={updateTracking} />
     </Box>
