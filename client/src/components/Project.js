@@ -4,27 +4,10 @@ import Typography from '@mui/material/Typography';
 
 import taskService from '../services/tasks';
 import trackingService from '../services/trackings';
-import time from '../services/time';
 
 import StartTrackingDialogButton from './StartTrackingDialogButton';
 import TrackingList from './TrackingList';
-
-const getSum = (total, tracking) => {
-  return total + time.getDurationInSeconds(tracking.startTime, tracking.endTime);
-};
-
-const printReport = (project) => {
-  console.log('Times by task in project: ' + project.name + '\n');
-  let totalSeconds = 0;
-  project.tasks.forEach(task => {
-    const seconds = project.trackings
-      .filter(t => t.task.id === task.id)
-      .reduce(getSum, 0);
-    totalSeconds += seconds;
-    console.log('| ' + task.name + ' | ', time.HHMMFromSeconds(seconds), ' |');
-  });
-  console.log('| TOTAL | ', time.HHMMFromSeconds(totalSeconds), ' |');
-};
+import reportService from '../services/reports';
 
 const Project = ({
                    user,
@@ -105,7 +88,7 @@ const Project = ({
           Stop tracking
         </Button>
       }
-      <Button onClick={() => printReport(project)} variant='contained' sx={{ mt: 1, mb: 0 }}>
+      <Button onClick={() => reportService.printReport(project)} variant='contained' sx={{ mt: 1, mb: 0 }}>
         Print report to console
       </Button>
       <TrackingList trackings={project.trackings} updateTracking={updateTracking} />
