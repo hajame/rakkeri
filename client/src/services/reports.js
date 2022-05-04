@@ -10,6 +10,10 @@ function println(string) {
   output = output + string + '\n';
 }
 
+function print(string) {
+  output = output + string;
+}
+
 function getSecondsForTask(trackings, task) {
   return trackings
     .filter(t => t.task.id === task.id)
@@ -26,6 +30,21 @@ function printTaskTotalsAndGetTotalSeconds(tasks, trackings) {
   return totalSeconds;
 }
 
+function printTaskTotalsWithDateAndGetTotalSeconds(tasks, trackings) {
+  let totalSeconds = 0;
+  print('| ' + trackings[0].startTime.substring(0, 10) + '');
+  const seconds = getSecondsForTask(trackings, tasks[0]);
+  totalSeconds += seconds;
+  println('| ' + tasks[0].name + ' | ' + time.HHMMFromSeconds(seconds) + ' |');
+  tasks.shift();
+  tasks.forEach(task => {
+    const seconds = getSecondsForTask(trackings, task);
+    totalSeconds += seconds;
+    println('|            | ' + task.name + ' | ' + time.HHMMFromSeconds(seconds) + ' |');
+  });
+  return totalSeconds;
+}
+
 const printReport = (project) => {
   output = '';
   println('# Times by task in project: ' + project.name);
@@ -38,23 +57,32 @@ const printReport = (project) => {
 };
 
 const printHelsinkiReport = (project) => {
+  
   output = '';
   println('# Daily times by task in project: ' + project.name);
   println('');
-  println('| Task | hh:mm |');
-  println('| ---- | ----- |');
+  println('| Date       | Task | hh:mm |');
+  println('| ---------- | ---- | ----- |');
   let totalSeconds = 0;
-  console.log(project.trackings);
-  project.trackings.groupBy(({ startTime }) => startTime);
-  //   .forEach(group => {
-  //   console.log(group);
-  // });
+  const trackingsByDate = project.trackings.reduce((trackings, tracking) => {
+    const year = tracking.startTime.substring(0, 10);
+    trackings[year] = trackings[year] || [];
+    trackings[year].push(tracking);
+    return trackings;
+  }, {});
+  for (const date in trackingsByDate) {
+    let taskIds = new Set();
+    let uniqueTasks = [];
+    trackingsByDate[date].forEach(t => {
+      if (!taskIds.has(t.task.id)) {
+        taskIds.add(t.task.id);
+        uniqueTasks.push(t.task);
+      }
+    });
+    printTaskTotalsWithDateAndGetTotalSeconds(uniqueTasks, trackingsByDate[date]);
+  }
 
-  // project.tasks.forEach(task => {
-  //   const seconds = getSecondsForTask(project.trackings, task);
-  //   totalSeconds += seconds;
-  //   println('| ' + task.name + ' | ' + time.HHMMFromSeconds(seconds) + ' |');
-  // });
+
   println('| TOTAL | ' + time.HHMMFromSeconds(totalSeconds) + ' |');
   return output;
 };
