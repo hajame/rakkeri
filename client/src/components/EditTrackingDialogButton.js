@@ -22,7 +22,7 @@ const EditTrackingDialogButton = ({}) => {
 
   return (
     <div>
-      <Button onClick={openDialog} variant='contained' sx={{ mt: 1, mb: 0 }}>
+      <Button onClick={openDialog} variant='contained' sx={{ mt: 1, mb: 0, marginRight: '12px' }}>
         Start Tracking
       </Button>
       <Dialog

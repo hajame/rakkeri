@@ -8,6 +8,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useState } from 'react';
 import Autocomplete from '@mui/material/Autocomplete';
+import Box from '@mui/material/Box';
 
 const StartTrackingDialogButton = ({ startTracking, project, tasks }) => {
   const [open, setOpen] = useState(false);
@@ -27,8 +28,8 @@ const StartTrackingDialogButton = ({ startTracking, project, tasks }) => {
   }
 
   return (
-    <div>
-      <Button onClick={openDialog} variant='contained' sx={{ mt: 1, mb: 0 }}>
+    <Box>
+      <Button onClick={openDialog} variant='contained' sx={{ mt: 1, mb: 0, marginRight: '12px' }}>
         Start Tracking
       </Button>
       <Dialog
@@ -71,7 +72,7 @@ const StartTrackingDialogButton = ({ startTracking, project, tasks }) => {
           <Button variant='contained' onClick={() => submit(taskNameValue)}>Start</Button>
         </DialogActions>
       </Dialog>
-    </div>
+    </Box>
   );
 };
 

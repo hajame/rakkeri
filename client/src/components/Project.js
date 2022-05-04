@@ -83,18 +83,27 @@ const Project = ({
       <Typography component='div' variant='h6' mb={3}>
         {project.name}
       </Typography>
-      {activeTracking === null ?
-        <StartTrackingDialogButton
-          startTracking={startTracking} project={project} tasks={tasks}
-        />
-        :
-        <Button color={'warning'} onClick={stopTracking} variant='contained' sx={{ mt: 1, mb: 0 }}>
-          Stop tracking
-        </Button>
-      }
-      <Button onClick={handleReportClick} variant='contained' sx={{ mt: 1, mb: 0 }}>
-        Times by task
-      </Button>
+      <Box
+        sx={{ display: 'flex', flexDirection: 'row' }}
+      >
+        {activeTracking === null ?
+          <StartTrackingDialogButton
+            startTracking={startTracking} project={project} tasks={tasks}
+          />
+          :
+          <Button color={'warning'} onClick={stopTracking} variant='contained'
+                  sx={{ mt: 1, mb: 0, marginRight: '12px' }}>
+            Stop tracking
+          </Button>
+        }
+        {project.trackings.length > 0 ?
+          <Button color={'secondary'} onClick={handleReportClick} variant='contained'
+                  sx={{ mt: 1, mb: 0, marginRight: '12px' }}>
+            Times by task
+          </Button>
+          : ''
+        }
+      </Box>
       <TrackingList trackings={project.trackings} updateTracking={updateTracking} />
     </Box>
   );
