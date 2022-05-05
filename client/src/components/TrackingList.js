@@ -21,7 +21,7 @@ const TrackingList = ({ trackingsByDate, updateTracking }) => {
                 component='li'
                 color='primary'
               >
-                {`${date}, total ${trackingService.getTotalSeconds(trackings)}`}
+                {`${date}, total ${trackingService.getTotalSeconds(trackings.filter(t => t.endTime))}`}
               </ListSubheader>
             }
           >
