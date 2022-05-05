@@ -26,7 +26,7 @@ function printTaskTotalsAndGetTotalSeconds(tasks, trackings) {
   tasks.forEach(task => {
     const seconds = getSecondsForTask(trackings, task);
     totalSeconds += seconds;
-    println('| ' + time.HHMMFromSeconds(seconds) + ' | ' + task.name + ' |');
+    println('|  ' + time.HHMMFromSeconds(seconds) + ' | ' + task.name + ' |');
   });
   return totalSeconds;
 }
@@ -36,33 +36,40 @@ function printTaskTotalsWithDateAndGetTotalSeconds(tasks, trackings) {
   print('| ' + trackings[0].startTime.substring(0, 10) + ' ');
   const seconds = getSecondsForTask(trackings, tasks[0]);
   totalSeconds += seconds;
-  println('| ' + time.HHMMFromSeconds(seconds) + ' | ' + tasks[0].name + ' |');
+  const secondsHHMM = time.HHMMFromSeconds(seconds);
+  println('| ' + getLeftPadding(secondsHHMM) + secondsHHMM + ' | ' + tasks[0].name + ' |');
   tasks.shift();
   tasks.forEach(task => {
     const seconds = getSecondsForTask(trackings, task);
+    const secondsHHMM = time.HHMMFromSeconds(seconds);
     totalSeconds += seconds;
-    println('|            | ' + time.HHMMFromSeconds(seconds) + ' | ' + task.name + ' |');
+    println('|            | ' + getLeftPadding(secondsHHMM) + secondsHHMM + ' | ' + task.name + ' |');
   });
   return totalSeconds;
 }
 
-const printReport = (project) => {
+function getLeftPadding(HHMM) {
+  return HHMM.length < 6 ? ' ' : '';
+}
+
+const getTimesByTaskReport = (project) => {
   output = '';
   println('# Times by task in project: ' + project.name);
   println('');
-  println('| hh:mm | Task |');
-  println('| ----- | ---- |');
+  println('|  hh:mm | Task   |');
+  println('| -----: | :----- |');
   let totalSeconds = printTaskTotalsAndGetTotalSeconds(project.tasks, project.trackings);
-  println('| TOTAL | ' + time.HHMMFromSeconds(totalSeconds) + ' |');
+  const totalHHMM = time.HHMMFromSeconds(totalSeconds);
+  println('| ' + getLeftPadding(totalHHMM) + totalHHMM + ' | TOTAL  |');
   return output;
 };
 
-const printHelsinkiReport = (project) => {
+const getHelsinkiReport = (project) => {
   output = '';
   println('# Daily times by task in project: ' + project.name);
   println('');
-  println('| Date       | hh:mm | Task |');
-  println('| ---------- | ----- | ---- |');
+  println('|    Date    |  hh:mm | Task  |');
+  println('| :--------: | -----: | :---- |');
   let totalSeconds = 0;
   const trackingsByDate = trackingService.getTrackingsByDate(project.trackings);
   for (const date in trackingsByDate) {
@@ -76,9 +83,9 @@ const printHelsinkiReport = (project) => {
     });
     totalSeconds += printTaskTotalsWithDateAndGetTotalSeconds(uniqueTasks, trackingsByDate[date]);
   }
-
-  println('| TOTAL      | ' + time.HHMMFromSeconds(totalSeconds) + ' |' + '      |');
+  const totalHHMM = time.HHMMFromSeconds(totalSeconds);
+  println('|   TOTAL    | ' + getLeftPadding(totalHHMM) + totalHHMM + ' |' + '      |');
   return output;
 };
 
-export default { printReport, printHelsinkiReport };
+export default { getTimesByTaskReport, getHelsinkiReport };

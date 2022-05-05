@@ -51,9 +51,9 @@ const ReportDialogButton = ({ project, type }) => {
 
             {
               type === 'helsinki' ?
-                reportService.printHelsinkiReport(project)
+                reportService.getHelsinkiReport(project)
                 :
-                reportService.printReport(project)
+                reportService.getTimesByTaskReport(project)
             }
           </pre>
         </DialogContent>
