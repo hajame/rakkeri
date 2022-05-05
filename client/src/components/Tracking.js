@@ -32,12 +32,15 @@ const Tracking = ({ tracking, updateTracking }) => {
   const handleUpdateTracking = () => {
     const startDate = new Date(tracking.startTime);
     time.setHHMM(startDate, startTimeValue);
-    const endDate = new Date(tracking.endTime);
-    time.setHHMM(endDate, endTimeValue);
+    let endDate = null;
+    if (tracking.endTime) {
+      endDate = new Date(tracking.endTime);
+      time.setHHMM(endDate, endTimeValue);
+    }
     const newTracking = {
       ...tracking,
       startTime: startDate.toISOString(),
-      endTime: endDate.toISOString(),
+      endTime: endDate ? endDate.toISOString() : null,
     };
     updateTracking(newTracking);
     closeDialog(newTracking);
@@ -45,7 +48,7 @@ const Tracking = ({ tracking, updateTracking }) => {
 
   return (
     <ListItem
-      style={{ display: tracking.endTime ? '' : 'none' }}
+      style={{ fontWeight: tracking.endTime ? '' : 'bolder' }}
       alignItems='flex-start' disablePadding
     >
 
@@ -85,9 +88,9 @@ const Tracking = ({ tracking, updateTracking }) => {
                 variant='outlined'
               />
               <TextField
-                value={endTimeValue}
+                value={tracking.endTime ? endTimeValue : undefined}
                 error={!time.validateHHMM(endTimeValue)}
-                autoFocus
+                disabled={!tracking.endTime}
                 margin='dense'
                 id={'tracking_endTime_field_' + tracking.id}
                 onChange={(event) => {

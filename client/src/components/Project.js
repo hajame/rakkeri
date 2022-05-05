@@ -12,44 +12,11 @@ import ReportDialogButton from './ReportDialogButton';
 const Project = ({
                    user,
                    project,
-                   setProject,
-                   projects,
-                   setProjects,
+                   updateProjectState,
                    tasks,
-                   setTasks,
                    activeTracking,
                    setActiveTracking,
                  }) => {
-
-  const replaceOldProject = (updatedProject) => {
-    return [
-      ...projects.filter((p) => p.id !== updatedProject.id),
-      updatedProject,
-    ];
-  };
-
-  const updateProjectState = tracking => {
-    const projectToUpdate = projects.filter((p) => p.id === tracking.project.id)[0];
-    let updatedProject = {
-      ...projectToUpdate,
-      trackings: [
-        ...projectToUpdate.trackings.filter((t) => t.id !== tracking.id),
-        tracking,
-      ],
-      tasks: [
-        ...projectToUpdate.tasks.filter((task) => task.id !== tracking.task.id),
-        tracking.task,
-      ],
-    };
-    trackingService.sortTrackings(updatedProject.trackings);
-    let updatedProjects = replaceOldProject(updatedProject);
-    updatedProjects.sort((a, b) => a.name.localeCompare(b.name));
-    setProjects(updatedProjects);
-    if (!tasks.has(tracking.task.name)) {
-      setTasks(tasks.set(tracking.task.name, tracking.task));
-    }
-    setProject(updatedProjects.filter((p) => p.id === project.id)[0]);
-  };
 
   const stopTracking = async () => {
     const updatedTracking = await trackingService.stopTracking(activeTracking);
@@ -60,6 +27,9 @@ const Project = ({
   const updateTracking = async tracking => {
     const updatedTracking = await trackingService.updateTracking(tracking);
     updateProjectState(updatedTracking);
+    if (updatedTracking.id === activeTracking.id) {
+      setActiveTracking(updatedTracking);
+    }
   };
 
   const startTracking = async taskName => {

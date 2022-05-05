@@ -15,6 +15,7 @@ import Box from '@mui/material/Box';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import ListItemButton from '@mui/material/ListItemButton';
 import List from '@mui/material/List';
+import Tracking from './Tracking';
 
 export const Home = ({
                        user,
@@ -60,9 +61,46 @@ export const Home = ({
     }
   };
 
+  const replaceOldProject = (updatedProject) => {
+    return [
+      ...projects.filter((p) => p.id !== updatedProject.id),
+      updatedProject,
+    ];
+  };
+
+
+  const updateProjectState = tracking => {
+    const projectToUpdate = projects.filter((p) => p.id === tracking.project.id)[0];
+    let updatedProject = {
+      ...projectToUpdate,
+      trackings: [
+        ...projectToUpdate.trackings.filter((t) => t.id !== tracking.id),
+        tracking,
+      ],
+      tasks: [
+        ...projectToUpdate.tasks.filter((task) => task.id !== tracking.task.id),
+        tracking.task,
+      ],
+    };
+    trackingService.sortTrackings(updatedProject.trackings);
+    let updatedProjects = replaceOldProject(updatedProject);
+    updatedProjects.sort((a, b) => a.name.localeCompare(b.name));
+    setProjects(updatedProjects);
+    if (!tasks.has(tracking.task.name)) {
+      setTasks(tasks.set(tracking.task.name, tracking.task));
+    }
+    setProject(updatedProjects.filter((p) => p.id === project.id)[0]);
+  };
+
   useEffect(async () => {
     await updateState();
   }, []);
+
+  const updateActiveTracking = async tracking => {
+    const updatedTracking = await trackingService.updateTracking(tracking);
+    updateProjectState(updatedTracking);
+    setActiveTracking(updatedTracking);
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -132,12 +170,8 @@ export const Home = ({
                 }}
               >
                 <List>
-                  <ListItemButton
-                    onClick={() => alert('test')}
-                  >
-                    active: __<b>{activeTracking.task.name}</b>__
-                    start time: {new Date(activeTracking.startTime).toTimeString().substring(0, 8)}
-                  </ListItemButton>
+                  <Tracking key={'activeTrackingButton'} tracking={activeTracking}
+                            updateTracking={updateActiveTracking} />
                 </List>
               </Box>
             )}
@@ -145,6 +179,7 @@ export const Home = ({
               <Project user={user}
                        project={project} setProject={setProject}
                        projects={projects} setProjects={setProjects}
+                       updateProjectState={updateProjectState}
                        tasks={tasks} setTasks={setTasks}
                        activeTracking={activeTracking} setActiveTracking={setActiveTracking} />
             )}
