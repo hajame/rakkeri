@@ -2,11 +2,16 @@ function now() {
   return new Date().toISOString();
 }
 
-const toDoubleDigits = value => {
+const doubleDigits = value => {
   return value > 9 ? value : '0' + value;
 };
 
-const toHHMM = (hours, minutes) => `${toDoubleDigits(hours)}:${toDoubleDigits(minutes)}`;
+const toHHMM = (hours, minutes) => `${doubleDigits(hours)}:${doubleDigits(minutes)}`;
+
+const toHHMMSS = (hours, minutes, seconds) => {
+  return `${doubleDigits(hours)}:${doubleDigits(minutes)}:${doubleDigits(seconds)}`;
+};
+
 
 const getHHMM = timeString => {
   const date = new Date(timeString);
@@ -34,6 +39,13 @@ const HHMMFromSeconds = seconds => {
   const hours = parseInt(seconds / 60 / 60);
   const minutes = parseInt((seconds / 60) % 60);
   return toHHMM(hours, minutes);
+};
+
+const HHMMSSFromSeconds = seconds => {
+  const hours = parseInt(seconds / 60 / 60);
+  const minutes = parseInt((seconds / 60) % 60);
+  const remainderSeconds = parseInt(seconds % 60);
+  return toHHMMSS(hours, minutes, remainderSeconds);
 };
 
 const getDuration = (start, end) => {
@@ -73,7 +85,7 @@ const validateHHMM = (HHMM) => {
 
 export default {
   now,
-  toDoubleDigits,
+  toDoubleDigits: doubleDigits,
   toHHMM,
   getHHMM,
   toDDMMYY,
@@ -82,4 +94,5 @@ export default {
   validateHHMM,
   getDurationInSeconds,
   HHMMFromSeconds,
+  HHMMSSFromSeconds,
 };
