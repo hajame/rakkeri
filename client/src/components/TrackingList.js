@@ -15,11 +15,13 @@ const TrackingList = ({ trackingsByDate, updateTracking }) => {
         }).map(([date, trackings]) => (
           <List
             key={date}
+            dense={true}
             subheader={
               <ListSubheader
                 component='li'
+                color='primary'
               >
-                {`${date}, day total ${trackingService.getTotalSeconds(trackings)}`}
+                {`${date}, total ${trackingService.getTotalSeconds(trackings)}`}
               </ListSubheader>
             }
           >

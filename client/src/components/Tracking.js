@@ -6,6 +6,7 @@ import DialogActions from '@mui/material/DialogActions';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import TextField from '@mui/material/TextField';
+import ListItemText from '@mui/material/ListItemText';
 
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItem from '@mui/material/ListItem';
@@ -48,15 +49,26 @@ const Tracking = ({ tracking, updateTracking }) => {
 
   return (
     <ListItem
-      style={{ fontWeight: tracking.endTime ? '' : 'bolder' }}
       alignItems='flex-start' disablePadding
     >
-
       <ListItemButton
-        dense={false}
         onClick={() => openDialog(tracking)}
       >
-        {time.toDDMMYY(tracking.startTime)} [{time.getDuration(tracking.startTime, tracking.endTime)}] {tracking.task.name}
+        {
+          !tracking.endTime ?
+            <ListItemText
+              primary={`${tracking.task.name}`}
+              primaryTypographyProps={{
+                fontWeight: 'bolder',
+              }}
+              secondary={`⏱ (${time.getHHMM(tracking.startTime)} - )`}
+            />
+            :
+            <ListItemText
+              primary={`${tracking.task.name}`}
+              secondary={`${time.getDuration(tracking.startTime, tracking.endTime)} (${time.getHHMM(tracking.startTime)} - ${time.getHHMM(tracking.endTime)})`}
+            />
+        }
       </ListItemButton>
 
       {
