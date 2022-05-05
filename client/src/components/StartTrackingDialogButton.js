@@ -61,7 +61,7 @@ const StartTrackingDialogButton = ({ startTracking, project, tasks }) => {
                 margin='dense'
                 InputProps={{
                   ...params.InputProps,
-                  type: 'search',
+                  type: 'text',
                 }}
               />
             )}
