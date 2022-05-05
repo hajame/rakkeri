@@ -13,6 +13,8 @@ import Project from './Project';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import ListItemButton from '@mui/material/ListItemButton';
+import List from '@mui/material/List';
 
 export const Home = ({
                        user,
@@ -129,9 +131,14 @@ export const Home = ({
                   alignItems: 'left',
                 }}
               >
-                <p>active: __<b>{activeTracking.task.name}</b>__
-                  start time: {new Date(activeTracking.startTime).toTimeString().substring(0, 8)}
-                </p>
+                <List>
+                  <ListItemButton
+                    onClick={() => alert('test')}
+                  >
+                    active: __<b>{activeTracking.task.name}</b>__
+                    start time: {new Date(activeTracking.startTime).toTimeString().substring(0, 8)}
+                  </ListItemButton>
+                </List>
               </Box>
             )}
             {project !== null && (
