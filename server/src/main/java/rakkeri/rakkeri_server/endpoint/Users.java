@@ -25,11 +25,13 @@ public class Users {
 
     @PostMapping("/api/users")
     public void create(@RequestBody Person person) {
+        person.setUsername(person.getUsername().toLowerCase());
         personService.saveNew(person);
     }
 
     @PostMapping("/api/login")
     public UserDTO login(@RequestBody Person person) {
+        person.setUsername(person.getUsername().toLowerCase());
         List<Person> people = personService.findByUsername(person);
         Person foundPerson = getUnique(people);
         if (personService.isValidPassword(person, foundPerson)) {

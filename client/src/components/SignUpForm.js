@@ -1,11 +1,8 @@
 import { useState } from 'react';
 import userService from '../services/users';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -13,11 +10,10 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
-import Stack from '@mui/material/Stack';
 import ListSubheader from '@mui/material/ListSubheader';
 import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
-import { AlertTitle } from '@mui/material';
+import AlertTitle from '@mui/material/AlertTitle';
 
 const requirementStyle = { paddingLeft: '2em', fontSize: 14 };
 
@@ -28,15 +24,15 @@ function validateEmail(email) {
 }
 
 const validateField = (fieldText, min, max) => {
-  return fieldText.length > min && fieldText.length < max;
+  return fieldText.length >= min && fieldText.length <= max;
 };
 
 const validatePassword = (password) => {
-  return validateField(password, 10, 65);
+  return validateField(password, 10, 64);
 };
 
 const validateUsername = (username) => {
-  return validateField(username, 8, 65);
+  return validateField(username, 8, 64);
 };
 
 
@@ -77,7 +73,6 @@ export const SignUpForm = () => {
   };
 
   return (
-    // <ThemeProvider theme={theme}>
     <Container component='main' maxWidth='xs'>
       <CssBaseline />
       <Box
@@ -160,29 +155,24 @@ export const SignUpForm = () => {
           </Grid>
         </Box>
       </Box>
-      <Stack spacing={2} sx={{ width: '100%' }}>
-        <Snackbar open={openSuccess}
-                  anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-                  autoHideDuration={6000}
-                  onClose={() => setOpenSuccess(false)}>
-          <Alert onClose={() => setOpenSuccess(false)} severity='success' sx={{ width: '100%' }}>
-            <AlertTitle>Success!</AlertTitle>
-            Now you can <Link href='/' variant='body2'>
-            {'Log In'}
-          </Link> 🙂
-          </Alert>
-        </Snackbar>
-        <Snackbar open={openError}
-                  anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-                  autoHideDuration={6000}
-                  onClose={() => setOpenError(false)}>
-          <Alert onClose={() => setOpenError(false)} severity='error' sx={{ width: '100%' }}>
-            <AlertTitle>Error</AlertTitle>
-            {errorMessage}
-          </Alert>
-        </Snackbar>
-      </Stack>
+      <Snackbar open={openSuccess}
+                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                autoHideDuration={6000}
+                onClose={() => setOpenSuccess(false)}>
+        <Alert onClose={() => setOpenSuccess(false)} severity='success' sx={{ width: '100%' }}>
+          <AlertTitle>Success!</AlertTitle>
+          Now you can <Link href='/'>{'Log In'}</Link> 🙂
+        </Alert>
+      </Snackbar>
+      <Snackbar open={openError}
+                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                autoHideDuration={6000}
+                onClose={() => setOpenError(false)}>
+        <Alert onClose={() => setOpenError(false)} severity='error' sx={{ width: '100%' }}>
+          <AlertTitle>Error</AlertTitle>
+          {errorMessage}
+        </Alert>
+      </Snackbar>
     </Container>
-    // </ThemeProvider>
   );
 };

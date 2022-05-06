@@ -1,17 +1,20 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import userService from '../services/users';
-import projectService from '../services/projects';
-
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
 
 const LoginForm = ({ setUser, updateState }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  const [openError, setOpenError] = useState(false);
 
   const login = async (event) => {
     event.preventDefault();
@@ -25,6 +28,7 @@ const LoginForm = ({ setUser, updateState }) => {
       updateState();
     } catch (e) {
       console.error('Error when logging in', e);
+      setOpenError(true);
     }
   };
 
@@ -73,6 +77,15 @@ const LoginForm = ({ setUser, updateState }) => {
           </Link>
         </Grid> */}
       </Grid>
+      <Snackbar open={openError}
+                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                autoHideDuration={6000}
+                onClose={() => setOpenError(false)}>
+        <Alert onClose={() => setOpenError(false)} severity='error' sx={{ width: '100%' }}>
+          <AlertTitle>Error</AlertTitle>
+          Wrong username or password.
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };
