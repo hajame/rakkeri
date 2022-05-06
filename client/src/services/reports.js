@@ -72,6 +72,10 @@ const getTimesByTaskReport = (project) => {
 };
 
 
+const getSortedDates = trackingsByDate => {
+  return Object.keys(trackingsByDate).sort((a, b) => a.localeCompare(b));
+};
+
 const getHelsinkiReport = (project) => {
   output = '';
   println('# Daily times by task in project: ' + project.name);
@@ -80,9 +84,9 @@ const getHelsinkiReport = (project) => {
   println('| :--------: | --------: | :---- |');
   let totalSeconds = 0;
   const finishedTrackings = getFinishedTrackings(project.trackings);
-  const trackingsByDate = trackingService.getTrackingsByDate(finishedTrackings);
+  const trackingsByDate = trackingService.getTrackingsByDateYYYYMMDD(finishedTrackings);
 
-  for (const date in trackingsByDate) {
+  for (const date of getSortedDates(trackingsByDate)) {
     let taskIds = new Set();
     let uniqueTasks = [];
     trackingsByDate[date].forEach(t => {

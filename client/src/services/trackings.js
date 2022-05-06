@@ -107,6 +107,15 @@ const getTrackingsByDate = trackings => {
   }, {});
 };
 
+const getTrackingsByDateYYYYMMDD = trackings => {
+  return trackings.reduce((trackings, tracking) => {
+    const date = timeService.toYYYYMMDD(tracking.startTime);
+    trackings[date] = trackings[date] || [];
+    trackings[date].push(tracking);
+    return trackings;
+  }, {});
+};
+
 function getTotalSeconds(trackings) {
   let totalSeconds = 0;
   trackings.forEach(t => {
@@ -128,5 +137,6 @@ export default {
   updateTracking,
   sortTrackings,
   getTrackingsByDate,
+  getTrackingsByDateYYYYMMDD,
   getTotalSeconds,
 };

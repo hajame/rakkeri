@@ -26,6 +26,14 @@ const toDDMMYY = timeString => {
   return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear().toString()}`;
 };
 
+const toYYYYMMDD = timeString => {
+  if (!timeString) {
+    return '';
+  }
+  const date = new Date(timeString);
+  return `${date.getFullYear().toString()}/${date.getMonth() + 1}/${date.getDate()}`;
+};
+
 const getDurationInSeconds = (start, end) => {
   if (!start) {
     return '';
@@ -83,12 +91,14 @@ const validateHHMM = (HHMM) => {
   }
 };
 
+
 export default {
   now,
   toDoubleDigits: doubleDigits,
   toHHMM,
   getHHMM,
   toDDMMYY,
+  toYYYYMMDD,
   getDuration,
   setHHMM,
   validateHHMM,
