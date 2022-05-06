@@ -84,7 +84,7 @@ const Tracking = ({ tracking, updateTracking, tasks }) => {
             fullWidth
             maxWidth='sm'
           >
-            <DialogTitle>Edit tracking</DialogTitle>
+            <DialogTitle>{tracking.endTime ? 'Edit tracking' : 'Edit active tracking'}</DialogTitle>
             <DialogContent>
               <TextField
                 value={startTimeValue}
@@ -139,7 +139,7 @@ const Tracking = ({ tracking, updateTracking, tasks }) => {
                 renderInput={(params) => (
                   <TextField
                     {...params}
-                    label='What are you doing?'
+                    label='Task'
                     margin='dense'
                     InputProps={{
                       ...params.InputProps,

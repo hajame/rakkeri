@@ -11,15 +11,45 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import List from '@mui/material/List';
+import { ListItem } from '@mui/material';
+import ListSubheader from '@mui/material/ListSubheader';
+
+function validateEmail(email) {
+  // regex from w3docs.com
+  const res = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return res.test(String(email).toLowerCase());
+}
+
+const validateField = (fieldText, min, max) => {
+  return fieldText.length > min && fieldText.length < max;
+};
+
+const validatePassword = (password) => {
+  return validateField(password, 10, 65);
+};
+
+const validateUsername = (username) => {
+  return validateField(username, 8, 65);
+};
+
 
 export const SignUpForm = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  function validateFields() {
+    return validateEmail(email) && validatePassword(password) && validateUsername(username);
+  }
+
   const handleSignUp = async (event) => {
     event.preventDefault();
     try {
+      if (!validateFields()) {
+        console.log('validation FAILED');
+        return;
+      }
       await userService.create({ username, email, password });
     } catch (e) {
       console.error('Error in creating new user', e);
@@ -52,6 +82,7 @@ export const SignUpForm = () => {
             fullWidth
             id='username'
             value={username}
+            error={username === '' ? false : !validateUsername(username)}
             label='Username'
             name='username'
             autoComplete='username'
@@ -64,6 +95,7 @@ export const SignUpForm = () => {
             fullWidth
             id='email'
             value={email}
+            error={email === '' ? false : !validateEmail(email)}
             label='Email Address'
             name='email'
             autoComplete='email'
@@ -75,12 +107,25 @@ export const SignUpForm = () => {
             fullWidth
             id='password'
             value={password}
+            error={password === '' ? false : !validatePassword(password)}
             label='Password'
             name='password'
             type='password'
             autoComplete='current-password'
             onChange={({ target }) => setPassword(target.value)}
           />
+          <List disablePadding={true} dense={true}
+          >
+            <ListSubheader>
+              Requirements
+            </ListSubheader>
+            <ListItem sx={{ paddingLeft: '2em' }}>
+              👤 Username length 8-64 chars
+            </ListItem>
+            <ListItem sx={{ paddingLeft: '2em' }}>
+              🔑 Password length 10-64 chars
+            </ListItem>
+          </List>
           <Button
             type='submit'
             fullWidth
