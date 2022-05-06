@@ -12,8 +12,11 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import List from '@mui/material/List';
-import { ListItem } from '@mui/material';
+import ListItem from '@mui/material/ListItem';
+import Stack from '@mui/material/Stack';
 import ListSubheader from '@mui/material/ListSubheader';
+import Alert from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
 
 function validateEmail(email) {
   // regex from w3docs.com
@@ -39,6 +42,9 @@ export const SignUpForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const [openSuccess, setOpenSuccess] = useState(false);
+  const [openError, setOpenError] = useState(false);
+
   function validateFields() {
     return validateEmail(email) && validatePassword(password) && validateUsername(username);
   }
@@ -47,10 +53,11 @@ export const SignUpForm = () => {
     event.preventDefault();
     try {
       if (!validateFields()) {
-        console.log('validation FAILED');
+        setOpenError(true);
         return;
       }
       await userService.create({ username, email, password });
+      setOpenSuccess(true);
     } catch (e) {
       console.error('Error in creating new user', e);
     }
@@ -143,6 +150,18 @@ export const SignUpForm = () => {
           </Grid>
         </Box>
       </Box>
+      <Stack spacing={2} sx={{ width: '100%' }}>
+        <Snackbar open={openSuccess} autoHideDuration={6000} onClose={() => setOpenSuccess(false)}>
+          <Alert onClose={() => setOpenSuccess(false)} severity='success' sx={{ width: '100%' }}>
+            Success! Now you can Log in 🙂
+          </Alert>
+        </Snackbar>
+        <Snackbar open={openError} autoHideDuration={6000} onClose={() => setOpenError(false)}>
+          <Alert onClose={() => setOpenError(false)} severity='error' sx={{ width: '100%' }}>
+            Some of the fields have errors. Edit and try again.
+          </Alert>
+        </Snackbar>
+      </Stack>
     </Container>
     // </ThemeProvider>
   );
