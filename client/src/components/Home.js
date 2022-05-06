@@ -30,12 +30,6 @@ export const Home = ({
                        setActiveTracking,
                      }) => {
 
-  const theme = createTheme({
-    palette: {
-      mode: 'dark', // always dark mode
-    },
-  });
-
   const setToken = user => {
     userService.setToken(user.token);
     projectService.setToken(user.token);
@@ -110,92 +104,90 @@ export const Home = ({
   };
 
   return (
-    <ThemeProvider theme={theme}>
+    <Box
+      sx={
+        user === null
+          ? {
+            marginTop: 4,
+            marginLeft: 1,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }
+          : { display: 'flex', flexDirection: 'column', height: '100%' }
+      }
+    >
+
       <Box
         sx={
-          user === null
-            ? {
-              marginTop: 4,
-              marginLeft: 1,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-            }
-            : { display: 'flex', flexDirection: 'column', height: '100%' }
+          { display: 'flex', flexDirection: 'row', height: '100%' }
         }
       >
-
+        <CssBaseline />
+        {user === null && (
+          <LoginForm setUser={setUser} updateState={updateState} />
+        )}
         <Box
-          sx={
-            { display: 'flex', flexDirection: 'row', height: '100%' }
-          }
+          sx={{
+            marginTop: 4,
+            marginLeft: 1,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            height: '100vh',
+            maxWidth: '15em',
+          }}
+          style={{
+            backgroundColor: '#212121',
+          }}
         >
-          <CssBaseline />
-          {user === null && (
-            <LoginForm setUser={setUser} updateState={updateState} />
+          {user !== null && (
+            <Projects
+              user={user}
+              project={project}
+              projects={projects}
+              setProjects={setProjects}
+              setProject={setProject}
+            />
           )}
-          <Box
-            sx={{
-              marginTop: 4,
-              marginLeft: 1,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              height: '100vh',
-              maxWidth: '15em',
-            }}
-            style={{
-              backgroundColor: '#212121',
-            }}
-          >
-            {user !== null && (
-              <Projects
-                user={user}
-                project={project}
-                projects={projects}
-                setProjects={setProjects}
-                setProject={setProject}
-              />
-            )}
-          </Box>
-          <Box
-            sx={{
-              marginTop: 1,
-              marginLeft: 4,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'left',
-            }}
-          >
-            {user !== null && activeTracking !== null && (
-              <Box
-                sx={{
-                  marginTop: 1,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'left',
-                }}
-              >
-                <List>
-                  <Tracking key={'activeTrackingButton'} tracking={activeTracking}
-                            updateTracking={updateTracking}
-                            tasks={tasks}
-                  />
-                </List>
-              </Box>
-            )}
-            {project !== null && (
-              <Project user={user}
-                       project={project} setProject={setProject}
-                       projects={projects} setProjects={setProjects}
-                       updateProjectState={updateProjectState}
-                       updateTracking={updateTracking}
-                       tasks={tasks} setTasks={setTasks}
-                       activeTracking={activeTracking} setActiveTracking={setActiveTracking} />
-            )}
-          </Box>
+        </Box>
+        <Box
+          sx={{
+            marginTop: 1,
+            marginLeft: 4,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'left',
+          }}
+        >
+          {user !== null && activeTracking !== null && (
+            <Box
+              sx={{
+                marginTop: 1,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'left',
+              }}
+            >
+              <List>
+                <Tracking key={'activeTrackingButton'} tracking={activeTracking}
+                          updateTracking={updateTracking}
+                          tasks={tasks}
+                />
+              </List>
+            </Box>
+          )}
+          {project !== null && (
+            <Project user={user}
+                     project={project} setProject={setProject}
+                     projects={projects} setProjects={setProjects}
+                     updateProjectState={updateProjectState}
+                     updateTracking={updateTracking}
+                     tasks={tasks} setTasks={setTasks}
+                     activeTracking={activeTracking} setActiveTracking={setActiveTracking} />
+          )}
         </Box>
       </Box>
-    </ThemeProvider>
+    </Box>
   );
 };

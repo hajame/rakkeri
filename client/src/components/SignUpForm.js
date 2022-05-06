@@ -17,6 +17,9 @@ import Stack from '@mui/material/Stack';
 import ListSubheader from '@mui/material/ListSubheader';
 import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
+import { AlertTitle } from '@mui/material';
+
+const requirementStyle = { paddingLeft: '2em', fontSize: 14 };
 
 function validateEmail(email) {
   // regex from w3docs.com
@@ -44,26 +47,33 @@ export const SignUpForm = () => {
 
   const [openSuccess, setOpenSuccess] = useState(false);
   const [openError, setOpenError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   function validateFields() {
     return validateEmail(email) && validatePassword(password) && validateUsername(username);
   }
 
-  const handleSignUp = async (event) => {
-    event.preventDefault();
+  const createNewUser = async () => {
     try {
-      if (!validateFields()) {
-        setOpenError(true);
-        return;
-      }
       await userService.create({ username, email, password });
       setOpenSuccess(true);
+      setUsername('');
+      setEmail('');
+      setPassword('');
     } catch (e) {
-      console.error('Error in creating new user', e);
+      setErrorMessage('Username is already taken.');
+      setOpenError(true);
     }
-    setUsername('');
-    setEmail('');
-    setPassword('');
+  };
+
+  const handleSignUp = async (event) => {
+    event.preventDefault();
+    if (!validateFields()) {
+      setErrorMessage('Some of the fields have errors. Please try again.');
+      setOpenError(true);
+      return;
+    }
+    await createNewUser();
   };
 
   return (
@@ -126,11 +136,11 @@ export const SignUpForm = () => {
             <ListSubheader>
               Requirements
             </ListSubheader>
-            <ListItem sx={{ paddingLeft: '2em' }}>
-              👤 Username length 8-64 chars
+            <ListItem sx={requirementStyle}>
+              👤 Username must be 8–64 characters long
             </ListItem>
-            <ListItem sx={{ paddingLeft: '2em' }}>
-              🔑 Password length 10-64 chars
+            <ListItem sx={requirementStyle}>
+              🔑 Password must be 10–64 characters long
             </ListItem>
           </List>
           <Button
@@ -144,21 +154,31 @@ export const SignUpForm = () => {
           <Grid container>
             <Grid item>
               <Link href='/' variant='body2'>
-                {'Already have an account? Sign In'}
+                {'Already have an account? Log In'}
               </Link>
             </Grid>
           </Grid>
         </Box>
       </Box>
       <Stack spacing={2} sx={{ width: '100%' }}>
-        <Snackbar open={openSuccess} autoHideDuration={6000} onClose={() => setOpenSuccess(false)}>
+        <Snackbar open={openSuccess}
+                  anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                  autoHideDuration={6000}
+                  onClose={() => setOpenSuccess(false)}>
           <Alert onClose={() => setOpenSuccess(false)} severity='success' sx={{ width: '100%' }}>
-            Success! Now you can Log in 🙂
+            <AlertTitle>Success!</AlertTitle>
+            Now you can <Link href='/' variant='body2'>
+            {'Log In'}
+          </Link> 🙂
           </Alert>
         </Snackbar>
-        <Snackbar open={openError} autoHideDuration={6000} onClose={() => setOpenError(false)}>
+        <Snackbar open={openError}
+                  anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                  autoHideDuration={6000}
+                  onClose={() => setOpenError(false)}>
           <Alert onClose={() => setOpenError(false)} severity='error' sx={{ width: '100%' }}>
-            Some of the fields have errors. Edit and try again.
+            <AlertTitle>Error</AlertTitle>
+            {errorMessage}
           </Alert>
         </Snackbar>
       </Stack>

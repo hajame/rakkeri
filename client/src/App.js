@@ -5,6 +5,7 @@ import { SignUpForm } from './components/SignUpForm';
 import { Home } from './components/Home';
 import Button from '@mui/material/Button';
 import { useState } from 'react';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -27,27 +28,35 @@ const App = () => {
     return window.localStorage.getItem('rakkeriAppUser');
   }
 
+  const theme = createTheme({
+    palette: {
+      mode: 'dark', // always dark mode
+    },
+  });
+
   return (
     <Router>
-      <div>
-        <Link to='/'><Button>{hasUser() ? 'Home' : 'Login'}</Button></Link>
-        {user === null ?
-          <Link to='/signup'><Button>Sign up</Button></Link>
-          : <Button onClick={() => handleLogout()}>Logout</Button>}
+      <ThemeProvider theme={theme}>
+        <div>
+          <Link to='/'><Button>{hasUser() ? 'Home' : 'Login'}</Button></Link>
+          {user === null ?
+            <Link to='/signup'><Button>Sign up</Button></Link>
+            : <Button onClick={() => handleLogout()}>Logout</Button>}
 
-      </div>
+        </div>
 
-      <Routes>
-        <Route path='/signup' element={<SignUpForm />} />
-        <Route path='/' element={
-          <Home user={user} setUser={setUser}
-                project={project} setProject={setProject}
-                projects={projects} setProjects={setProjects}
-                tasks={tasks} setTasks={setTasks}
-                activeTracking={activeTracking} setActiveTracking={setActiveTracking}
-          />
-        } />
-      </Routes>
+        <Routes>
+          <Route path='/signup' element={<SignUpForm />} />
+          <Route path='/' element={
+            <Home user={user} setUser={setUser}
+                  project={project} setProject={setProject}
+                  projects={projects} setProjects={setProjects}
+                  tasks={tasks} setTasks={setTasks}
+                  activeTracking={activeTracking} setActiveTracking={setActiveTracking}
+            />
+          } />
+        </Routes>
+      </ThemeProvider>
     </Router>
   );
 };
