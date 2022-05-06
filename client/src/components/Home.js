@@ -96,10 +96,17 @@ export const Home = ({
     await updateState();
   }, []);
 
-  const updateActiveTracking = async tracking => {
-    const updatedTracking = await trackingService.updateTracking(tracking);
+  const updateTracking = async tracking => {
+    let newTask = await taskService.findOrCreate(tracking.task.name, tasks);
+    const dto = {
+      ...tracking,
+      task: newTask,
+    };
+    const updatedTracking = await trackingService.updateTracking(dto);
     updateProjectState(updatedTracking);
-    setActiveTracking(updatedTracking);
+    if (activeTracking && updatedTracking.id === activeTracking.id) {
+      setActiveTracking(updatedTracking);
+    }
   };
 
   return (
@@ -171,7 +178,7 @@ export const Home = ({
               >
                 <List>
                   <Tracking key={'activeTrackingButton'} tracking={activeTracking}
-                            updateTracking={updateActiveTracking}
+                            updateTracking={updateTracking}
                             tasks={tasks}
                   />
                 </List>
@@ -182,6 +189,7 @@ export const Home = ({
                        project={project} setProject={setProject}
                        projects={projects} setProjects={setProjects}
                        updateProjectState={updateProjectState}
+                       updateTracking={updateTracking}
                        tasks={tasks} setTasks={setTasks}
                        activeTracking={activeTracking} setActiveTracking={setActiveTracking} />
             )}

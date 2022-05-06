@@ -47,8 +47,14 @@ const update = async (project, task, tracking) => {
   return response.data;
 };
 
+const findOrCreate = async (taskName, taskSet) => {
+  return taskSet.has(taskName) ?
+    taskSet.get(taskName)
+    : await addTask(taskName);
+};
+
 const setToken = (newToken) => {
   token = `bearer ${newToken}`;
 };
 
-export default { setToken, addTask, startTracking, update };
+export default { setToken, addTask, startTracking, update, findOrCreate };

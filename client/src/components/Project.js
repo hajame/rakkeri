@@ -13,6 +13,7 @@ const Project = ({
                    user,
                    project,
                    updateProjectState,
+                   updateTracking,
                    tasks,
                    activeTracking,
                    setActiveTracking,
@@ -24,30 +25,11 @@ const Project = ({
     setActiveTracking(null);
   };
 
-  const updateTracking = async tracking => {
-    let newTask = await findOrCreate(tracking.task.name);
-    const dto = {
-      ...tracking,
-      task: newTask,
-    };
-    const updatedTracking = await trackingService.updateTracking(dto);
-    updateProjectState(updatedTracking);
-    if (activeTracking && updatedTracking.id === activeTracking.id) {
-      setActiveTracking(updatedTracking);
-    }
-  };
-
-  const findOrCreate = async taskName => {
-    return tasks.has(taskName) ?
-      tasks.get(taskName)
-      : await taskService.addTask(taskName, project);
-  };
-
   const startTracking = async taskName => {
     if (!taskName) {
       return;
     }
-    let task = await findOrCreate(taskName);
+    let task = await taskService.findOrCreate(taskName, tasks);
     const newTracking = await trackingService.startTracking(user, project, task);
     updateProjectState(newTracking);
     setActiveTracking(newTracking);
