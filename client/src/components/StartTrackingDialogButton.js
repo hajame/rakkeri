@@ -22,8 +22,8 @@ const StartTrackingDialogButton = ({ startTracking, project, tasks }) => {
     setOpen(false);
   };
 
-  function submit(taskName) {
-    startTracking(taskName);
+  function handleStartTracking(taskName) {
+    startTracking(taskName.trim());
     closeDialog();
   }
 
@@ -49,7 +49,7 @@ const StartTrackingDialogButton = ({ startTracking, project, tasks }) => {
             }}
             onKeyPress={(e) => {
               if (e.key === 'Enter') {
-                submit(taskNameValue);
+                handleStartTracking(taskNameValue);
               }
             }}
             options={Array.from(tasks.keys())}
@@ -69,7 +69,7 @@ const StartTrackingDialogButton = ({ startTracking, project, tasks }) => {
         </DialogContent>
         <DialogActions>
           <Button onClick={closeDialog}>Cancel</Button>
-          <Button variant='contained' onClick={() => submit(taskNameValue)}>Start</Button>
+          <Button variant='contained' onClick={() => handleStartTracking(taskNameValue)}>Start</Button>
         </DialogActions>
       </Dialog>
     </Box>

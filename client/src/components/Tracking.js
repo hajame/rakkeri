@@ -35,13 +35,13 @@ const Tracking = ({ tracking, updateTracking, tasks }) => {
 
   const handleUpdateTracking = () => {
     const startDate = new Date(tracking.startTime);
-    time.setHHMM(startDate, startTimeValue);
+    time.setHHMM(startDate, startTimeValue.trim());
     let endDate = null;
     if (tracking.endTime) {
       endDate = new Date(tracking.endTime);
-      time.setHHMM(endDate, endTimeValue);
+      time.setHHMM(endDate, endTimeValue.trim());
     }
-    let newTask = { name: taskNameValue };
+    let newTask = { name: taskNameValue.trim() };
     const newTracking = {
       ...tracking,
       task: newTask,
@@ -132,7 +132,7 @@ const Tracking = ({ tracking, updateTracking, tasks }) => {
                 }}
                 onKeyPress={(e) => {
                   if (e.key === 'Enter') {
-                    alert('enter');
+                    handleUpdateTracking();
                   }
                 }}
                 options={Array.from(tasks.keys())}
