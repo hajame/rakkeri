@@ -25,16 +25,4 @@ public class TrackingService {
     public Tracking findOne(Long id) {
         return trackingRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
-
-    public Tracking update(Tracking tracking) {
-        return trackingRepository.save(tracking);
-    }
-
-    public Tracking getTracking(String authorizationToken, Long projectId, Long taskId, Long trackingId) {
-        return null;
-    }
-
-    public boolean exists(Long id) {
-        return trackingRepository.findById(id).isPresent();
-    }
 }

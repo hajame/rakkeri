@@ -1,11 +1,9 @@
 package rakkeri.rakkeri_server.endpoint;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 import rakkeri.rakkeri_server.DTO.TrackingDTO;
 import rakkeri.rakkeri_server.entity.Person;
 import rakkeri.rakkeri_server.entity.Project;
@@ -43,13 +41,8 @@ public class Trackings {
     }
 
     private TrackingDTO saveNewTracking(TrackingDTO trackingDTO, Person person) {
-        boolean isProjectOwner = person.getProjects().stream()
-                .anyMatch(project -> trackingDTO.getProject().getId().equals(project.getId()));
-        if (!isProjectOwner) {
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Unauthorized user");
-        }
+        Project project = personService.getProject(person, trackingDTO.getProject().getId());
         Task task = taskService.getTask(trackingDTO.getTask().getId());
-        Project project = projectService.findOne(trackingDTO.getProject().getId());
         Tracking tracking = new Tracking(person, project, task, trackingDTO.getStartTime(), trackingDTO.getEndTime());
         project.getTasks().add(task);
         projectService.update(project);
@@ -58,15 +51,19 @@ public class Trackings {
     }
 
     private TrackingDTO updateExistingTracking(TrackingDTO trackingDTO, Person person) {
+        Project project = personService.getProject(person, trackingDTO.getProject().getId());
         Tracking tracking = trackingService.findOne(trackingDTO.getId());
-        boolean isProjectOwner = person.getProjects().stream()
-                .anyMatch(project -> tracking.getProject().getId().equals(project.getId()));
-        if (!isProjectOwner) {
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Unauthorized user");
-        }
-        // TODO: setPerson, setTask, setProject
+        Task task = taskService.getTask(trackingDTO.getTask().getId());
+
+        // TODO: setPerson
+        tracking.setProject(project);
+        tracking.setTask(task);
         tracking.setStartTime(trackingDTO.getStartTime());
         tracking.setEndTime(trackingDTO.getEndTime());
+
+        project.getTasks().add(task);
+        projectService.update(project);
+        
         Tracking savedTracking = trackingService.save(tracking);
         return TrackingDTO.toDTO(savedTracking);
     }

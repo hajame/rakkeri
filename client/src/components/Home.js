@@ -171,7 +171,9 @@ export const Home = ({
               >
                 <List>
                   <Tracking key={'activeTrackingButton'} tracking={activeTracking}
-                            updateTracking={updateActiveTracking} />
+                            updateTracking={updateActiveTracking}
+                            tasks={tasks}
+                  />
                 </List>
               </Box>
             )}

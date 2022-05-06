@@ -11,16 +11,19 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItem from '@mui/material/ListItem';
 import time from '../services/time';
+import Autocomplete from '@mui/material/Autocomplete';
 
-const Tracking = ({ tracking, updateTracking }) => {
+const Tracking = ({ tracking, updateTracking, tasks }) => {
 
   const [editDialogOpen, setEditDialogOpen] = useState(false);
   const [startTimeValue, setStartTimeValue] = useState('');
   const [endTimeValue, setEndTimeValue] = useState('');
+  const [taskNameValue, setTaskNameValue] = useState('');
 
   const openDialog = () => {
     setStartTimeValue(time.getHHMM(tracking.startTime));
     setEndTimeValue(time.getHHMM(tracking.endTime));
+    setTaskNameValue(tracking.task.name);
     setEditDialogOpen(true);
   };
 
@@ -38,8 +41,10 @@ const Tracking = ({ tracking, updateTracking }) => {
       endDate = new Date(tracking.endTime);
       time.setHHMM(endDate, endTimeValue);
     }
+    let newTask = { name: taskNameValue };
     const newTracking = {
       ...tracking,
+      task: newTask,
       startTime: startDate.toISOString(),
       endTime: endDate ? endDate.toISOString() : null,
     };
@@ -116,6 +121,32 @@ const Tracking = ({ tracking, updateTracking }) => {
                 label='End Time'
                 type='text'
                 variant='outlined'
+              />
+              <Autocomplete
+                id='task_text'
+                fullWidth
+                freeSolo
+                value={taskNameValue}
+                onInputChange={(event, newInputValue) => {
+                  setTaskNameValue(newInputValue);
+                }}
+                onKeyPress={(e) => {
+                  if (e.key === 'Enter') {
+                    alert('enter');
+                  }
+                }}
+                options={Array.from(tasks.keys())}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label='What are you doing?'
+                    margin='dense'
+                    InputProps={{
+                      ...params.InputProps,
+                      type: 'text',
+                    }}
+                  />
+                )}
               />
             </DialogContent>
             <DialogActions>

@@ -25,20 +25,29 @@ const Project = ({
   };
 
   const updateTracking = async tracking => {
-    const updatedTracking = await trackingService.updateTracking(tracking);
+    let newTask = await findOrCreate(tracking.task.name);
+    const dto = {
+      ...tracking,
+      task: newTask,
+    };
+    const updatedTracking = await trackingService.updateTracking(dto);
     updateProjectState(updatedTracking);
-    if (updatedTracking.id === activeTracking.id) {
+    if (activeTracking && updatedTracking.id === activeTracking.id) {
       setActiveTracking(updatedTracking);
     }
+  };
+
+  const findOrCreate = async taskName => {
+    return tasks.has(taskName) ?
+      tasks.get(taskName)
+      : await taskService.addTask(taskName, project);
   };
 
   const startTracking = async taskName => {
     if (!taskName) {
       return;
     }
-    let task = tasks.has(taskName) ?
-      tasks.get(taskName)
-      : await taskService.addTask(taskName, project);
+    let task = await findOrCreate(taskName);
     const newTracking = await trackingService.startTracking(user, project, task);
     updateProjectState(newTracking);
     setActiveTracking(newTracking);
@@ -66,7 +75,9 @@ const Project = ({
         <ReportDialogButton project={project} type={'helsinki'} />
       </Box>
       <TrackingList trackingsByDate={trackingService.getTrackingsByDate(project.trackings)}
-                    updateTracking={updateTracking} />
+                    updateTracking={updateTracking}
+                    tasks={tasks}
+      />
     </Box>
   );
 };

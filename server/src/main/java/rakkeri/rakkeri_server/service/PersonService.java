@@ -80,4 +80,10 @@ public class PersonService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED));
     }
 
+    public Project getProject(Person person, Long projectId) {
+        return person.getProjects().stream()
+                .filter(p -> projectId.equals(p.getId()))
+                .findFirst()
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Unauthorized user"));
+    }
 }
