@@ -1,6 +1,12 @@
 import './App.css';
 
-import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+  useNavigate,
+} from 'react-router-dom';
 import { SignUpForm } from './components/SignUpForm';
 import { Home } from './components/Home';
 import Button from '@mui/material/Button';
@@ -38,16 +44,16 @@ const App = () => {
     <Router>
       <ThemeProvider theme={theme}>
         <div>
-          <Link to='/'><Button>{hasUser() ? 'Home' : 'Login'}</Button></Link>
+          <Link to='/rakkeri'><Button>{hasUser() ? 'Home' : 'Login'}</Button></Link>
           {user === null ?
-            <Link to='/signup'><Button>Sign up</Button></Link>
+            <Link to='/rakkeri/signup'><Button>Sign up</Button></Link>
             : <Button onClick={() => handleLogout()}>Logout</Button>}
 
         </div>
 
         <Routes>
-          <Route path='/signup' element={<SignUpForm />} />
-          <Route path='/' element={
+          <Route path='/rakkeri/signup' element={<SignUpForm />} />
+          <Route path='/rakkeri' element={
             <Home user={user} setUser={setUser}
                   project={project} setProject={setProject}
                   projects={projects} setProjects={setProjects}

@@ -148,7 +148,7 @@ export const SignUpForm = () => {
           </Button>
           <Grid container>
             <Grid item>
-              <Link href='/' variant='body2'>
+              <Link href='/rakkeri' variant='body2'>
                 {'Already have an account? Log In'}
               </Link>
             </Grid>
@@ -161,7 +161,7 @@ export const SignUpForm = () => {
                 onClose={() => setOpenSuccess(false)}>
         <Alert onClose={() => setOpenSuccess(false)} severity='success' sx={{ width: '100%' }}>
           <AlertTitle>Success!</AlertTitle>
-          Now you can <Link href='/'>{'Log In'}</Link> 🙂
+          Now you can <Link href='/rakkeri'>{'Log In'}</Link> 🙂
         </Alert>
       </Snackbar>
       <Snackbar open={openError}

@@ -2,16 +2,16 @@ version: "3.8"
 services:
   db:
     image: postgres:14.2-alpine3.15
+    container_name: rakkeri_db
     restart: always
     environment:
       - POSTGRES_PASSWORD=test
-    ports:
-      - 5432:5432
     volumes:
       - ~/psql/rakkeri/data:/var/lib/postgresql/data
   
   server:
     build: ./server
+    container_name: rakkeri_server
     environment:
       - spring_profiles_active=production
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/postgres
@@ -28,5 +28,6 @@ services:
       context: ./client
       args:
         - backendurl=http://localhost:8080
+    container_name: rakkeri_client
     ports:
       - 3000:3000
