@@ -99,4 +99,8 @@
 |            |  01:37:48 | Story: Register form validations                                           |
 |            |  00:58:37 | Fix report order                                                           |
 |            |  01:21:32 | Story: Edit tracking task                                                  |
-|   TOTAL    | 119:58:11 |                                                                            |
+| 2022-05-09 |  01:26:20 | Planning requirements                                                      |
+|            |  02:38:30 | Installing Räkkeri to University of Helsinki server                        |
+|            |  00:45:13 | Making a demo for University of Helsinki                                   |
+| 2022-05-10 |  05:47:20 | Installing Räkkeri to University of Helsinki server                        |
+|   TOTAL    | 130:35:34 |                                                                            |
