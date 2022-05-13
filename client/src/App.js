@@ -8,6 +8,7 @@ import {
   useNavigate,
 } from 'react-router-dom';
 import { SignUpForm } from './components/SignUpForm';
+import { ForgotPasswordForm } from './components/ForgotPasswordForm';
 import { Home } from './components/Home';
 import Button from '@mui/material/Button';
 import { useState } from 'react';
@@ -61,6 +62,7 @@ const App = () => {
                   activeTracking={activeTracking} setActiveTracking={setActiveTracking}
             />
           } />
+          <Route path='/rakkeri/forgot-password' element={<ForgotPasswordForm />} />
         </Routes>
       </ThemeProvider>
     </Router>

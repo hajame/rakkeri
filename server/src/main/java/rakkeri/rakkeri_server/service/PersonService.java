@@ -36,6 +36,11 @@ public class PersonService {
         return personRepository.findByUsername(person.getUsername());
     }
 
+    public List<Person> findByEmail(String email) {
+        return personRepository.findByEmail(email);
+    }
+
+
     public boolean isValidPassword(Person person, Person foundPerson) {
         return new BCryptPasswordEncoder().matches(person.getPassword(), foundPerson.getPassword());
     }

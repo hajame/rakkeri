@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
+import rakkeri.rakkeri_server.DTO.EmailDTO;
 import rakkeri.rakkeri_server.DTO.UserDTO;
 import rakkeri.rakkeri_server.entity.Person;
 import rakkeri.rakkeri_server.service.JwtService;
@@ -49,6 +50,15 @@ public class Users {
             );
         }
         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User not found");
+    }
+
+    @PostMapping("/api/reset-password")
+    public HttpStatus reset(@RequestBody EmailDTO emailDTO) {
+        List<Person> people = personService.findByEmail(emailDTO.getEmail());
+        Person unique = getUnique(people);
+        System.out.println(unique + " Was found");
+        // TODO: send email for pass resetting
+        return HttpStatus.OK;
     }
 
     private Person getUnique(List<Person> people) {

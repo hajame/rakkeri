@@ -9,6 +9,7 @@ import Typography from '@mui/material/Typography';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
+import CssBaseline from '@mui/material/CssBaseline';
 
 const LoginForm = ({ setUser, updateState }) => {
   const [username, setUsername] = useState('');
@@ -65,17 +66,20 @@ const LoginForm = ({ setUser, updateState }) => {
         Sign in
       </Button>
       <Grid container>
-        <Grid item>
+        <Grid item
+              sx={{ marginTop: 1 }}
+        >
           <Link href='/rakkeri/signup' variant='body2'>
             {'Don\'t have an account? Sign Up'}
           </Link>
         </Grid>
-        {/* Todo: */}
-        {/* <Grid item xs>
-          <Link href="" variant="body2">
+        <Grid item
+              sx={{ marginTop: 1, marginLeft: 3 }}
+        >
+          <Link href='/rakkeri/forgot-password' variant='body2'>
             Forgot password?
           </Link>
-        </Grid> */}
+        </Grid>
       </Grid>
       <Snackbar open={openError}
                 anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
