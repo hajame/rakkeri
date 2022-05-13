@@ -54,7 +54,7 @@ const App = () => {
         <Routes>
           <Route path='/rakkeri/signup' element={<SignUpForm />} />
           <Route path='/rakkeri' element={
-            <Home user={user} setUser={setUser}
+            <Home user={user} setUser={setUser} handleLogout={handleLogout}
                   project={project} setProject={setProject}
                   projects={projects} setProjects={setProjects}
                   tasks={tasks} setTasks={setTasks}

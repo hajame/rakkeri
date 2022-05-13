@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import userService from '../services/users';
 import projectService from '../services/projects';
 import taskService from '../services/tasks';
@@ -12,14 +12,13 @@ import Project from './Project';
 
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import ListItemButton from '@mui/material/ListItemButton';
 import List from '@mui/material/List';
 import Tracking from './Tracking';
 
 export const Home = ({
                        user,
                        setUser,
+                       handleLogout,
                        project,
                        setProject,
                        tasks,
@@ -39,19 +38,24 @@ export const Home = ({
 
   const updateState = async () => {
     const userJSON = window.localStorage.getItem('rakkeriAppUser');
-    if (userJSON) {
-      const user = JSON.parse(userJSON);
-      setUser(user);
-      setToken(user);
-      let fetchedProjects = await controller.fetchProjects(user);
-      setProjects(fetchedProjects);
-      setTasks(controller.getTaskMap(fetchedProjects));
-      const activeProject = controller.getActiveProject(fetchedProjects);
-      if (activeProject) {
-        setProject(activeProject);
-        const tracking = controller.getActiveTracking(activeProject);
-        setActiveTracking(tracking);
-      }
+    if (!userJSON) {
+      return;
+    }
+    const user = JSON.parse(userJSON);
+    if (userService.hasTokenExpired(user)) {
+      handleLogout();
+      return;
+    }
+    setUser(user);
+    setToken(user);
+    let fetchedProjects = await controller.fetchProjects(user);
+    setProjects(fetchedProjects);
+    setTasks(controller.getTaskMap(fetchedProjects));
+    const activeProject = controller.getActiveProject(fetchedProjects);
+    if (activeProject) {
+      setProject(activeProject);
+      const tracking = controller.getActiveTracking(activeProject);
+      setActiveTracking(tracking);
     }
   };
 

@@ -9,8 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import rakkeri.rakkeri_server.entity.Person;
 
-import java.time.Duration;
-import java.time.Instant;
 import java.util.Date;
 
 @Service
@@ -19,14 +17,14 @@ public class JwtService {
     @Value("${jwt.secret}")
     private String secret;
 
-    public String createToken(Person person) {
+    public String createToken(Person person, Date expirationDate) {
         Date issuedDate = new Date();
 
         String token = Jwts.builder()
                 .setSubject(person.getId().toString())
                 .claim("username", person.getUsername())
                 .setIssuedAt(issuedDate)
-                .setExpiration(Date.from(Instant.now().plus(Duration.ofDays(14))))
+                .setExpiration(expirationDate)
                 .signWith(Keys.hmacShaKeyFor(secret.getBytes()))
                 .compact();
         return token;

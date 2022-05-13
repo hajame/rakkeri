@@ -2,11 +2,14 @@ package rakkeri.rakkeri_server.DTO;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.sql.Timestamp;
+
 public class UserDTO {
     @JsonProperty("id")
     private Long id;
     private String username;
     private String token;
+    private Timestamp tokenExpirationDate;
 
     public UserDTO() {
     }
@@ -16,9 +19,10 @@ public class UserDTO {
         this.username = username;
     }
 
-    public UserDTO(Long id, String username, String token) {
+    public UserDTO(Long id, String username, String token, Timestamp tokenExpirationDate) {
         this(id, username);
         this.token = token;
+        this.tokenExpirationDate = tokenExpirationDate;
     }
 
     public Long getId() {
@@ -41,12 +45,21 @@ public class UserDTO {
         this.token = token;
     }
 
+    public Timestamp getTokenExpirationDate() {
+        return tokenExpirationDate;
+    }
+
+    public void setTokenExpirationDate(Timestamp tokenExpirationDate) {
+        this.tokenExpirationDate = tokenExpirationDate;
+    }
+
     @Override
     public String toString() {
         return "UserDTO{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", token='" + token + '\'' +
+                ", tokenExpirationDate=" + tokenExpirationDate +
                 '}';
     }
 }

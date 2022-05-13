@@ -19,4 +19,9 @@ const setToken = (newToken) => {
   token = `bearer ${newToken}`;
 };
 
-export default { create, login, setToken, token };
+const hasTokenExpired = user => {
+  return !user.tokenExpirationDate || new Date(user.tokenExpirationDate) < new Date();
+};
+
+export default { create, login, setToken, token, hasTokenExpired };
+

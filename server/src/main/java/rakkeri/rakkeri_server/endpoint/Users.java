@@ -10,6 +10,10 @@ import rakkeri.rakkeri_server.entity.Person;
 import rakkeri.rakkeri_server.service.JwtService;
 import rakkeri.rakkeri_server.service.PersonService;
 
+import java.sql.Timestamp;
+import java.time.Duration;
+import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -35,8 +39,14 @@ public class Users {
         List<Person> people = personService.findByUsername(person);
         Person foundPerson = getUnique(people);
         if (personService.isValidPassword(person, foundPerson)) {
-            String token = jwtService.createToken(foundPerson);
-            return new UserDTO(foundPerson.getId(), foundPerson.getUsername(), token);
+            Instant expirationInstant = Instant.now().plus(Duration.ofDays(14));
+            String token = jwtService.createToken(foundPerson, Date.from(expirationInstant));
+            return new UserDTO(
+                    foundPerson.getId(),
+                    foundPerson.getUsername(),
+                    token,
+                    Timestamp.from(expirationInstant)
+            );
         }
         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User not found");
     }
