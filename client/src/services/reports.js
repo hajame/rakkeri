@@ -73,7 +73,7 @@ const getTimesByTaskReport = (project) => {
 
 
 const getSortedDates = trackingsByDate => {
-  return Object.keys(trackingsByDate).sort((a, b) => a.localeCompare(b));
+  return Object.keys(trackingsByDate).sort((a, b) => new Date(a) - new Date(b));
 };
 
 const getHelsinkiReport = (project) => {
