@@ -65,7 +65,9 @@ const getTimesByTaskReport = (project) => {
   println('|  hh:mm:ss | Task   |');
   println('| --------: | :----- |');
   const finishedTrackings = getFinishedTrackings(project.trackings);
-  let totalSeconds = printTaskTotalsAndGetTotalSeconds(project.tasks, finishedTrackings);
+  let sortedTasks = project.tasks;
+  sortedTasks.sort((a, b) => a.name.localeCompare(b.name));
+  let totalSeconds = printTaskTotalsAndGetTotalSeconds(sortedTasks, finishedTrackings);
   const totalHHMMSS = time.HHMMSSFromSeconds(totalSeconds);
   println('| ' + getLeftPadding(totalHHMMSS) + totalHHMMSS + ' | TOTAL  |');
   return output;
