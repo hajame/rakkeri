@@ -55,8 +55,15 @@ public class Users {
     @PostMapping("/api/reset-password")
     public HttpStatus reset(@RequestBody EmailDTO emailDTO) {
         List<Person> people = personService.findByEmail(emailDTO.getEmail());
-        Person unique = getUnique(people);
-        System.out.println(unique + " Was found");
+        Person unique;
+        try {
+            unique = getUnique(people);
+        } catch (Exception e) {
+            System.err.println("Password reset attempt for email [" + emailDTO.getEmail() + "] failed.");
+            // Return success message anyway to protect from user enumeration attacks.
+            return HttpStatus.OK;
+        }
+        System.out.println("Resetting password for [" + unique.getEmail() + "]");
         // TODO: send email for pass resetting
         return HttpStatus.OK;
     }
