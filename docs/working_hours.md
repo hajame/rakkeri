@@ -103,4 +103,11 @@
 |            |  02:38:30 | Installing Räkkeri to University of Helsinki server                        |
 |            |  00:45:13 | Making a demo for University of Helsinki                                   |
 | 2022-05-10 |  05:47:20 | Installing Räkkeri to University of Helsinki server                        |
-|   TOTAL    | 130:35:34 |                                                                            |
+| 2022-05-13 |  01:54:15 | Story: Reset password                                                      |
+|            |  00:14:18 | Fix report order                                                           |
+|            |  01:16:17 | Story: User is logged out after token expires                              |
+| 2022-05-15 |  00:52:22 | Story: Reset password                                                      |
+| 2022-05-18 |  02:41:56 | Story: Reset password                                                      |
+|            |  01:02:44 | Planning requirements                                                      |
+|            |  01:31:44 | Migrate from Heroku to University server                                   |
+|   TOTAL    | 140:09:10 |                                                                            |
