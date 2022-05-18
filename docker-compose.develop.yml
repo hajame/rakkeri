@@ -2,6 +2,7 @@ version: "3.8"
 services:
   db:
     image: postgres:14.2-alpine3.15
+    container_name: rakkeri_db
     restart: always
     environment:
       - POSTGRES_PASSWORD=test
@@ -12,6 +13,8 @@ services:
   
   server:
     build: ./server
+    container_name: rakkeri_server
+    restart: always
     environment:
       - spring_profiles_active=develop
     ports:
@@ -22,5 +25,7 @@ services:
   client:
     build: 
       context: ./client
+    container_name: rakkeri_client
+    restart: always
     ports:
       - 3000:3000

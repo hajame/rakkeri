@@ -12,6 +12,7 @@ services:
   server:
     build: ./server
     container_name: rakkeri_server
+    restart: always
     environment:
       - spring_profiles_active=production
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/postgres
@@ -29,5 +30,6 @@ services:
       args:
         - backendurl=http://localhost:8080
     container_name: rakkeri_client
+    restart: always
     ports:
       - 3000:3000
