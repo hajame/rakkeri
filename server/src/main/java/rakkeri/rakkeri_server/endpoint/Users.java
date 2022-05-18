@@ -8,6 +8,7 @@ import org.springframework.web.server.ResponseStatusException;
 import rakkeri.rakkeri_server.DTO.EmailDTO;
 import rakkeri.rakkeri_server.DTO.UserDTO;
 import rakkeri.rakkeri_server.entity.Person;
+import rakkeri.rakkeri_server.service.EmailService;
 import rakkeri.rakkeri_server.service.JwtService;
 import rakkeri.rakkeri_server.service.PersonService;
 
@@ -22,10 +23,12 @@ public class Users {
 
     private final PersonService personService;
     private final JwtService jwtService;
+    private final EmailService emailService;
 
-    public Users(PersonService personService, JwtService jwtService) {
+    public Users(PersonService personService, JwtService jwtService, EmailService emailService) {
         this.personService = personService;
         this.jwtService = jwtService;
+        this.emailService = emailService;
     }
 
     @PostMapping("/api/users")
@@ -64,7 +67,7 @@ public class Users {
             return HttpStatus.OK;
         }
         System.out.println("Resetting password for [" + unique.getEmail() + "]");
-        // TODO: send email for pass resetting
+        emailService.sendSimpleMessage();
         return HttpStatus.OK;
     }
 

@@ -1,4 +1,4 @@
-package rakkeri.rakkeri_server.security;
+package rakkeri.rakkeri_server.configuration;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
