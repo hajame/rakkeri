@@ -24,7 +24,7 @@ public class PersonService {
     }
 
     public Person saveNew(Person person) {
-        person.setPassword(new BCryptPasswordEncoder().encode(person.getPassword()));
+        person.setPassword(Cryptography.encrypt(person.getPassword()));
         return personRepository.save(person);
     }
 
@@ -90,5 +90,10 @@ public class PersonService {
                 .filter(p -> projectId.equals(p.getId()))
                 .findFirst()
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Unauthorized user"));
+    }
+
+    public void updatePassword(Person person, String password) {
+        person.setPassword(Cryptography.encrypt(password));
+        update(person);
     }
 }

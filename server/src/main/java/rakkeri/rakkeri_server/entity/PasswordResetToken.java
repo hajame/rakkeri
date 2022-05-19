@@ -11,7 +11,7 @@ public class PasswordResetToken {
     @Column(name = "person_id")
     private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.DETACH})
     @MapsId
     @JoinColumn(name = "person_id", referencedColumnName = "id")
     private Person person;

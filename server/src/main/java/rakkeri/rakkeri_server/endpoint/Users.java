@@ -99,8 +99,9 @@ public class Users {
 
     @PostMapping("/api/users/reset-password")
     public void resetPassword(@RequestBody ResetPasswordDTO resetPasswordDTO) {
-        // Todo
-        System.out.println(resetPasswordDTO.toString());
+        PasswordResetToken passwordResetToken = passwordResetTokenService.findByToken(resetPasswordDTO.getToken());
+        personService.updatePassword(passwordResetToken.getPerson(), resetPasswordDTO.getPassword());
+        passwordResetTokenService.delete(passwordResetToken);
     }
 
     private Person getUnique(List<Person> people) {
