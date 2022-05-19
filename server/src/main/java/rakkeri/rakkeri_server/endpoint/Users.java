@@ -10,12 +10,8 @@ import rakkeri.rakkeri_server.DTO.ResetPasswordDTO;
 import rakkeri.rakkeri_server.DTO.UserDTO;
 import rakkeri.rakkeri_server.entity.PasswordResetToken;
 import rakkeri.rakkeri_server.entity.Person;
-import rakkeri.rakkeri_server.service.EmailService;
-import rakkeri.rakkeri_server.service.JwtService;
-import rakkeri.rakkeri_server.service.PasswordResetTokenService;
-import rakkeri.rakkeri_server.service.PersonService;
+import rakkeri.rakkeri_server.service.*;
 
-import java.security.SecureRandom;
 import java.sql.Timestamp;
 import java.time.Clock;
 import java.time.Duration;
@@ -76,11 +72,10 @@ public class Users {
             return HttpStatus.OK;
         }
         System.out.println("Sending reset password email for [" + unique.getEmail() + "]");
-
         Timestamp expirationDate = Timestamp.from(Instant.now(Clock.systemUTC()).plus(10, ChronoUnit.MINUTES));
-        String token = "" + new SecureRandom().nextLong();
-        PasswordResetToken passwordResetToken;
+        String token = Cryptography.generateToken();
 
+        PasswordResetToken passwordResetToken;
         if (unique.getPasswordResetToken() == null) {
             passwordResetToken = new PasswordResetToken(unique, token, expirationDate);
             passwordResetTokenService.save(passwordResetToken);
@@ -90,7 +85,6 @@ public class Users {
             passwordResetToken.setExpirationDate(expirationDate);
             passwordResetTokenService.update(passwordResetToken);
         }
-
         unique.setPasswordResetToken(passwordResetToken);
         personService.update(unique);
         emailService.sendSimpleMessage(token);
@@ -102,6 +96,7 @@ public class Users {
         PasswordResetToken passwordResetToken = passwordResetTokenService.findByToken(resetPasswordDTO.getToken());
         personService.updatePassword(passwordResetToken.getPerson(), resetPasswordDTO.getPassword());
         passwordResetTokenService.delete(passwordResetToken);
+        System.out.println("Password for username [" + passwordResetToken.getPerson().getUsername() + "] was reset.");
     }
 
     private Person getUnique(List<Person> people) {
