@@ -35,12 +35,12 @@ public class EmailService {
         return mailSender;
     }
 
-    public void sendSimpleMessage() {
+    public void sendSimpleMessage(String token) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("server@example.com");
         message.setTo("user@example.com");
         message.setSubject("Räkkeri password reset link");
-        message.setText("Reset link: https://ohtup-staging.cs.helsinki.fi/rakkeri/reset-password?token=123abc");
+        message.setText("Reset link: https://ohtup-staging.cs.helsinki.fi/rakkeri/reset-password?token=" + token);
         getMailSender().send(message);
     }
 

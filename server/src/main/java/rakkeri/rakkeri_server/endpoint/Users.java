@@ -8,14 +8,19 @@ import org.springframework.web.server.ResponseStatusException;
 import rakkeri.rakkeri_server.DTO.EmailDTO;
 import rakkeri.rakkeri_server.DTO.ResetPasswordDTO;
 import rakkeri.rakkeri_server.DTO.UserDTO;
+import rakkeri.rakkeri_server.entity.PasswordResetToken;
 import rakkeri.rakkeri_server.entity.Person;
 import rakkeri.rakkeri_server.service.EmailService;
 import rakkeri.rakkeri_server.service.JwtService;
+import rakkeri.rakkeri_server.service.PasswordResetTokenService;
 import rakkeri.rakkeri_server.service.PersonService;
 
+import java.security.SecureRandom;
 import java.sql.Timestamp;
+import java.time.Clock;
 import java.time.Duration;
 import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.List;
 
@@ -25,11 +30,14 @@ public class Users {
     private final PersonService personService;
     private final JwtService jwtService;
     private final EmailService emailService;
+    private final PasswordResetTokenService passwordResetTokenService;
 
-    public Users(PersonService personService, JwtService jwtService, EmailService emailService) {
+    public Users(PersonService personService, JwtService jwtService, EmailService emailService,
+                 PasswordResetTokenService passwordResetTokenService) {
         this.personService = personService;
         this.jwtService = jwtService;
         this.emailService = emailService;
+        this.passwordResetTokenService = passwordResetTokenService;
     }
 
     @PostMapping("/api/users")
@@ -68,7 +76,24 @@ public class Users {
             return HttpStatus.OK;
         }
         System.out.println("Sending reset password email for [" + unique.getEmail() + "]");
-        emailService.sendSimpleMessage();
+
+        Timestamp expirationDate = Timestamp.from(Instant.now(Clock.systemUTC()).plus(10, ChronoUnit.MINUTES));
+        String token = "" + new SecureRandom().nextLong();
+        PasswordResetToken passwordResetToken;
+
+        if (unique.getPasswordResetToken() == null) {
+            passwordResetToken = new PasswordResetToken(unique, token, expirationDate);
+            passwordResetTokenService.save(passwordResetToken);
+        } else {
+            passwordResetToken = unique.getPasswordResetToken();
+            passwordResetToken.setToken(token);
+            passwordResetToken.setExpirationDate(expirationDate);
+            passwordResetTokenService.update(passwordResetToken);
+        }
+
+        unique.setPasswordResetToken(passwordResetToken);
+        personService.update(unique);
+        emailService.sendSimpleMessage(token);
         return HttpStatus.OK;
     }
 
