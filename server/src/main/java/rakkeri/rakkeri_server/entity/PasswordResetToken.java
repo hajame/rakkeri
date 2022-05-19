@@ -8,7 +8,7 @@ import java.sql.Timestamp;
 public class PasswordResetToken {
 
     @Id
-    @Column(name = "user_id")
+    @Column(name = "person_id")
     private Long id;
 
     @OneToOne(cascade = CascadeType.ALL)
