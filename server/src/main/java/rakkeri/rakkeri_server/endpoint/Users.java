@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import rakkeri.rakkeri_server.DTO.EmailDTO;
+import rakkeri.rakkeri_server.DTO.ResetPasswordDTO;
 import rakkeri.rakkeri_server.DTO.UserDTO;
 import rakkeri.rakkeri_server.entity.Person;
 import rakkeri.rakkeri_server.service.EmailService;
@@ -55,20 +56,26 @@ public class Users {
         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User not found");
     }
 
-    @PostMapping("/api/reset-password")
-    public HttpStatus reset(@RequestBody EmailDTO emailDTO) {
+    @PostMapping("/api/users/reset-password-email")
+    public HttpStatus sendResetEmail(@RequestBody EmailDTO emailDTO) {
         List<Person> people = personService.findByEmail(emailDTO.getEmail());
         Person unique;
         try {
             unique = getUnique(people);
         } catch (Exception e) {
-            System.err.println("Password reset attempt for email [" + emailDTO.getEmail() + "] failed.");
+            System.err.println("Sending reset password mail for email [" + emailDTO.getEmail() + "] failed.");
             // Return success message anyway to protect from user enumeration attacks.
             return HttpStatus.OK;
         }
-        System.out.println("Resetting password for [" + unique.getEmail() + "]");
+        System.out.println("Sending reset password email for [" + unique.getEmail() + "]");
         emailService.sendSimpleMessage();
         return HttpStatus.OK;
+    }
+
+    @PostMapping("/api/users/reset-password")
+    public void resetPassword(@RequestBody ResetPasswordDTO resetPasswordDTO) {
+        // Todo
+        System.out.println(resetPasswordDTO.toString());
     }
 
     private Person getUnique(List<Person> people) {

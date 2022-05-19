@@ -5,10 +5,10 @@ import {
   Routes,
   Route,
   Link,
-  useNavigate,
 } from 'react-router-dom';
 import { SignUpForm } from './components/SignUpForm';
 import { ForgotPasswordForm } from './components/ForgotPasswordForm';
+import { ResetPasswordForm } from './components/ResetPasswordForm';
 import { Home } from './components/Home';
 import Button from '@mui/material/Button';
 import { useState } from 'react';
@@ -63,6 +63,7 @@ const App = () => {
             />
           } />
           <Route path='/rakkeri/forgot-password' element={<ForgotPasswordForm />} />
+          <Route path='/rakkeri/reset-password' element={<ResetPasswordForm />} />
         </Routes>
       </ThemeProvider>
     </Router>

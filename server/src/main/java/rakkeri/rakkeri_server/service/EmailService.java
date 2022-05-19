@@ -20,9 +20,6 @@ public class EmailService {
     @Value("${spring.mail.password}")
     private String password;
 
-    public EmailService() {
-    }
-
     public JavaMailSender getMailSender() {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
         mailSender.setHost(host);
@@ -42,8 +39,8 @@ public class EmailService {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("server@example.com");
         message.setTo("user@example.com");
-        message.setSubject("hello from Spring Boot!");
-        message.setText("testing sending, hello 123!@#$%^ :)");
+        message.setSubject("Räkkeri password reset link");
+        message.setText("Reset link: https://ohtup-staging.cs.helsinki.fi/rakkeri/reset-password?token=123abc");
         getMailSender().send(message);
     }
 

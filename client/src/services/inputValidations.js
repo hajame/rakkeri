@@ -4,6 +4,18 @@ function validateEmail(email) {
   return res.test(String(email).toLowerCase());
 }
 
+const validateField = (fieldText, min, max) => {
+  return fieldText.length >= min && fieldText.length <= max;
+};
+
+const validatePassword = (password) => {
+  return validateField(password, 10, 64);
+};
+
+const validateUsername = (username) => {
+  return validateField(username, 8, 64);
+};
+
 export default {
-  validateEmail,
+  validateEmail, validatePassword, validateUsername,
 };

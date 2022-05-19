@@ -1,5 +1,7 @@
-import { useState } from 'react';
 import userService from '../services/users';
+import validations from '../services/inputValidations';
+
+import { useState } from 'react';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -17,25 +19,6 @@ import AlertTitle from '@mui/material/AlertTitle';
 
 const requirementStyle = { paddingLeft: '2em', fontSize: 14 };
 
-function validateEmail(email) {
-  // regex from w3docs.com
-  const res = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  return res.test(String(email).toLowerCase());
-}
-
-const validateField = (fieldText, min, max) => {
-  return fieldText.length >= min && fieldText.length <= max;
-};
-
-const validatePassword = (password) => {
-  return validateField(password, 10, 64);
-};
-
-const validateUsername = (username) => {
-  return validateField(username, 8, 64);
-};
-
-
 export const SignUpForm = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -46,7 +29,9 @@ export const SignUpForm = () => {
   const [errorMessage, setErrorMessage] = useState('');
 
   function validateFields() {
-    return validateEmail(email) && validatePassword(password) && validateUsername(username);
+    return validations.validateEmail(email)
+      && validations.validatePassword(password)
+      && validations.validateUsername(username);
   }
 
   const createNewUser = async () => {
@@ -94,7 +79,7 @@ export const SignUpForm = () => {
             fullWidth
             id='username'
             value={username}
-            error={username === '' ? false : !validateUsername(username)}
+            error={username === '' ? false : !validations.validateUsername(username)}
             label='Username'
             name='username'
             autoComplete='username'
@@ -107,7 +92,7 @@ export const SignUpForm = () => {
             fullWidth
             id='email'
             value={email}
-            error={email === '' ? false : !validateEmail(email)}
+            error={email === '' ? false : !validations.validateEmail(email)}
             label='Email Address'
             name='email'
             autoComplete='email'
@@ -119,7 +104,7 @@ export const SignUpForm = () => {
             fullWidth
             id='password'
             value={password}
-            error={password === '' ? false : !validatePassword(password)}
+            error={password === '' ? false : !validations.validatePassword(password)}
             label='Password'
             name='password'
             type='password'
