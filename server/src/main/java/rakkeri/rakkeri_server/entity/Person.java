@@ -37,6 +37,10 @@ public class Person {
     @OneToMany(mappedBy = "person", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Tracking> trackings = new HashSet<>();
 
+    @OneToOne(mappedBy = "person")
+    @PrimaryKeyJoinColumn
+    private PasswordResetToken passwordResetToken;
+
     public Person(String username, String email, String password) {
         this.username = username;
         this.email = email;
@@ -92,5 +96,13 @@ public class Person {
 
     public void setTrackings(Set<Tracking> trackings) {
         this.trackings = trackings;
+    }
+
+    public void setPasswordResetToken(PasswordResetToken passwordResetToken) {
+        this.passwordResetToken = passwordResetToken;
+    }
+
+    public PasswordResetToken getPasswordResetToken() {
+        return passwordResetToken;
     }
 }
