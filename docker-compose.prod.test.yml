@@ -19,6 +19,10 @@ services:
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=test
       - JWT_SECRET=really_long_secret_for_the_encryption_algorithm_so_it_accepts_it
+      - EMAIL_HOST=smtp.example.com
+      - EMAIL_PORT=587
+      - EMAIL_USERNAME=example@example.com
+      - EMAIL_PASSWORD=secret_pass
     ports:
       - 8080:8080
     depends_on:
