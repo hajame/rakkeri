@@ -36,7 +36,7 @@ const LoginForm = ({ setUser, updateState }) => {
   return (
     <Box component='form' onSubmit={login} noValidate sx={{ mt: 1 }}>
       <Typography component='h1' variant='h5'>
-        Sign in to Räkkeri
+        Sign in to Räkkeri ⏱
       </Typography>
 
       <TextField
