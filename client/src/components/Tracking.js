@@ -17,11 +17,15 @@ const Tracking = ({ tracking, updateTracking, tasks }) => {
   const [editDialogOpen, setEditDialogOpen] = useState(false);
   const [startTimeValue, setStartTimeValue] = useState('');
   const [endTimeValue, setEndTimeValue] = useState('');
+  const [startDateValue, setStartDateValue] = useState('');
+  const [endDateValue, setEndDateValue] = useState('');
   const [taskNameValue, setTaskNameValue] = useState('');
 
   const openDialog = () => {
     setStartTimeValue(time.getHHMM(tracking.startTime));
     setEndTimeValue(time.getHHMM(tracking.endTime));
+    setStartDateValue(time.getDateFieldFormat(tracking.startTime));
+    setEndDateValue(time.getDateFieldFormat(tracking.endTime));
     setTaskNameValue(tracking.task.name);
     setEditDialogOpen(true);
   };
@@ -34,10 +38,12 @@ const Tracking = ({ tracking, updateTracking, tasks }) => {
 
   const handleUpdateTracking = () => {
     const startDate = new Date(tracking.startTime);
+    time.setYYYYMMDD(startDate, startDateValue.trim());
     time.setHHMM(startDate, startTimeValue.trim());
     let endDate = null;
     if (tracking.endTime) {
       endDate = new Date(tracking.endTime);
+      time.setYYYYMMDD(endDate, endDateValue.trim());
       time.setHHMM(endDate, endTimeValue.trim());
     }
     let newTask = { name: taskNameValue.trim() };
@@ -119,6 +125,41 @@ const Tracking = ({ tracking, updateTracking, tasks }) => {
                 }}
                 label='End Time'
                 type='text'
+                variant='outlined'
+              />
+              <TextField
+                value={startDateValue}
+                error={false}
+                margin='dense'
+                id={'tracking_startDate_field_' + tracking.id}
+                onChange={(event) => {
+                  setStartDateValue(event.target.value);
+                }}
+                onKeyPress={(e) => {
+                  if (e.key === 'Enter') {
+                    handleUpdateTracking();
+                  }
+                }}
+                label='Start Date'
+                type='date'
+                variant='outlined'
+              />
+              <TextField
+                value={endDateValue}
+                error={false}
+                disabled={!tracking.endTime}
+                margin='dense'
+                id={'tracking_endDate_field_' + tracking.id}
+                onChange={(event) => {
+                  setEndDateValue(event.target.value);
+                }}
+                onKeyPress={(e) => {
+                  if (e.key === 'Enter') {
+                    handleUpdateTracking();
+                  }
+                }}
+                label='End Date'
+                type='date'
                 variant='outlined'
               />
               <Autocomplete

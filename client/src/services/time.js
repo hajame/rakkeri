@@ -18,6 +18,14 @@ const getHHMM = timeString => {
   return toHHMM(date.getHours(), date.getMinutes());
 };
 
+const getDateFieldFormat = timeString => {
+  if (!timeString) {
+    return '';
+  }
+  const date = new Date(timeString);
+  return `${date.getFullYear().toString()}-${doubleDigits((date.getMonth() + 1))}-${doubleDigits(date.getDate())}`;
+};
+
 const toDDMMYY = timeString => {
   if (!timeString) {
     return '';
@@ -68,6 +76,13 @@ const getDuration = (start, end) => {
   return toHHMM(hours, minutes);
 };
 
+const setYYYYMMDD = (date, YYYYMMDD) => {
+  date.setFullYear(
+    parseInt(YYYYMMDD.substring(0, 4)),
+    parseInt(YYYYMMDD.substring(5, 7)) - 1,
+    parseInt(YYYYMMDD.substring(8, 10)));
+};
+
 const setHHMM = (date, HHMM) => {
   date.setHours(parseInt(HHMM.substring(0, 2)));
   date.setMinutes(parseInt(HHMM.substring(3, 5)));
@@ -96,10 +111,12 @@ export default {
   now,
   toDoubleDigits: doubleDigits,
   toHHMM,
+  getDateFieldFormat,
   getHHMM,
   toDDMMYY,
   toYYYYMMDD,
   getDuration,
+  setYYYYMMDD,
   setHHMM,
   validateHHMM,
   getDurationInSeconds,
