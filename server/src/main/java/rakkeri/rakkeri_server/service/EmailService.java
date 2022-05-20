@@ -5,6 +5,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Service;
+import rakkeri.rakkeri_server.entity.Person;
 
 import java.util.Properties;
 
@@ -35,12 +36,17 @@ public class EmailService {
         return mailSender;
     }
 
-    public void sendSimpleMessage(String token) {
+    public void sendSimpleMessage(Person person, String token) {
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("server@example.com");
-        message.setTo("user@example.com");
+        message.setFrom(username);
+        message.setTo(person.getEmail());
         message.setSubject("Räkkeri password reset link");
-        message.setText("Reset link: https://ohtup-staging.cs.helsinki.fi/rakkeri/reset-password?token=" + token);
+        message.setText("Hello " + person.getUsername() + ",\n\n"
+                + "You have asked to reset your password for Räkkeri account.\n"
+                + "Reset link: https://ohtup-staging.cs.helsinki.fi/rakkeri/reset-password?token=" + token + " \n\n"
+                + "This password reset link is valid for 10 minutes.\n"
+                + "If you did not request a password reset, please ignore this email.\n\n"
+                + "- Räkkeri");
         getMailSender().send(message);
     }
 

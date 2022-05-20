@@ -63,31 +63,31 @@ public class Users {
     @PostMapping("/api/users/reset-password-email")
     public HttpStatus sendResetEmail(@RequestBody EmailDTO emailDTO) {
         List<Person> people = personService.findByEmail(emailDTO.getEmail());
-        Person unique;
+        Person person;
         try {
-            unique = getUnique(people);
+            person = getUnique(people);
         } catch (Exception e) {
             System.err.println("Sending reset password mail for email [" + emailDTO.getEmail() + "] failed.");
             // Return success message anyway to protect from user enumeration attacks.
             return HttpStatus.OK;
         }
-        System.out.println("Sending reset password email for [" + unique.getEmail() + "]");
+        System.out.println("Sending reset password email for [" + person.getEmail() + "]");
         Timestamp expirationDate = Timestamp.from(Instant.now(Clock.systemUTC()).plus(10, ChronoUnit.MINUTES));
         String token = Cryptography.generateToken();
 
         PasswordResetToken passwordResetToken;
-        if (unique.getPasswordResetToken() == null) {
-            passwordResetToken = new PasswordResetToken(unique, token, expirationDate);
+        if (person.getPasswordResetToken() == null) {
+            passwordResetToken = new PasswordResetToken(person, token, expirationDate);
             passwordResetTokenService.save(passwordResetToken);
         } else {
-            passwordResetToken = unique.getPasswordResetToken();
+            passwordResetToken = person.getPasswordResetToken();
             passwordResetToken.setToken(token);
             passwordResetToken.setExpirationDate(expirationDate);
             passwordResetTokenService.update(passwordResetToken);
         }
-        unique.setPasswordResetToken(passwordResetToken);
-        personService.update(unique);
-        emailService.sendSimpleMessage(token);
+        person.setPasswordResetToken(passwordResetToken);
+        personService.update(person);
+        emailService.sendSimpleMessage(person, token);
         return HttpStatus.OK;
     }
 
