@@ -1,5 +1,3 @@
-import { useState, useEffect } from 'react';
-import userService from '../services/users';
 import projectService from '../services/projects';
 
 import List from '@mui/material/List';

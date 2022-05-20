@@ -22,7 +22,7 @@ const Task = ({ task, project, setProject, activeTask, setActiveTask }) => {
       };
       try {
         const updatedTracking = await taskService.update(project, task, endedTracking);
-        activeTask.trackings = activeTracking.filter((t) => t.id === activeTracking.id).push(endedTracking);
+        activeTask.trackings = activeTracking.filter((t) => t.id === activeTracking.id).push(updatedTracking);
       } catch (e) {
         console.error('failed to update active tracking', endedTracking, e);
       }

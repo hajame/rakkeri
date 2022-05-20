@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-const usersUrl = `${process.env.REACT_APP_BACKEND_URL}/api/users`;
 const projectsUrl = `${process.env.REACT_APP_BACKEND_URL}/api/projects`;
 const tasksUrl = `${process.env.REACT_APP_BACKEND_URL}/api/tasks`;
 

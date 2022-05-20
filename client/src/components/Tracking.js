@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { useState } from 'react';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';

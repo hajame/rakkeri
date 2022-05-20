@@ -9,7 +9,6 @@ import Typography from '@mui/material/Typography';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
-import CssBaseline from '@mui/material/CssBaseline';
 
 const LoginForm = ({ setUser, updateState }) => {
   const [username, setUsername] = useState('');
@@ -78,6 +77,15 @@ const LoginForm = ({ setUser, updateState }) => {
         >
           <Link href='/rakkeri/forgot-password' variant='body2'>
             Forgot password?
+          </Link>
+        </Grid>
+        <Grid item
+              sx={{ marginTop: 1, marginLeft: 3 }}
+        >
+          <Link href='https://github.com/hajame/rakkeri/blob/main/docs/privacy_policy_statement.md'
+                target='_blank'
+                variant='body2'>
+            Privacy Policy
           </Link>
         </Grid>
       </Grid>
