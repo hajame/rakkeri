@@ -110,4 +110,12 @@
 | 2022-05-18 |  02:41:56 | Story: Reset password                                                      |
 |            |  01:02:44 | Planning requirements                                                      |
 |            |  01:31:44 | Migrate from Heroku to University server                                   |
-|   TOTAL    | 140:09:10 |                                                                            |
+| 2022-05-19 |  06:21:22 | Story: Reset password                                                      |
+|            |  00:00:40 | Planning requirements                                                      |
+| 2022-05-20 |  00:24:20 | Story: User can edit tracking date                                         |
+|            |  00:19:08 | Planning requirements                                                      |
+|            |  01:04:40 | Creating Privacy Policy Statement                                          |
+|            |  01:11:11 | Creating deployment pipeline to Uni Helsinki Server                        |
+|            |  00:57:48 | Installing Räkkeri to University of Helsinki server                        |
+| 2022-05-21 |  00:05:12 | Documentation                                                              |
+|   TOTAL    | 152:05:07 |                                                                            |
