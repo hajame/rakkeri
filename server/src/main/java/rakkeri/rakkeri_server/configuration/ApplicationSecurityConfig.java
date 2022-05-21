@@ -13,13 +13,13 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/test", "/hello", "/api/**")
+                .antMatchers("/hello", "/api/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
                 .httpBasic();
 
-        http.csrf().ignoringAntMatchers("/test", "/hello", "/api/**");
+        http.csrf().ignoringAntMatchers("/hello", "/api/**");
     }
 }
