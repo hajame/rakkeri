@@ -1,9 +1,10 @@
 import axios from 'axios';
 
 import trackingService from './trackings';
+import { backendUrl } from './config';
 
-const usersUrl = `${process.env.REACT_APP_BACKEND_URL}/api/users`;
-const projectsUrl = `${process.env.REACT_APP_BACKEND_URL}/api/projects`;
+const usersUrl = `${backendUrl}/api/users`;
+const projectsUrl = `${backendUrl}/api/projects`;
 
 let token = null;
 

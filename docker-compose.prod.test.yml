@@ -30,10 +30,7 @@ services:
       - db
   
   client:
-    build: 
-      context: ./client
-      args:
-        - backendurl=http://localhost:8080
+    build: ./client
     container_name: rakkeri_client
     restart: always
     ports:

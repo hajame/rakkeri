@@ -1,7 +1,8 @@
 import axios from 'axios';
+import { backendUrl } from './config';
 
-const projectsUrl = `${process.env.REACT_APP_BACKEND_URL}/api/projects`;
-const tasksUrl = `${process.env.REACT_APP_BACKEND_URL}/api/tasks`;
+const projectsUrl = `${backendUrl}/api/projects`;
+const tasksUrl = `${backendUrl}/api/tasks`;
 
 let token = null;
 

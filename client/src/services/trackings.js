@@ -1,8 +1,9 @@
 import axios from 'axios';
 
 import timeService from './time';
+import { backendUrl } from './config';
 
-const trackingsUrl = `${process.env.REACT_APP_BACKEND_URL}/api/trackings`;
+const trackingsUrl = `${backendUrl}/api/trackings`;
 
 let token = null;
 

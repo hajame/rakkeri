@@ -1,9 +1,11 @@
 import axios from 'axios';
 
-const usersUrl = `${process.env.REACT_APP_BACKEND_URL}/api/users`;
-const loginUrl = `${process.env.REACT_APP_BACKEND_URL}/api/login`;
-const sendResetPasswordEmailUrl = `${process.env.REACT_APP_BACKEND_URL}/api/users/reset-password-email`;
-const resetPasswordUrl = `${process.env.REACT_APP_BACKEND_URL}/api/users/reset-password`;
+import { backendUrl } from './config';
+
+const usersUrl = `${backendUrl}/api/users`;
+const loginUrl = `${backendUrl}/api/login`;
+const sendResetPasswordEmailUrl = `${backendUrl}/api/users/reset-password-email`;
+const resetPasswordUrl = `${backendUrl}/api/users/reset-password`;
 
 let token = null;
 
