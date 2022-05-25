@@ -11,6 +11,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItem from '@mui/material/ListItem';
 import time from '../services/time';
 import Autocomplete from '@mui/material/Autocomplete';
+import Box from '@mui/material/Box';
 
 const Tracking = ({ tracking, updateTracking, tasks }) => {
 
@@ -53,6 +54,10 @@ const Tracking = ({ tracking, updateTracking, tasks }) => {
     closeDialog(newTracking);
   };
 
+  const timeFieldWidth = 149;
+
+  const timeFieldRightMargin = 3;
+  const timeFieldBottomMargin = 0.5;
   return (
     <ListItem
       alignItems='flex-start' disablePadding
@@ -87,77 +92,94 @@ const Tracking = ({ tracking, updateTracking, tasks }) => {
           >
             <DialogTitle>{tracking.endTime ? 'Edit tracking' : 'Edit active tracking'}</DialogTitle>
             <DialogContent>
-              <TextField
-                value={startTimeValue}
-                error={!time.validateHHMM(startTimeValue)}
-                autoFocus
-                margin='dense'
-                id={'tracking_startTime_field_' + tracking.id}
-                onChange={(event) => {
-                  setStartTimeValue(event.target.value);
-                }}
-                onKeyPress={(e) => {
-                  if (e.key === 'Enter') {
-                    handleUpdateTracking();
-                  }
-                }}
-                label='Start Time'
-                type='text'
-                variant='outlined'
-              />
-              <TextField
-                value={tracking.endTime ? endTimeValue : undefined}
-                error={!time.validateHHMM(endTimeValue)}
-                disabled={!tracking.endTime}
-                margin='dense'
-                id={'tracking_endTime_field_' + tracking.id}
-                onChange={(event) => {
-                  setEndTimeValue(event.target.value);
-                }}
-                onKeyPress={(e) => {
-                  if (e.key === 'Enter') {
-                    handleUpdateTracking();
-                  }
-                }}
-                label='End Time'
-                type='text'
-                variant='outlined'
-              />
-              <TextField
-                value={startDateValue}
-                error={false}
-                margin='dense'
-                id={'tracking_startDate_field_' + tracking.id}
-                onChange={(event) => {
-                  setStartDateValue(event.target.value);
-                }}
-                onKeyPress={(e) => {
-                  if (e.key === 'Enter') {
-                    handleUpdateTracking();
-                  }
-                }}
-                label='Start Date'
-                type='date'
-                variant='outlined'
-              />
-              <TextField
-                value={endDateValue}
-                error={false}
-                disabled={!tracking.endTime}
-                margin='dense'
-                id={'tracking_endDate_field_' + tracking.id}
-                onChange={(event) => {
-                  setEndDateValue(event.target.value);
-                }}
-                onKeyPress={(e) => {
-                  if (e.key === 'Enter') {
-                    handleUpdateTracking();
-                  }
-                }}
-                label='End Date'
-                type='date'
-                variant='outlined'
-              />
+              <Box sx={{ mb: timeFieldBottomMargin }}>
+                <TextField
+                  value={startTimeValue}
+                  error={!time.validateHHMM(startTimeValue)}
+                  autoFocus
+                  margin='dense'
+                  id={'tracking_startTime_field_' + tracking.id}
+                  onChange={(event) => {
+                    setStartTimeValue(event.target.value);
+                  }}
+                  onKeyPress={(e) => {
+                    if (e.key === 'Enter') {
+                      handleUpdateTracking();
+                    }
+                  }}
+                  label='🕤 Start Time'
+                  type='text'
+                  variant='outlined'
+                  sx={{ width: timeFieldWidth, mr: timeFieldRightMargin }}
+                />
+                <TextField
+                  value={tracking.endTime ? endTimeValue : undefined}
+                  error={!time.validateHHMM(endTimeValue)}
+                  disabled={!tracking.endTime}
+                  margin='dense'
+                  id={'tracking_endTime_field_' + tracking.id}
+                  onChange={(event) => {
+                    setEndTimeValue(event.target.value);
+                  }}
+                  onKeyPress={(e) => {
+                    if (e.key === 'Enter') {
+                      handleUpdateTracking();
+                    }
+                  }}
+                  label='🕞 End Time'
+                  type='text'
+                  variant='outlined'
+                  sx={{
+                    display: tracking.endTime ? '' : 'none',
+                    width: timeFieldWidth,
+                    mr: timeFieldRightMargin,
+                  }}
+                />
+              </Box>
+              <Box sx={{ mb: timeFieldBottomMargin + 1 }}>
+                <TextField
+                  value={startDateValue}
+                  error={false}
+                  margin='dense'
+                  id={'tracking_startDate_field_' + tracking.id}
+                  onChange={(event) => {
+                    setStartDateValue(event.target.value);
+                  }}
+                  onKeyPress={(e) => {
+                    if (e.key === 'Enter') {
+                      handleUpdateTracking();
+                    }
+                  }}
+                  label='📅 Start Date'
+                  type='date'
+                  variant='outlined'
+                  sx={{ width: timeFieldWidth, mr: timeFieldRightMargin }}
+                />
+
+                <TextField
+                  value={endDateValue}
+                  error={false}
+                  disabled={!tracking.endTime}
+                  margin='dense'
+                  id={'tracking_endDate_field_' + tracking.id}
+                  onChange={(event) => {
+                    setEndDateValue(event.target.value);
+                  }}
+                  onKeyPress={(e) => {
+                    if (e.key === 'Enter') {
+                      handleUpdateTracking();
+                    }
+                  }}
+                  label='📅 End Date'
+                  type='date'
+                  variant='outlined'
+                  sx={{
+                    display: tracking.endTime ? '' : 'none',
+                    width: timeFieldWidth,
+                    mr: timeFieldRightMargin,
+                  }}
+                />
+              </Box>
               <Autocomplete
                 id='task_text'
                 fullWidth
@@ -175,7 +197,7 @@ const Tracking = ({ tracking, updateTracking, tasks }) => {
                 renderInput={(params) => (
                   <TextField
                     {...params}
-                    label='Task'
+                    label='🔨 Task'
                     margin='dense'
                     InputProps={{
                       ...params.InputProps,
