@@ -91,7 +91,7 @@ const LoginForm = ({ setUser, updateState }) => {
       </Grid>
       <Snackbar open={openError}
                 anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-                autoHideDuration={6000}
+                autoHideDuration={8000}
                 onClose={() => setOpenError(false)}>
         <Alert onClose={() => setOpenError(false)} severity='error' sx={{ width: '100%' }}>
           <AlertTitle>Error</AlertTitle>

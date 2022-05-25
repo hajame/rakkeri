@@ -1,13 +1,9 @@
 import projectService from '../services/projects';
 
 const fetchProjects = async (user) => {
-  try {
-    let fetchedProjects = await projectService.getProjects(user);
-    fetchedProjects.sort((a, b) => a.name.localeCompare(b.name));
-    return fetchedProjects;
-  } catch {
-    console.error('failed to fetch projects');
-  }
+  let fetchedProjects = await projectService.getProjects(user);
+  fetchedProjects.sort((a, b) => a.name.localeCompare(b.name));
+  return fetchedProjects;
 };
 
 const getActiveProject = (fetchedProjects) => {

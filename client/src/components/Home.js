@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import userService from '../services/users';
 import projectService from '../services/projects';
 import taskService from '../services/tasks';
@@ -14,6 +14,9 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import Tracking from './Tracking';
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
+import Snackbar from '@mui/material/Snackbar';
 
 export const Home = ({
                        user,
@@ -28,6 +31,8 @@ export const Home = ({
                        activeTracking,
                        setActiveTracking,
                      }) => {
+
+  const [openError, setOpenError] = useState(false);
 
   const setToken = user => {
     userService.setToken(user.token);
@@ -48,7 +53,13 @@ export const Home = ({
     }
     setUser(user);
     setToken(user);
-    let fetchedProjects = await controller.fetchProjects(user);
+    let fetchedProjects;
+    try {
+      fetchedProjects = await controller.fetchProjects(user);
+    } catch {
+      setOpenError(true);
+      return;
+    }
     setProjects(fetchedProjects);
     setTasks(controller.getTaskMap(fetchedProjects));
     const activeProject = controller.getActiveProject(fetchedProjects);
@@ -192,6 +203,15 @@ export const Home = ({
           )}
         </Box>
       </Box>
+      <Snackbar open={openError}
+                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                autoHideDuration={10000}
+                onClose={() => setOpenError(false)}>
+        <Alert onClose={() => setOpenError(false)} severity='error' sx={{ width: '100%' }}>
+          <AlertTitle>Error</AlertTitle>
+          Failed to load projects. Consider logging out and try again.
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };
