@@ -106,6 +106,13 @@ const validateHHMM = (HHMM) => {
   }
 };
 
+const dateFrom = (dateString, timeString) => {
+  const date = new Date();
+  setYYYYMMDD(date, dateString.trim());
+  setHHMM(date, timeString.trim());
+  return date;
+};
+
 
 export default {
   now,
@@ -122,4 +129,5 @@ export default {
   getDurationInSeconds,
   HHMMFromSeconds,
   HHMMSSFromSeconds,
+  dateFrom,
 };

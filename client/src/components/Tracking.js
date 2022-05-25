@@ -37,14 +37,10 @@ const Tracking = ({ tracking, updateTracking, tasks }) => {
   };
 
   const handleUpdateTracking = () => {
-    const startDate = new Date(tracking.startTime);
-    time.setYYYYMMDD(startDate, startDateValue.trim());
-    time.setHHMM(startDate, startTimeValue.trim());
+    const startDate = time.dateFrom(startDateValue, startTimeValue);
     let endDate = null;
     if (tracking.endTime) {
-      endDate = new Date(tracking.endTime);
-      time.setYYYYMMDD(endDate, endDateValue.trim());
-      time.setHHMM(endDate, endTimeValue.trim());
+      endDate = time.dateFrom(endDateValue, endTimeValue);
     }
     let newTask = { name: taskNameValue.trim() };
     const newTracking = {
