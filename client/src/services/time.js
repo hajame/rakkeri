@@ -42,6 +42,7 @@ const toYYYYMMDD = timeString => {
   return `${date.getFullYear().toString()}/${date.getMonth() + 1}/${date.getDate()}`;
 };
 
+
 const getDurationInSeconds = (start, end) => {
   if (!start) {
     return '';
@@ -62,6 +63,11 @@ const HHMMSSFromSeconds = seconds => {
   const minutes = parseInt((seconds / 60) % 60);
   const remainderSeconds = parseInt(seconds % 60);
   return toHHMMSS(hours, minutes, remainderSeconds);
+};
+
+const HHMMSSElapsedSince = (timeStamp) => {
+  const msElapsed = new Date() - new Date(timeStamp);
+  return HHMMSSFromSeconds(msElapsed / 1000);
 };
 
 const getDuration = (start, end) => {
@@ -129,5 +135,6 @@ export default {
   getDurationInSeconds,
   HHMMFromSeconds,
   HHMMSSFromSeconds,
+  HHMMSSElapsedSince,
   dateFrom,
 };
