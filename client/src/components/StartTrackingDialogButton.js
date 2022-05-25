@@ -55,7 +55,7 @@ const StartTrackingDialogButton = ({ startTracking, project, tasks }) => {
               <TextField
                 {...params}
                 autoFocus
-                label='What are you doing?'
+                label='🔨 What are you doing?'
                 margin='dense'
                 InputProps={{
                   ...params.InputProps,

@@ -10,7 +10,7 @@ import Typography from '@mui/material/Typography';
 
 const Projects = ({ user, project, projects, setProjects, setProject }) => {
   const createProject = async () => {
-    const name = prompt('Please name your project', 'name');
+    const name = prompt('Please name your project', '');
     if (!name) {
       return;
     }

@@ -13,7 +13,7 @@ const validatePassword = (password) => {
 };
 
 const validateUsername = (username) => {
-  return validateField(username, 8, 64);
+  return validateField(username, 6, 64);
 };
 
 export default {

@@ -11,7 +11,8 @@ import static javax.persistence.GenerationType.SEQUENCE;
 @Table(
         name = "person",
         uniqueConstraints = {
-                @UniqueConstraint(name = "person_username_unique", columnNames = "username")
+                @UniqueConstraint(name = "person_username_unique", columnNames = "username"),
+                @UniqueConstraint(name = "person_email_unique", columnNames = "email")
         }
 )
 public class Person {

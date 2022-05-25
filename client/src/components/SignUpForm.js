@@ -42,7 +42,7 @@ export const SignUpForm = () => {
       setEmail('');
       setPassword('');
     } catch (e) {
-      setErrorMessage('Username is already taken.');
+      setErrorMessage('Username or email is taken.');
       setOpenError(true);
     }
   };
@@ -117,7 +117,7 @@ export const SignUpForm = () => {
               Requirements
             </ListSubheader>
             <ListItem sx={requirementStyle}>
-              👤 Username must be 8–64 characters long
+              👤 Username must be 6–64 characters long
             </ListItem>
             <ListItem sx={requirementStyle}>
               🔑 Password must be 10–64 characters long
