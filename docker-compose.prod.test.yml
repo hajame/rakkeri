@@ -24,6 +24,8 @@ services:
       - EMAIL_PORT=587
       - EMAIL_USERNAME=example@example.com
       - EMAIL_PASSWORD=secret_pass
+      - EMAIL_AUTH=true
+      - EMAIL_STARTTLS=true
     ports:
       - 8080:8080
     depends_on:
