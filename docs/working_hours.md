@@ -117,5 +117,15 @@
 |            |  01:04:40 | Creating Privacy Policy Statement                                          |
 |            |  01:11:11 | Creating deployment pipeline to Uni Helsinki Server                        |
 |            |  00:57:48 | Installing Räkkeri to University of Helsinki server                        |
-| 2022-05-21 |  00:05:12 | Documentation                                                              |
-|   TOTAL    | 152:05:07 |                                                                            |
+| 2022-05-21 |  01:05:45 | Creating deployment pipeline to Uni Helsinki Server                        |
+|            |  00:11:49 | Story: User can edit tracking date                                         |
+|            |  00:05:12 | Documentation                                                              |
+| 2022-05-25 |  00:17:00 | Documentation                                                              |
+|            |  00:33:44 | Story: Show elapsed time                                                   |
+|            |  01:19:23 | Planning requirements                                                      |
+|            |  00:18:01 | Story: Handle corrupt token / deleted user.                                |
+|            |  01:10:00 | Edit Sign up field validations                                             |
+|            |  02:01:45 | Edit dialog styles                                                         |
+|            |  01:14:36 | Change send address for pass reset emails                                  |
+|            |  00:51:33 | Creating deployment pipeline to Uni Helsinki Server                        |
+|   TOTAL    | 161:08:43 |                                                                            |
