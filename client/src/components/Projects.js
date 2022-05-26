@@ -32,10 +32,11 @@ const Projects = ({ user, project, projects, setProjects, setProject }) => {
       <Button
         onClick={createProject}
         fullWidth
-        variant='contained'
+        variant='outlined'
+        color='primary'
         sx={{ mt: 1, mb: 1 }}
       >
-        Create new
+        New project
       </Button>
       <List>
         {projects.map((p) => (

@@ -25,7 +25,7 @@ const ReportDialogButton = ({ project, type }) => {
 
   return (
     <Box>
-      <Button onClick={openDialog} color={'secondary'} sx={{ mt: 1, mb: 0, marginRight: '12px' }}>
+      <Button onClick={openDialog} variant='outlined' color={'secondary'} sx={{ mt: 0.5, mb: 0, marginRight: '12px' }}>
         {
           type === 'helsinki' ? 'CS-HELSINKI REPORT' : 'TIMES BY TASK'
         }

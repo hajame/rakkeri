@@ -41,7 +41,7 @@ const Project = ({
         {project.name}
       </Typography>
       <Box
-        sx={{ display: 'flex', flexDirection: 'row' }}
+        sx={{ display: 'flex', flexWrap: 'wrap' }}
       >
         {activeTracking === null ?
           <StartTrackingDialogButton
@@ -49,7 +49,7 @@ const Project = ({
           />
           :
           <Button color={'warning'} onClick={stopTracking} variant='contained'
-                  sx={{ mt: 1, mb: 0, marginRight: '12px' }}>
+                  sx={{ mt: 0.5, mb: 1, marginRight: '12px' }}>
             Stop tracking
           </Button>
         }

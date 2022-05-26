@@ -66,21 +66,21 @@ const LoginForm = ({ setUser, updateState }) => {
       </Button>
       <Grid container>
         <Grid item
-              sx={{ marginTop: 1 }}
+              sx={{ marginTop: 1, marginRight: 3 }}
         >
           <Link href='/rakkeri/signup' variant='body2'>
             {'Don\'t have an account? Sign Up'}
           </Link>
         </Grid>
         <Grid item
-              sx={{ marginTop: 1, marginLeft: 3 }}
+              sx={{ marginTop: 1, marginRight: 3 }}
         >
           <Link href='/rakkeri/forgot-password' variant='body2'>
             Forgot password?
           </Link>
         </Grid>
         <Grid item
-              sx={{ marginTop: 1, marginLeft: 3 }}
+              sx={{ marginTop: 1, marginRight: 3 }}
         >
           <Link href='https://github.com/hajame/rakkeri/blob/main/docs/privacy_policy_statement.md'
                 target='_blank'

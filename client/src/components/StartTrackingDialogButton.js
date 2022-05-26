@@ -27,7 +27,7 @@ const StartTrackingDialogButton = ({ startTracking, project, tasks }) => {
 
   return (
     <Box>
-      <Button onClick={openDialog} variant='contained' sx={{ mt: 1, mb: 0, marginRight: '12px' }}>
+      <Button onClick={openDialog} variant='contained' sx={{ mt: 0.5, mb: 1, marginRight: '12px' }}>
         Start Tracking
       </Button>
       <Dialog
