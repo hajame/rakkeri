@@ -67,6 +67,10 @@ export const Home = ({
       setProject(activeProject);
       const tracking = controller.getActiveTracking(activeProject);
       setActiveTracking(tracking);
+      return;
+    }
+    if (fetchedProjects.size !== 0) {
+      setProject(projectService.findMostRecent(fetchedProjects));
     }
   };
 

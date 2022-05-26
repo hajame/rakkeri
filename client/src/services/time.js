@@ -119,6 +119,7 @@ const dateFrom = (dateString, timeString) => {
   return date;
 };
 
+const isBiggerThan = (timeStamp, compared) => new Date(timeStamp) - new Date(compared) > 0;
 
 export default {
   now,
@@ -137,4 +138,5 @@ export default {
   HHMMSSFromSeconds,
   HHMMSSElapsedSince,
   dateFrom,
+  isBiggerThan,
 };

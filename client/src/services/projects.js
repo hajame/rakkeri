@@ -1,6 +1,8 @@
 import axios from 'axios';
 
 import trackingService from './trackings';
+import time from './time';
+
 import { backendUrl } from './config';
 
 const usersUrl = `${backendUrl}/api/users`;
@@ -48,4 +50,15 @@ const setToken = (newToken) => {
   token = `bearer ${newToken}`;
 };
 
-export default { getProjects, setToken, create, addTask };
+const findMostRecent = projects => {
+  let mostRecent = projects[0];
+  for (const project of projects) {
+    mostRecent = time.isBiggerThan(
+      project.trackings[0].endTime, mostRecent.trackings[0].endTime,
+    ) ?
+      project : mostRecent;
+  }
+  return mostRecent;
+};
+
+export default { getProjects, setToken, create, addTask, findMostRecent };
