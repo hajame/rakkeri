@@ -186,6 +186,7 @@ const Tracking = ({ tracking, updateTracking, tasks }) => {
                 id={'tracking_startDate_field_' + tracking.id}
                 onChange={(event) => {
                   setStartDateValue(event.target.value);
+                  setEndDateValue(event.target.value);
                 }}
                 onKeyPress={(e) => {
                   if (e.key === 'Enter') {
