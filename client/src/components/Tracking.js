@@ -69,7 +69,7 @@ const Tracking = ({ tracking, updateTracking, tasks }) => {
   const timeFieldRightMargin = '2%';
   const fieldBottomMargin = 0.5;
   const timeFieldWidth = '20%';
-  const timeFieldMinWidth = '105px';
+  const timeFieldMinWidth = '120px';
   return (
     <ListItem alignItems='flex-start' disablePadding>
       <ListItemButton onClick={() => openDialog(tracking)}>
@@ -158,7 +158,6 @@ const Tracking = ({ tracking, updateTracking, tasks }) => {
               onInputChange={(event, newInputValue) => {
                 setTaskNameValue(newInputValue);
               }}
-              sx={{ width: '100%', mb: fieldBottomMargin + 2 }}
               onKeyPress={(e) => {
                 if (e.key === 'Enter') {
                   handleUpdateTracking();
@@ -177,6 +176,7 @@ const Tracking = ({ tracking, updateTracking, tasks }) => {
                   variant='outlined'
                 />
               )}
+              sx={{ width: '100%', mb: fieldBottomMargin + 2 }}
             />
             <Box sx={{ mb: 0 }}>
               <TextField
