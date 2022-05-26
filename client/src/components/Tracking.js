@@ -12,8 +12,6 @@ import ListItem from '@mui/material/ListItem';
 import time from '../services/time';
 import Autocomplete from '@mui/material/Autocomplete';
 import Box from '@mui/material/Box';
-import IconButton from '@mui/material/IconButton';
-import Icon from '@mui/material/Icon';
 
 const Tracking = ({ tracking, updateTracking, tasks }) => {
   const [editDialogOpen, setEditDialogOpen] = useState(false);
@@ -74,39 +72,25 @@ const Tracking = ({ tracking, updateTracking, tasks }) => {
   const timeFieldMinWidth = '120px';
   return (
     <ListItem alignItems='flex-start' disablePadding>
-      <Box fullWidth sx={{
-        display: 'flex', flexDirection: 'row',
-      }}
-      >
-        {tracking.endTime ?
-          (
-            <IconButton
-              aria-label='comments'
-              onClick={() => alert('hello')}
-            >
-              <Icon color='primary'>play_arrow</Icon>
-            </IconButton>
-          ) : ('')}
-        <ListItemButton onClick={() => openDialog(tracking)}>
-          {!tracking.endTime ? (
-            <ListItemText
-              primary={`🔨 ${tracking.task.name}`}
-              primaryTypographyProps={{
-                fontWeight: 'bolder',
-              }}
-              secondary={`⏱ ${elapsedTime} (${time.getHHMM(tracking.startTime)} - )`}
-            />
-          ) : (
-            <ListItemText
-              primary={`${tracking.task.name}`}
-              secondary={`${time.getDuration(
-                tracking.startTime,
-                tracking.endTime,
-              )} (${time.getHHMM(tracking.startTime)} - ${time.getHHMM(tracking.endTime)})`}
-            />
-          )}
-        </ListItemButton>
-      </Box>
+      <ListItemButton onClick={() => openDialog(tracking)}>
+        {!tracking.endTime ? (
+          <ListItemText
+            primary={`🔨 ${tracking.task.name}`}
+            primaryTypographyProps={{
+              fontWeight: 'bolder',
+            }}
+            secondary={`⏱ ${elapsedTime} (${time.getHHMM(tracking.startTime)} - )`}
+          />
+        ) : (
+          <ListItemText
+            primary={`${tracking.task.name}`}
+            secondary={`${time.getDuration(
+              tracking.startTime,
+              tracking.endTime,
+            )} (${time.getHHMM(tracking.startTime)} - ${time.getHHMM(tracking.endTime)})`}
+          />
+        )}
+      </ListItemButton>
 
       {editDialogOpen ? (
         <Dialog
