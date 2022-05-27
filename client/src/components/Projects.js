@@ -9,6 +9,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Icon from '@mui/material/Icon';
 import IconButton from '@mui/material/IconButton';
+import clientInfo from '../services/clientInfo';
 
 const Projects = ({ user, project, projects, setProjects, setProject, projectBarOpen, setProjectBarOpen }) => {
 
@@ -29,7 +30,7 @@ const Projects = ({ user, project, projects, setProjects, setProject, projectBar
 
   return (
 
-    <Box sx={{ mt: 1 }}>
+    <Box sx={{ mt: 1, ml: clientInfo.isNarrowViewPort() ? 0.5 : 1, mr: 0.5 }}>
       <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
         {projectBarOpen ? (
           <Typography component='div' variant='h6' sx={{ ml: 1 }}>
@@ -39,18 +40,16 @@ const Projects = ({ user, project, projects, setProjects, setProject, projectBar
         <IconButton
           sx={{ position: 'relative', maxWidth: 35 }}
           aria-label={`Hide project column`}
+          size='small'
           onClick={() => setProjectBarOpen(!projectBarOpen)}
         >
-          <Icon color='primary'>
+          <Icon color='secondary'>
             {projectBarOpen ? ('menu_open') : ('menu')}
-
           </Icon>
         </IconButton>
-
       </Box>
       {projectBarOpen ? (
         <Box>
-
           <Button
             onClick={createProject}
             fullWidth
@@ -60,6 +59,7 @@ const Projects = ({ user, project, projects, setProjects, setProject, projectBar
           >
             New project
           </Button>
+
           <List>
             {projects.map((p) => (
               <ListItem alignItems='center' disablePadding key={p.id}>

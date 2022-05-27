@@ -90,7 +90,7 @@ const Tracking = ({ tracking, resetActiveTracking, updateTracking, tasks }) => {
               aria-label={`Start new tracking for task ${tracking.task.name}`}
               onClick={() => handleResetActiveTracking()}
             >
-              <Icon color='primary'>play_arrow</Icon>
+              <Icon color='primary' fontSize='medium'>play_arrow</Icon>
             </IconButton>
           ) : ('')}
         <ListItemButton onClick={() => openDialog()}>

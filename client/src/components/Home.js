@@ -17,6 +17,7 @@ import Tracking from './Tracking';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import Snackbar from '@mui/material/Snackbar';
+import clientInfo from '../services/clientInfo';
 
 export const Home = ({
                        user,
@@ -43,7 +44,7 @@ export const Home = ({
   };
 
   const handleProjectBarClose = () => {
-    if (window.innerWidth < 785) {
+    if (clientInfo.isNarrowViewPort()) {
       setProjectBarOpen(false);
     }
   };
@@ -146,8 +147,8 @@ export const Home = ({
         )}
         <Box
           sx={{
-            marginTop: 4,
-            marginLeft: 1,
+            marginTop: 1,
+            marginLeft: 0,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -173,7 +174,7 @@ export const Home = ({
         <Box
           sx={{
             marginTop: 1,
-            marginLeft: 4,
+            marginLeft: !clientInfo.isNarrowViewPort() ? 4 : 2,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'left',
