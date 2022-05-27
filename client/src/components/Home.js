@@ -43,7 +43,6 @@ export const Home = ({
   };
 
   const handleProjectBarClose = () => {
-    console.log(window.innerWidth);
     if (window.innerWidth < 785) {
       setProjectBarOpen(false);
     }

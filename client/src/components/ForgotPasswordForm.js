@@ -20,7 +20,6 @@ export const ForgotPasswordForm = () => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const sendResetEmail = async () => {
-    console.log('resetting pw for', email);
     try {
       await userService.sendResetPasswordLink(email);
       setOpenSuccess(true);
