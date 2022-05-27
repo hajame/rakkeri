@@ -38,13 +38,13 @@ const Projects = ({ user, project, projects, setProjects, setProject, projectBar
           </Typography>
         ) : ('')}
         <IconButton
-          sx={{ position: 'relative', maxWidth: 35 }}
-          aria-label={`Hide project column`}
+          sx={{ ml: projectBarOpen ? (clientInfo.isNarrowViewPort() ? 1 : 2) : 0 }}
+          aria-label={`Toggle project column visibility`}
           size='small'
           onClick={() => setProjectBarOpen(!projectBarOpen)}
         >
-          <Icon color='secondary'>
-            {projectBarOpen ? ('menu_open') : ('menu')}
+          <Icon fontSize='small'>
+            {projectBarOpen ? ('close') : ('menu')}
           </Icon>
         </IconButton>
       </Box>
