@@ -53,4 +53,4 @@ The saved data are stored on a server to which only system administrators have a
 
 ## How do I remove my account or data?
 
-There is currently no other way to delete an account, than to contact the server adminstrators (Toska research group @ University of Helsinki), who can delete your data directly from the database.
+The user has currently no way to delete an account or any other data. They must contact the server adminstrators (Toska research group @ University of Helsinki), who can delete your data directly from the database.

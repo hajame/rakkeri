@@ -1,7 +1,7 @@
 # Work time tracking
 
 |    Date    |  hh:mm:ss | Task                                                                       |
-| :--------: | --------: | :------------------------------------------------------------------------- | --- |
+| :--------: | --------: | :------------------------------------------------------------------------- |
 |   25.3.    |  01:05:00 | Planning requirements                                                      |
 |            |  01:34:00 | Planning how and where to deploy                                           |
 |            |  03:17:00 | Building a walking skeleton                                                |
@@ -134,9 +134,9 @@
 |            |  00:24:56 | Story: Show most recently tracked project                                  |
 |            |  00:53:36 | Edit styles                                                                |
 |            |  00:56:54 | Edit dialog styles                                                         |
-| 2022-05-27 |  00:15:19 | Documentation                                                              |
+| 2022-05-27 |  00:26:45 | Documentation                                                              |
 |            |  00:11:25 | Testing with different viewport sizes                                      |
 |            |  01:21:45 | Story: Closable project bar                                                |
 |            |  00:38:01 | Planning requirements                                                      |
 |            |  01:54:01 | Story: Switch tasks with one click                                         |
-|   TOTAL    | 171:10:49 |                                                                            |     |
+|   TOTAL    | 171:22:15 |                                                                            |
