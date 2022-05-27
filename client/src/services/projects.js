@@ -53,6 +53,9 @@ const setToken = (newToken) => {
 const findMostRecent = projects => {
   let mostRecent = projects[0];
   for (const project of projects) {
+    if (!project.trackings[0]) {
+      continue;
+    }
     mostRecent = time.isBiggerThan(
       project.trackings[0].endTime, mostRecent.trackings[0].endTime,
     ) ?

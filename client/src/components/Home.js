@@ -33,6 +33,7 @@ export const Home = ({
                      }) => {
 
   const [openError, setOpenError] = useState(false);
+  const [projectBarOpen, setProjectBarOpen] = useState(true);
 
   const setToken = user => {
     userService.setToken(user.token);
@@ -67,10 +68,13 @@ export const Home = ({
       setProject(activeProject);
       const tracking = controller.getActiveTracking(activeProject);
       setActiveTracking(tracking);
+      setProjectBarOpen(false);
       return;
     }
-    if (fetchedProjects.size !== 0) {
-      setProject(projectService.findMostRecent(fetchedProjects));
+    if (fetchedProjects.length !== 0) {
+      const mostRecent = projectService.findMostRecent(fetchedProjects);
+      setProject(mostRecent ? mostRecent : null);
+      setProjectBarOpen(false);
     }
   };
 
@@ -155,6 +159,8 @@ export const Home = ({
               projects={projects}
               setProjects={setProjects}
               setProject={setProject}
+              projectBarOpen={projectBarOpen}
+              setProjectBarOpen={setProjectBarOpen}
             />
           )}
         </Box>
@@ -184,7 +190,7 @@ export const Home = ({
               </List>
             </Box>
           )}
-          {project !== null && (
+          {project && (
             <Project user={user}
                      project={project} setProject={setProject}
                      projects={projects} setProjects={setProjects}

@@ -86,13 +86,14 @@ const Tracking = ({ tracking, resetActiveTracking, updateTracking, tasks }) => {
         {tracking.endTime ?
           (
             <IconButton
+              sx={{ maxHeight: 40, mt: 1 }}
               aria-label={`Start new tracking for task ${tracking.task.name}`}
               onClick={() => handleResetActiveTracking()}
             >
               <Icon color='primary'>play_arrow</Icon>
             </IconButton>
           ) : ('')}
-        <ListItemButton onClick={() => openDialog(tracking)}>
+        <ListItemButton onClick={() => openDialog()}>
           {!tracking.endTime ? (
             <ListItemText
               primary={`🔨 ${tracking.task.name}`}

@@ -7,8 +7,11 @@ import Button from '@mui/material/Button';
 
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import Icon from '@mui/material/Icon';
+import IconButton from '@mui/material/IconButton';
 
-const Projects = ({ user, project, projects, setProjects, setProject }) => {
+const Projects = ({ user, project, projects, setProjects, setProject, projectBarOpen, setProjectBarOpen }) => {
+
   const createProject = async () => {
     const name = prompt('Please name your project', '');
     if (!name) {
@@ -25,33 +28,55 @@ const Projects = ({ user, project, projects, setProjects, setProject }) => {
   };
 
   return (
+
     <Box sx={{ mt: 1 }}>
-      <Typography component='div' variant='h6'>
-        Projects
-      </Typography>
-      <Button
-        onClick={createProject}
-        fullWidth
-        variant='outlined'
-        color='primary'
-        sx={{ mt: 1, mb: 1 }}
-      >
-        New project
-      </Button>
-      <List>
-        {projects.map((p) => (
-          <ListItem alignItems='center' disablePadding key={p.id}>
-            <ListItemButton
-              dense={true}
-              selected={project && project.id === p.id}
-              onClick={() => setFocused(p)}
-            >
-              {p.name}
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
+      <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+        {projectBarOpen ? (
+          <Typography component='div' variant='h6' sx={{ ml: 1 }}>
+            Projects
+          </Typography>
+        ) : ('')}
+        <IconButton
+          sx={{ position: 'relative', maxWidth: 35 }}
+          aria-label={`Hide project column`}
+          onClick={() => setProjectBarOpen(!projectBarOpen)}
+        >
+          <Icon color='primary'>
+            {projectBarOpen ? ('menu_open') : ('menu')}
+
+          </Icon>
+        </IconButton>
+
+      </Box>
+      {projectBarOpen ? (
+        <Box>
+
+          <Button
+            onClick={createProject}
+            fullWidth
+            variant='outlined'
+            color='primary'
+            sx={{ mt: 1, mb: 1 }}
+          >
+            New project
+          </Button>
+          <List>
+            {projects.map((p) => (
+              <ListItem alignItems='center' disablePadding key={p.id}>
+                <ListItemButton
+                  dense={true}
+                  selected={project && project.id === p.id}
+                  onClick={() => setFocused(p)}
+                >
+                  {p.name}
+                </ListItemButton>
+              </ListItem>
+            ))}
+          </List>
+        </Box>
+      ) : ('')}
     </Box>
+
   );
 };
 
