@@ -128,4 +128,13 @@
 |            |  02:01:45 | Edit dialog styles                                                         |
 |            |  01:14:36 | Change send address for pass reset emails                                  |
 |            |  00:51:33 | Creating deployment pipeline to Uni Helsinki Server                        |
-|   TOTAL    | 161:08:43 |                                                                            |
+| 2022-05-26 |  00:02:00 | Revert failed attempt at single-click task switching                       |
+|            |  02:07:29 | Story: Switch tasks with one click                                         |
+|            |  01:16:40 | Planning requirements                                                      |
+|            |  00:24:56 | Story: Show most recently tracked project                                  |
+|            |  00:53:36 | Edit styles                                                                |
+|            |  00:56:54 | Edit dialog styles                                                         |
+| 2022-05-27 |  00:10:19 | Documentation                                                              |
+|            |  00:22:01 | Planning requirements                                                      |
+|            |  01:54:01 | Story: Switch tasks with one click                                         |
+|   TOTAL    | 169:16:39 |                                                                            |
