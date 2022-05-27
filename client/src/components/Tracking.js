@@ -86,7 +86,7 @@ const Tracking = ({ tracking, resetActiveTracking, updateTracking, tasks }) => {
         {tracking.endTime ?
           (
             <IconButton
-              aria-label='comments'
+              aria-label={`Start new tracking for task ${tracking.task.name}`}
               onClick={() => handleResetActiveTracking()}
             >
               <Icon color='primary'>play_arrow</Icon>
@@ -242,7 +242,6 @@ const Tracking = ({ tracking, resetActiveTracking, updateTracking, tasks }) => {
                 }}
               />
             </Box>
-
           </DialogContent>
           <DialogActions>
             <Button onClick={() => closeDialog(tracking)}>Cancel</Button>

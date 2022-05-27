@@ -44,7 +44,6 @@ const Project = ({
     const oldActiveTracking = await trackingService.stopTracking(activeTracking);
     const newActiveTracking = await trackingService.startTracking(user, project, task);
     updateActiveTracking(oldActiveTracking, newActiveTracking);
-
   };
 
   return (
