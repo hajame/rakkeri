@@ -13,6 +13,7 @@ const Project = ({
                    user,
                    project,
                    updateProjectState,
+                   updateActiveTracking,
                    updateTracking,
                    tasks,
                    activeTracking,
@@ -33,6 +34,12 @@ const Project = ({
     const newTracking = await trackingService.startTracking(user, project, task);
     updateProjectState(newTracking);
     setActiveTracking(newTracking);
+  };
+
+  const resetActiveTracking = async task => {
+    const oldActiveTracking = await trackingService.stopTracking(activeTracking);
+    const newActiveTracking = await trackingService.startTracking(user, project, task);
+    updateActiveTracking(oldActiveTracking, newActiveTracking);
   };
 
   return (
@@ -57,6 +64,7 @@ const Project = ({
         <ReportDialogButton project={project} type={'helsinki'} />
       </Box>
       <TrackingList trackingsByDate={trackingService.getTrackingsByDate(project.trackings)}
+                    resetActiveTracking={resetActiveTracking}
                     updateTracking={updateTracking}
                     tasks={tasks}
       />

@@ -6,7 +6,7 @@ import Tracking from './Tracking';
 import trackingService from '../services/trackings';
 import Divider from '@mui/material/Divider';
 
-const TrackingList = ({ trackingsByDate, updateTracking, tasks }) => {
+const TrackingList = ({ trackingsByDate, resetActiveTracking, updateTracking, tasks }) => {
   return (
     <Box>
       {
@@ -30,6 +30,7 @@ const TrackingList = ({ trackingsByDate, updateTracking, tasks }) => {
               trackings.map(tracking =>
                 <Tracking key={tracking.id}
                           tracking={tracking}
+                          resetActiveTracking={resetActiveTracking}
                           updateTracking={updateTracking}
                           tasks={tasks}
                 />,

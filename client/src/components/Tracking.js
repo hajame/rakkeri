@@ -15,7 +15,7 @@ import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import Icon from '@mui/material/Icon';
 
-const Tracking = ({ tracking, updateTracking, tasks }) => {
+const Tracking = ({ tracking, resetActiveTracking, updateTracking, tasks }) => {
   const [editDialogOpen, setEditDialogOpen] = useState(false);
   const [startTimeValue, setStartTimeValue] = useState('');
   const [endTimeValue, setEndTimeValue] = useState('');
@@ -72,6 +72,11 @@ const Tracking = ({ tracking, updateTracking, tasks }) => {
   const fieldBottomMargin = 0.5;
   const timeFieldWidth = '20%';
   const timeFieldMinWidth = '120px';
+
+  const handleResetActiveTracking = () => {
+    resetActiveTracking(tracking.task);
+  };
+
   return (
     <ListItem alignItems='flex-start' disablePadding>
       <Box fullWidth sx={{
@@ -82,7 +87,7 @@ const Tracking = ({ tracking, updateTracking, tasks }) => {
           (
             <IconButton
               aria-label='comments'
-              onClick={() => alert('hello')}
+              onClick={() => handleResetActiveTracking()}
             >
               <Icon color='primary'>play_arrow</Icon>
             </IconButton>

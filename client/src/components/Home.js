@@ -74,34 +74,22 @@ export const Home = ({
     }
   };
 
-  const replaceOldProject = (updatedProject) => {
-    return [
-      ...projects.filter((p) => p.id !== updatedProject.id),
-      updatedProject,
-    ];
-  };
-
-
   const updateProjectState = tracking => {
-    const projectToUpdate = projects.filter((p) => p.id === tracking.project.id)[0];
-    let updatedProject = {
-      ...projectToUpdate,
-      trackings: [
-        ...projectToUpdate.trackings.filter((t) => t.id !== tracking.id),
-        tracking,
-      ],
-      tasks: [
-        ...projectToUpdate.tasks.filter((task) => task.id !== tracking.task.id),
-        tracking.task,
-      ],
-    };
-    trackingService.sortTrackings(updatedProject.trackings);
-    let updatedProjects = replaceOldProject(updatedProject);
-    updatedProjects.sort((a, b) => a.name.localeCompare(b.name));
+    let updatedProject = projectService.getUpdatedProject(projects, tracking);
+    let updatedProjects = projectService.replaceOldProject(projects, updatedProject);
     setProjects(updatedProjects);
     if (!tasks.has(tracking.task.name)) {
       setTasks(tasks.set(tracking.task.name, tracking.task));
     }
+    setProject(updatedProjects.filter((p) => p.id === project.id)[0]);
+  };
+
+  const updateActiveTracking = (oldActiveTracking, newActiveTracking) => {
+    let updatedProjects = projectService.getUpdatedProjects(
+      projects, oldActiveTracking, newActiveTracking,
+    );
+    setProjects(updatedProjects);
+    setActiveTracking(newActiveTracking);
     setProject(updatedProjects.filter((p) => p.id === project.id)[0]);
   };
 
@@ -201,6 +189,7 @@ export const Home = ({
                      project={project} setProject={setProject}
                      projects={projects} setProjects={setProjects}
                      updateProjectState={updateProjectState}
+                     updateActiveTracking={updateActiveTracking}
                      updateTracking={updateTracking}
                      tasks={tasks} setTasks={setTasks}
                      activeTracking={activeTracking} setActiveTracking={setActiveTracking} />

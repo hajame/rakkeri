@@ -60,5 +60,73 @@ const findMostRecent = projects => {
   }
   return mostRecent;
 };
+const getUpdatedProject = (projects, tracking) => {
+  const projectToUpdate = projects.filter((p) => p.id === tracking.project.id)[0];
+  let updatedProject = {
+    ...projectToUpdate,
+    trackings: [
+      ...projectToUpdate.trackings.filter((t) => t.id !== tracking.id),
+      tracking,
+    ],
+    tasks: [
+      ...projectToUpdate.tasks.filter((task) => task.id !== tracking.task.id),
+      tracking.task,
+    ],
+  };
+  trackingService.sortTrackings(updatedProject.trackings);
+  return updatedProject;
+};
 
-export default { getProjects, setToken, create, addTask, findMostRecent };
+const replaceOldProject = (projects, updatedProject) => {
+  const updatedProjects = [
+    ...projects.filter((p) => p.id !== updatedProject.id),
+    updatedProject,
+  ];
+  updatedProjects.sort((a, b) => a.name.localeCompare(b.name));
+  return updatedProjects;
+};
+
+function replaceInProject(project, oldActiveTracking, newActiveTracking) {
+  let updatedProject = {
+    ...project,
+    trackings: [
+      ...project.trackings.filter((t) => t.id !== oldActiveTracking.id && t.id !== newActiveTracking.id),
+      oldActiveTracking,
+      newActiveTracking,
+    ],
+    tasks: [
+      ...project.tasks.filter((task) => task.id !== newActiveTracking.task.id),
+      newActiveTracking.task,
+    ],
+  };
+  trackingService.sortTrackings(updatedProject.trackings);
+  return updatedProject;
+}
+
+function replaceInProjects(projects, oldActiveTracking, newActiveTracking) {
+  const oldActiveProject = getUpdatedProject(projects, oldActiveTracking);
+  trackingService.sortTrackings(oldActiveProject.trackings);
+  const newActiveProject = getUpdatedProject(projects, newActiveTracking);
+  trackingService.sortTrackings(newActiveProject.trackings);
+  const updatedProjects = [
+    ...projects.filter((p) => p.id !== oldActiveProject.id && p.id !== newActiveProject.id),
+    oldActiveProject,
+    newActiveProject,
+  ];
+  updatedProjects.sort((a, b) => a.name.localeCompare(b.name));
+  return updatedProjects;
+}
+
+const getUpdatedProjects = (projects, oldActiveTracking, newActiveTracking) => {
+  if (oldActiveTracking.project.id === newActiveTracking.project.id) {
+    const projectToUpdate = projects.filter((p) => p.id === oldActiveTracking.project.id)[0];
+    let updatedProject = replaceInProject(projectToUpdate, oldActiveTracking, newActiveTracking);
+    return replaceOldProject(projects, updatedProject);
+  }
+  return replaceInProjects(projects, oldActiveTracking, newActiveTracking);
+};
+
+export default {
+  getProjects, setToken, create, addTask, findMostRecent, getUpdatedProject,
+  replaceOldProject, getUpdatedProjects,
+};
