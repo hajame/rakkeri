@@ -56,6 +56,10 @@ const findMostRecent = projects => {
     if (!project.trackings[0]) {
       continue;
     }
+    if (!mostRecent.trackings[0]) {
+      mostRecent = project;
+      continue;
+    }
     mostRecent = time.isBiggerThan(
       project.trackings[0].endTime, mostRecent.trackings[0].endTime,
     ) ?
