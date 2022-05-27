@@ -42,6 +42,13 @@ export const Home = ({
     trackingService.setToken(user.token);
   };
 
+  const handleProjectBarClose = () => {
+    console.log(window.innerWidth);
+    if (window.innerWidth < 785) {
+      setProjectBarOpen(false);
+    }
+  };
+
   const updateState = async () => {
     const userJSON = window.localStorage.getItem('rakkeriAppUser');
     if (!userJSON) {
@@ -68,13 +75,13 @@ export const Home = ({
       setProject(activeProject);
       const tracking = controller.getActiveTracking(activeProject);
       setActiveTracking(tracking);
-      setProjectBarOpen(false);
+      handleProjectBarClose();
       return;
     }
     if (fetchedProjects.length !== 0) {
       const mostRecent = projectService.findMostRecent(fetchedProjects);
       setProject(mostRecent ? mostRecent : null);
-      setProjectBarOpen(false);
+      handleProjectBarClose();
     }
   };
 
