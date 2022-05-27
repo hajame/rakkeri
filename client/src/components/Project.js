@@ -37,9 +37,14 @@ const Project = ({
   };
 
   const resetActiveTracking = async task => {
+    if (!activeTracking) {
+      await startTracking(task.name);
+      return;
+    }
     const oldActiveTracking = await trackingService.stopTracking(activeTracking);
     const newActiveTracking = await trackingService.startTracking(user, project, task);
     updateActiveTracking(oldActiveTracking, newActiveTracking);
+
   };
 
   return (
