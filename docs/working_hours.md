@@ -134,9 +134,12 @@
 |            |  00:24:56 | Story: Show most recently tracked project                                  |
 |            |  00:53:36 | Edit styles                                                                |
 |            |  00:56:54 | Edit dialog styles                                                         |
-| 2022-05-27 |  00:26:45 | Documentation                                                              |
+| 2022-05-27 |  01:00:22 | Documentation                                                              |
+|            |  01:21:12 | Edit small viewport styles                                                 |
+|            |  00:38:16 | Exploratory testing                                                        |
+|            |  00:14:58 | Profiling                                                                  |
+|            |  01:28:23 | Planning requirements                                                      |
 |            |  00:11:25 | Testing with different viewport sizes                                      |
 |            |  01:21:45 | Story: Closable project bar                                                |
-|            |  00:38:01 | Planning requirements                                                      |
 |            |  01:54:01 | Story: Switch tasks with one click                                         |
-|   TOTAL    | 171:22:15 |                                                                            |
+|   TOTAL    | 175:00:40 |                                                                            |
