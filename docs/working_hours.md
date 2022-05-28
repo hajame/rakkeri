@@ -142,4 +142,5 @@
 |            |  00:11:25 | Testing with different viewport sizes                                      |
 |            |  01:21:45 | Story: Closable project bar                                                |
 |            |  01:54:01 | Story: Switch tasks with one click                                         |
-|   TOTAL    | 175:00:40 |                                                                            |
+| 2022-05-28 |  03:00:00 | Video tutorial                                                             |
+|   TOTAL    | 178:00:40 |                                                                            |
