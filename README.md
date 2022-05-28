@@ -4,6 +4,7 @@ Räkkeri is an online time tracking application for University of Helsinki Compu
 
 It produces **Markdown hour reports** that are ideal for Helsinki University Computer Science projects.
 
+
 ## Where is it?
 
 [https://ohtup-staging.cs.helsinki.fi/rakkeri](https://ohtup-staging.cs.helsinki.fi/rakkeri) - go ahead and try it!
@@ -12,7 +13,11 @@ It produces **Markdown hour reports** that are ideal for Helsinki University Com
 
 Räkkeri saves time on documenting your HY project hours so you have more time to do _anything else_.
 
-### Here's one possible workflow
+## How do I use it?
+
+https://user-images.githubusercontent.com/32326389/170817282-0edd9e87-a5f8-4bc4-a280-968bb32042b6.mp4
+
+### Tracking workflow
 
 1. Create a `project` for time tracking
 2. Start tracking time for a `task` (e.g. "Create walking skeleton for Todo App")
@@ -60,7 +65,7 @@ When copypasted to Github/Gitlab other, it renders like this:
 - Front end
   - React, Material UI
 - Back end
-  - Spring Boot REST API
+  - Java Spring Boot REST API
   - JWT token authentication
   - JPA Object Relational Model
 - Data store
