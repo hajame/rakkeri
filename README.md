@@ -4,7 +4,6 @@ Räkkeri is an online time tracking application for University of Helsinki Compu
 
 It produces **Markdown hour reports** that are ideal for Helsinki University Computer Science projects.
 
-
 ## Where is it?
 
 [https://ohtup-staging.cs.helsinki.fi/rakkeri](https://ohtup-staging.cs.helsinki.fi/rakkeri) - go ahead and try it!
@@ -59,6 +58,7 @@ When copypasted to Github/Gitlab other, it renders like this:
 
 - [Hours spent on project](https://github.com/hajame/rakkeri/blob/main/docs/working_hours.md)
 - [Privacy policy statement](https://github.com/hajame/rakkeri/blob/main/docs/working_hours.md)
+- [Local environment setup](https://github.com/hajame/rakkeri/blob/main/docs/local_environment.md)
 
 ## Tech stuff
 
