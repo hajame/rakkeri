@@ -1,20 +1,41 @@
 # Räkkeri
 
-Räkkeri is an online time tracking application for University of Helsinki Computer Science students (and anyone else who finds it useful).
+Räkkeri is an online time tracking application for University of Helsinki Computer Science students (and anyone else who finds it useful). Räkkeri saves time on documenting your project hours. It produces **Markdown hour reports** that are ideal for Helsinki University Computer Science projects.
 
-It produces **Markdown hour reports** that are ideal for Helsinki University Computer Science projects.
+_Rakkeri was done as a 175-hour solo project for the University of Helsinki (Full-Stack Project, 10 cr)._
+
+## Tech stuff
+
+- Front end
+  - React, Material UI
+- Back end
+  - Java Spring Boot REST API
+  - JWT token authentication
+  - JPA Object Relational Model
+- Data store
+  - Postgresql
+- DevOps
+  - Build and Deploy to staging with GitHub Actions
+
+## Documentation
+
+- [Hours spent on project (175 + making video tutorial)](https://github.com/hajame/rakkeri/blob/main/docs/working_hours.md)
+- [Privacy policy statement](https://github.com/hajame/rakkeri/blob/main/docs/working_hours.md)
+- [Local environment setup](https://github.com/hajame/rakkeri/blob/main/docs/local_environment.md)
+
 
 ## Where is it?
 
-[https://ohtup-staging.cs.helsinki.fi/rakkeri](https://ohtup-staging.cs.helsinki.fi/rakkeri) - go ahead and try it!
+* Only development build available: [Local environment setup](https://github.com/hajame/rakkeri/blob/main/docs/local_environment.md)
+* The old staging deployment is no longer available (was https://ohtup-staging.cs.helsinki.fi/rakkeri).
+    * The production build contains hard-coded configurations to the staging server, which is why modifications are needed to run this elsewhere.
 
-## What is it good for?
 
-Räkkeri saves time on documenting your HY project hours so you have more time to do _anything else_.
-
-## How do I use it?
+## Here's a video tutorial of Räkkeri!
 
 https://user-images.githubusercontent.com/32326389/170817282-0edd9e87-a5f8-4bc4-a280-968bb32042b6.mp4
+
+## User guide
 
 ### Tracking workflow
 
@@ -53,20 +74,3 @@ When copypasted to Github/Gitlab other, it renders like this:
 | 2022-05-04 | 01:34:34 | Plan requirements |
 |            | 03:17:05 | Build Web app     |
 |   TOTAL    | 05:57:49 |                   |
-
-## Documentation
-
-- [Hours spent on project](https://github.com/hajame/rakkeri/blob/main/docs/working_hours.md)
-- [Privacy policy statement](https://github.com/hajame/rakkeri/blob/main/docs/working_hours.md)
-- [Local environment setup](https://github.com/hajame/rakkeri/blob/main/docs/local_environment.md)
-
-## Tech stuff
-
-- Front end
-  - React, Material UI
-- Back end
-  - Java Spring Boot REST API
-  - JWT token authentication
-  - JPA Object Relational Model
-- Data store
-  - Postgresql
